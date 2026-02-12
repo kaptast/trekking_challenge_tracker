@@ -1,20 +1,52 @@
 import { betterAuth } from 'better-auth'
-import { drizzleAdapter } from 'better-auth/adapters/drizzle'
+import { genericOAuth } from 'better-auth/plugins'
 import { sveltekitCookies } from 'better-auth/svelte-kit'
 import { env } from '$env/dynamic/private'
 import { getRequestEvent } from '$app/server'
-import { db } from '$lib/server/db'
 
 export const auth = betterAuth({
 	baseURL: env.ORIGIN,
 	secret: env.BETTER_AUTH_SECRET,
-	database: drizzleAdapter(db, { provider: 'sqlite' }),
-	emailAndPassword: { enabled: true },
-	socialProviders: {
-		github: {
-			clientId: env.GITHUB_CLIENT_ID,
-			clientSecret: env.GITHUB_CLIENT_SECRET
+	user: {
+		additionalFields: {
+			username: {
+				type: 'string',
+				required: false
+			}
+		},
+		modelName: 'user'
+	},
+	account: {
+		accountLinking: {
+			enabled: true
 		}
 	},
-	plugins: [sveltekitCookies(getRequestEvent)] // make sure this is the last plugin in the array
+	plugins: [
+		genericOAuth({
+			config: [
+				{
+					providerId: 'strava',
+					clientId: env.STRAVA_CLIENT_ID,
+					clientSecret: env.STRAVA_CLIENT_SECRET,
+					authorizationUrl: 'https://www.strava.com/oauth/authorize',
+					tokenUrl: 'https://www.strava.com/oauth/token',
+					userInfoUrl: 'https://www.strava.com/api/v3/athlete',
+					scopes: ['read'],
+					mapProfileToUser: (user) => {
+						return {
+							email: user.email || `${user.id}@strava.local`, // Provide a fallback email
+							name:
+								user.firstname && user.lastname
+									? `${user.firstname} ${user.lastname}`
+									: user.username,
+							emailVerified: user.emailVerified || false,
+							image: user.profile || user.profile_medium,
+							username: user.username
+						}
+					}
+				}
+			]
+		}),
+		sveltekitCookies(getRequestEvent) // make sure this is the last plugin in the array
+	]
 })

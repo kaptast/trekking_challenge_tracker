@@ -16,9 +16,9 @@ export const actions: Actions = {
 		const provider = formData.get('provider')?.toString() ?? 'github'
 		const callbackURL = formData.get('callbackURL')?.toString() ?? '/demo/better-auth'
 
-		const result = await auth.api.signInSocial({
+		const result = await auth.api.signInWithOAuth2({
 			body: {
-				provider: provider as 'github',
+				providerId: provider,
 				callbackURL
 			}
 		})
