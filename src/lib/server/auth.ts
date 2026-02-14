@@ -31,7 +31,7 @@ export const auth = betterAuth({
 					authorizationUrl: 'https://www.strava.com/oauth/authorize',
 					tokenUrl: 'https://www.strava.com/oauth/token',
 					userInfoUrl: 'https://www.strava.com/api/v3/athlete',
-					scopes: ['read'],
+					scopes: ['activity:read_all'],
 					mapProfileToUser: (user) => {
 						return {
 							email: user.email || `${user.id}@strava.local`, // Provide a fallback email
