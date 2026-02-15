@@ -71,7 +71,7 @@
 					<span slot="title">{m.teams()}</span>
 
 					<dap-ds-stack spacing="100">
-						<dap-ds-button href="/groups" variant="subtle-menu-item">
+						<dap-ds-button href="/teams" variant="subtle-menu-item">
 							<dap-ds-stack spacing="0">
 								<dap-ds-stack direction="row">
 									<dap-ds-icon>
@@ -86,7 +86,7 @@
 							</dap-ds-stack>
 						</dap-ds-button>
 
-						<dap-ds-button href="/groups/create" variant="subtle-menu-item">
+						<dap-ds-button href="/teams/create" variant="subtle-menu-item">
 							<dap-ds-stack spacing="0">
 								<dap-ds-stack direction="row">
 									<dap-ds-icon>

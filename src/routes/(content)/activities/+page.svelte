@@ -29,10 +29,10 @@
 				<dap-ds-table-row>
 					<dap-ds-table-cell>{activity.name}</dap-ds-table-cell>
 					<dap-ds-table-cell><Distance value={activity.distance} /></dap-ds-table-cell>
-					<dap-ds-table-cell><Duration value={activity.movingTime} /></dap-ds-table-cell>
+					<dap-ds-table-cell><Duration value={activity.movingTime ?? 0} /></dap-ds-table-cell>
 					<dap-ds-table-cell>{activity.type}</dap-ds-table-cell>
 					<dap-ds-table-cell>
-						<SummaryMap summaryPolyline={activity.polyline} />
+						<SummaryMap summaryPolyline={activity.polyline ?? ''} />
 					</dap-ds-table-cell>
 				</dap-ds-table-row>
 			{/each}
