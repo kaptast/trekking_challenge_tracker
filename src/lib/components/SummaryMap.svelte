@@ -53,13 +53,6 @@
 	})
 </script>
 
-<svg width="600" height="400" viewBox="0 0 600 400" class="summary-map">
-	<polyline points={svgPath} fill="none" stroke="currentColor" stroke-width="2" />
+<svg width="60" height="40" viewBox="0 0 600 400">
+	<polyline points={svgPath} fill="none" stroke="var(--dds-brand-1000)" stroke-width="2" />
 </svg>
-
-<style>
-	.summary-map {
-		border: 1px solid currentColor;
-		background: transparent;
-	}
-</style>
