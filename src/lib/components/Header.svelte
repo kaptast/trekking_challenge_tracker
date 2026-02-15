@@ -110,9 +110,7 @@
 				<dap-ds-avatar slot="trigger" src={user.image} alt="User Avatar" size="xs"></dap-ds-avatar>
 				<form method="POST" action="/auth?/signOut" use:enhance>
 					<button type="submit" title={m.logout()}>
-						<dap-ds-command-item value="signOut">
-							{m.logout()}
-						</dap-ds-command-item>
+						{m.logout()}
 					</button>
 				</form>
 			</dap-ds-command>
