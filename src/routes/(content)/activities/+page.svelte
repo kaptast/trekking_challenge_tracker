@@ -1,5 +1,7 @@
 <script lang="ts">
+	import polyline from '@mapbox/polyline'
 	import type { PageServerData } from './$types'
+	import SummaryMap from '$lib/components/SummaryMap.svelte'
 
 	let { data }: { data: PageServerData } = $props()
 </script>
@@ -27,7 +29,9 @@
 				<dap-ds-table-cell>{activity.elapsed_time}</dap-ds-table-cell>
 				<dap-ds-table-cell>{activity.total_elevation_gain}</dap-ds-table-cell>
 				<dap-ds-table-cell>{activity.type}</dap-ds-table-cell>
-				<dap-ds-table-cell>{activity.map.summary_polyline}</dap-ds-table-cell>
+				<dap-ds-table-cell>
+					<SummaryMap summaryPolyline={activity.map.summary_polyline} />
+				</dap-ds-table-cell>
 			</dap-ds-table-row>
 		{/each}
 	{:catch error}
