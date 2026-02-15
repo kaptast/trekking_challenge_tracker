@@ -15,5 +15,13 @@ async function loadActivities(locals: App.Locals): Promise<Array<typeof activity
 		error(401, 'Unauthorized')
 	}
 
-	return db.select().from(activity).where(eq(activity.athleteId, locals.user.id)).execute()
+	if (!locals.user.stravaAthleteId) {
+		error(400, 'Strava athlete ID not found for user')
+	}
+
+	return db
+		.select()
+		.from(activity)
+		.where(eq(activity.athleteId, locals.user.stravaAthleteId))
+		.execute()
 }

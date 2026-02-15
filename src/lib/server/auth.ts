@@ -12,6 +12,10 @@ export const auth = betterAuth({
 			username: {
 				type: 'string',
 				required: false
+			},
+			stravaAthleteId: {
+				type: 'number',
+				required: false
 			}
 		},
 		modelName: 'user'
@@ -41,7 +45,8 @@ export const auth = betterAuth({
 									: user.username,
 							emailVerified: user.emailVerified || false,
 							image: user.profile || user.profile_medium,
-							username: user.username
+							username: user.username,
+							stravaAthleteId: user.id // Store Strava athlete ID as custom field
 						}
 					}
 				}
