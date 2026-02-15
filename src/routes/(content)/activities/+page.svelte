@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { PageServerData } from './$types'
+	import type { PageProps } from './$types'
 	import SummaryMap from '$lib/components/SummaryMap.svelte'
 	import Distance from '$lib/components/Distance.svelte'
 	import Duration from '$lib/components/Duration.svelte'
 
-	let { data }: { data: PageServerData } = $props()
+	let { data }: PageProps = $props()
 </script>
 
 <dap-ds-table>
