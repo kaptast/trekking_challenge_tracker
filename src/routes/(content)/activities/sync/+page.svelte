@@ -8,7 +8,9 @@
 </script>
 
 <form method="POST" action="?/sync">
-	<input type="hidden" name="activityIds" value={selectedActivityIds} />
+	{#each selectedActivityIds as activityId}
+		<input type="hidden" name="activityIds" value={activityId} />
+	{/each}
 	<dap-ds-table>
 		<dap-ds-table-row>
 			<dap-ds-table-header>Select</dap-ds-table-header>

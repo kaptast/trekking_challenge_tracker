@@ -1,4 +1,4 @@
-import { error } from '@sveltejs/kit'
+import { error, type Actions } from '@sveltejs/kit'
 import type { PageServerLoad } from './$types'
 import { db } from '$lib/server/db/index.js'
 import { activity } from '$lib/server/db/schema.js'
@@ -11,13 +11,51 @@ export const load: PageServerLoad = async ({ request, fetch }) => {
 }
 
 export const actions = {
-	sync: async ({ request }) => {
+	sync: async ({ request, fetch }) => {
 		const formData = await request.formData()
-		const activityIds = formData.getAll('activityIds') as string[]
+		const activitiesToSync = formData.getAll('activityIds') as string[]
 
-		console.log('Selected activity IDs for sync:', activityIds)
+		const response = await fetch('https://www.strava.com/api/v3/athlete/activities', {
+			method: 'GET',
+			headers: request.headers
+		})
+
+		if (!response.ok) {
+			error(response.status, `Failed to fetch activities: ${response.statusText}`)
+		}
+
+		const stravaActivities = (await response.json()) as Activity[]
+		for (const stravaActivity of stravaActivities) {
+			const isIncluded = activitiesToSync.includes(stravaActivity.id.toString())
+
+			if (isIncluded) {
+				await db
+					.insert(activity)
+					.values({
+						id: stravaActivity.id,
+						athleteId: stravaActivity.athlete.id,
+						name: stravaActivity.name,
+						distance: stravaActivity.distance,
+						movingTime: stravaActivity.moving_time,
+						type: stravaActivity.type,
+						sportType: stravaActivity.sport_type,
+						workoutType: stravaActivity.workout_type,
+						deviceName: stravaActivity.device_name,
+						startDate: stravaActivity.start_date,
+						startDateLocal: stravaActivity.start_date_local,
+						timezone: stravaActivity.timezone,
+						utcOffset: stravaActivity.utc_offset,
+						locationCity: stravaActivity.location_city,
+						locationState: stravaActivity.location_state,
+						locationCountry: stravaActivity.location_country,
+						polyline: stravaActivity.map.summary_polyline,
+						maxSpeed: stravaActivity.max_speed
+					})
+					.execute()
+			}
+		}
 	}
-}
+} satisfies Actions
 
 async function fetchActivities(
 	request: Request,
@@ -33,18 +71,14 @@ async function fetchActivities(
 	}
 
 	const activities = (await response.json()) as Activity[]
-
 	const activityIds = activities.map((activity) => activity.id)
 
-	// Use inArray from drizzle-orm for the IN query
 	const savedActivities = await db
 		.select({ id: activity.id })
 		.from(activity)
 		.where(inArray(activity.id, activityIds))
-
 	const savedActivityIds = new Set(savedActivities.map((a) => a.id))
 
-	// Mark which activities are already synced
 	const activitiesWithSyncStatus: SyncedActivity[] = activities.map((act) => ({
 		...act,
 		synced: savedActivityIds.has(act.id)
