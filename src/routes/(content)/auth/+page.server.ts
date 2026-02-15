@@ -1,6 +1,10 @@
 import { auth } from '$lib/server/auth'
 import { fail, redirect, type Actions } from '@sveltejs/kit'
 
+export const load = async () => {
+	redirect(302, '/')
+}
+
 export const actions: Actions = {
 	signOut: async (event) => {
 		await auth.api.signOut({
