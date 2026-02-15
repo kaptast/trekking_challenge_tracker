@@ -1,7 +1,8 @@
 <script lang="ts">
-	import polyline from '@mapbox/polyline'
 	import type { PageServerData } from './$types'
 	import SummaryMap from '$lib/components/SummaryMap.svelte'
+	import Distance from '$lib/components/Distance.svelte'
+	import Duration from '$lib/components/Duration.svelte'
 
 	let { data }: { data: PageServerData } = $props()
 </script>
@@ -24,10 +25,10 @@
 		{#each activities as activity}
 			<dap-ds-table-row>
 				<dap-ds-table-cell>{activity.name}</dap-ds-table-cell>
-				<dap-ds-table-cell>{activity.distance}</dap-ds-table-cell>
-				<dap-ds-table-cell>{activity.moving_time}</dap-ds-table-cell>
-				<dap-ds-table-cell>{activity.elapsed_time}</dap-ds-table-cell>
-				<dap-ds-table-cell>{activity.total_elevation_gain}</dap-ds-table-cell>
+				<dap-ds-table-cell><Distance value={activity.distance} /></dap-ds-table-cell>
+				<dap-ds-table-cell><Duration value={activity.moving_time} /></dap-ds-table-cell>
+				<dap-ds-table-cell><Duration value={activity.elapsed_time} /></dap-ds-table-cell>
+				<dap-ds-table-cell><Distance value={activity.total_elevation_gain} /></dap-ds-table-cell>
 				<dap-ds-table-cell>{activity.type}</dap-ds-table-cell>
 				<dap-ds-table-cell>
 					<SummaryMap summaryPolyline={activity.map.summary_polyline} />
