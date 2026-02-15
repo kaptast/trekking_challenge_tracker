@@ -52,6 +52,8 @@
 		"vitest-browser-svelte": "^2.0.2"
 	},
 	"dependencies": {
+		"@mapbox/polyline": "^1.2.1",
+		"@types/mapbox__polyline": "^1.0.5",
 		"dap-design-system": "^0.52.10"
 	}
 }
