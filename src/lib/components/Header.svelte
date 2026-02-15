@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms'
 	import { page } from '$app/state'
-	import { loginWith, m } from '$lib/paraglide/messages.js'
+	import { m } from '$lib/paraglide/messages.js'
 
 	type Props = {
 		user:
@@ -27,6 +27,7 @@
 
 			<dap-ds-navigation-menu activeHref={page.url.pathname}>
 				<dap-ds-navigation-menu-item>
+					<!-- TODO: Replace with a link that doesn't reload the whole layout -->
 					<dap-ds-button slot="trigger" href="/" variant="subtle-menu"> {m.home()} </dap-ds-button>
 				</dap-ds-navigation-menu-item>
 
