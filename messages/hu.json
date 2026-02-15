@@ -1,4 +1,40 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"hello_world": "Hello, {name} from hu!"
+	"home": "Kezdőlap",
+	"teams": "Csapatok",
+	"noTeams": "Nincsenek csapatok",
+	"challenges": "Kihívások",
+	"noChallenges": "Nincsenek kihívások",
+	"loginWith": "{provider} bejelentkezés",
+	"logout": "Kijelentkezés",
+	"activity": "Tevékenység",
+	"activities": "Tevékenységek",
+	"syncActivities": "Tevékenységek szinkronizálása",
+	"noActivities": "Nincsenek tevékenységek",
+	"points": "Pontok",
+	"leaderboard": "Ranglista",
+	"createTeam": "Csapat létrehozása",
+	"joinTeam": "Csatlakozás egy csapathoz",
+	"teamName": "Csapat neve",
+	"teamCode": "Csapat kódja",
+	"submit": "Beküldés",
+	"cancel": "Mégse",
+	"teamCreated": "Csapat sikeresen létrehozva",
+	"teamJoined": "Sikeresen csatlakoztál a csapathoz",
+	"invalidTeamCode": "Érvénytelen csapat kód",
+	"alreadyInTeam": "Már egy csapatban vagy",
+	"leaveTeam": "Csapat elhagyása",
+	"confirmLeaveTeam": "Biztosan el akarod hagyni a csapatot?",
+	"teamLeft": "Sikeresen elhagytad a csapatot",
+	"error": "Hiba történt. Kérlek, próbáld újra.",
+	"loading": "Betöltés...",
+	"noData": "Nincs megjeleníthető adat",
+	"activityType": [{
+		"match": {
+			"type=run": "Futás",
+			"type=ride": "Kerékpározás",
+			"type=hike": "Túra",
+			"type=*": "Egyéb"
+		}
+	}]
 }
