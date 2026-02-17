@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Distance from '$lib/components/Distance.svelte'
 	import { m } from '$lib/paraglide/messages'
 	import { joinTeam, leaveTeam } from '../data.remote'
 	import type { PageProps } from './$types'
@@ -27,9 +28,19 @@
 			{#each teams as team}
 				<dap-ds-table-row>
 					<dap-ds-table-cell>{team.name}</dap-ds-table-cell>
-					<dap-ds-table-cell>{0}</dap-ds-table-cell>
-					<dap-ds-table-cell>{0}</dap-ds-table-cell>
-					<dap-ds-table-cell>{0}</dap-ds-table-cell>
+					<dap-ds-table-cell>
+						{0}
+					</dap-ds-table-cell>
+					<dap-ds-table-cell>{team.members.length}</dap-ds-table-cell>
+					<dap-ds-table-cell>
+						<Distance
+							value={team.members.reduce(
+								(acc, member) =>
+									acc + member.activities.reduce((acc, activity) => acc + activity.distance, 0),
+								0
+							)}
+						/>
+					</dap-ds-table-cell>
 					<dap-ds-table-cell>
 						<dap-ds-button
 							variant="subtle-neutral"

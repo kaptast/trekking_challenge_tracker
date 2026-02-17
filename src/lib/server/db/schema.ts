@@ -1,3 +1,4 @@
+import { relations } from 'drizzle-orm'
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 
 export const team = sqliteTable('team', {
@@ -34,3 +35,22 @@ export const activity = sqliteTable('activity', {
 	polyline: text('polyline'),
 	maxSpeed: integer('max_speed')
 })
+
+export const teamRelations = relations(team, ({ many }) => ({
+	members: many(teamMember)
+}))
+
+export const teamMemberRelations = relations(teamMember, ({ one, many }) => ({
+	team: one(team, {
+		fields: [teamMember.teamId],
+		references: [team.id]
+	}),
+	activities: many(activity)
+}))
+
+export const activityRelations = relations(activity, ({ one }) => ({
+	athlete: one(teamMember, {
+		fields: [activity.athleteId],
+		references: [teamMember.id]
+	})
+}))

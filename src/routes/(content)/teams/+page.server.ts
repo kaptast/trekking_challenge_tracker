@@ -1,5 +1,4 @@
 import { db } from '$lib/server/db'
-import { team } from '$lib/server/db/schema.js'
 
 export const load = async () => {
 	return {
@@ -8,5 +7,13 @@ export const load = async () => {
 }
 
 async function loadTeams() {
-	return db.select().from(team).execute()
+	return db.query.team.findMany({
+		with: {
+			members: {
+				with: {
+					activities: true
+				}
+			}
+		}
+	})
 }
