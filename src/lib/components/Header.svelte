@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms'
 	import { page } from '$app/state'
 	import { m } from '$lib/paraglide/messages.js'
+	import { createTeamDialogState } from './CreateTeamDialog/createTeamDialogState.svelte'
 
 	type Props = {
 		user:
@@ -86,7 +87,20 @@
 							</dap-ds-stack>
 						</dap-ds-button>
 
-						<dap-ds-button href="/teams/create" variant="subtle-menu-item">
+						<dap-ds-button
+							tabindex="0"
+							role="button"
+							onclick={() => {
+								createTeamDialogState.open = true
+							}}
+							onkeydown={(e: KeyboardEvent) => {
+								if (e.key === 'Enter' || e.key === ' ') {
+									e.preventDefault()
+									createTeamDialogState.open = true
+								}
+							}}
+							variant="subtle-menu-item"
+						>
 							<dap-ds-stack spacing="0">
 								<dap-ds-stack direction="row">
 									<dap-ds-icon>
@@ -117,7 +131,7 @@
 		{:else}
 			<form method="POST" class="leading-0" action="/auth?/signInSocial" use:enhance>
 				<input type="hidden" name="provider" value="strava" />
-				<input type="hidden" name="callbackURL" value="/" />
+				<input type="hidden" name="callbackURL" value={page.url} />
 
 				<button type="submit" class="cursor-pointer" title={m.loginWith({ provider: 'Strava' })}>
 					<svg
