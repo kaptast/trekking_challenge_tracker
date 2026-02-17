@@ -11,7 +11,7 @@
 {@render children()}
 
 <CreateTeamDialog
-	onCreateTeam={async (name, code) => {
-		await createTeam({ name, code })
+	onCreateTeam={async (name) => {
+		await createTeam({ name })
 	}}
 />
