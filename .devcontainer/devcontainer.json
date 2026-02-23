@@ -1,0 +1,27 @@
+﻿{
+  "name": "trekking_challenge_tracker",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/rails/devcontainer/features/bun:latest": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2.12.1": {
+      "version": "latest"
+    }
+  },
+  "remoteUser": "root",
+  "forwardPorts": [5173, 5432],
+  "portsAttributes": {
+    "5173": { "label": "SvelteKit Dev" },
+    "5432": { "label": "Postgres" }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "svelte.svelte-vscode",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint"
+      ]
+    }
+  }
+}
