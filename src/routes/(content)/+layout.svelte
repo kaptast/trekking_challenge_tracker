@@ -8,7 +8,9 @@
 
 <Header user={data.user} />
 
-{@render children()}
+<main class="mx-auto max-w-7xl">
+	{@render children()}
+</main>
 
 <CreateTeamDialog
 	onCreateTeam={async (name) => {

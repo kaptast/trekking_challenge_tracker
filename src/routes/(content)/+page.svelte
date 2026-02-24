@@ -23,10 +23,14 @@
 			</svg>
 		{/snippet}
 
-		<h4 class="font-cursive text-xl">Spring Alpine Quest</h4>
-		<p class="font-serif">Group: Mountain Goats</p>
+		<div class="mx-auto w-4/5 space-y-2">
+			<h4 class="text-xl font-medium">Spring Alpine Quest</h4>
+			<p class="text-lg">Group: Mountain Goats</p>
 
-		<Button label="View details" href="/challenges/1" />
+			<div class="mx-auto w-fit">
+				<Button label="View details" href="/challenges/1" />
+			</div>
+		</div>
 
 		{#snippet bottomRightDecoration()}
 			<svg
@@ -71,8 +75,12 @@
 
 			<h4 class="font-cursive text-xl">Mountain Goats</h4>
 
-			<Button label="Create Group" href="/groups/create" />
-			<Button label="Join Group" href="/groups" />
+			<Divider />
+
+			<div class="mt-2 grid grid-rows-2 place-content-center gap-2">
+				<Button label="Create Group" href="/groups/create" />
+				<Button label="Join Group" href="/groups" />
+			</div>
 
 			{#snippet bottomLeftDecoration()}
 				<svg
@@ -119,8 +127,10 @@
 				<Divider />
 			</div>
 
-			<Button label="Sync with Strava" href="/activities/sync" />
-			<Button label="Import GPX" href="/activities/import" />
+			<div class="mt-2 grid grid-rows-2 place-content-center gap-2">
+				<Button label="Sync with Strava" href="/activities/sync" />
+				<Button label="Import GPX" href="/activities/import" />
+			</div>
 
 			{#snippet bottomRightDecoration()}
 				<svg
@@ -159,7 +169,9 @@
 			</li>
 		</ul>
 
-		<Button label="View All Activities" href="/activities" />
+		<div class="mt-2 grid place-content-center">
+			<Button label="View All Activities" href="/activities" />
+		</div>
 
 		{#snippet bottomRightDecoration()}
 			<svg
