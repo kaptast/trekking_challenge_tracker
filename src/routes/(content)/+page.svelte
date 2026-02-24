@@ -18,7 +18,7 @@
 					fill-rule="evenodd"
 					clip-rule="evenodd"
 					d="M0 30L53 29L42 7L39 16L27 0L16 18.5L11.5 14L0 30ZM34 20.5L24 10.5L28 8L31 14.25L34 20.5Z"
-					fill="#6E7278"
+					fill="#6E7177"
 				/>
 			</svg>
 		{/snippet}
