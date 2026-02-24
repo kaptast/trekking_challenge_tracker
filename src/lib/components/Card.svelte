@@ -12,10 +12,10 @@
 	let { title, icon, children }: Props = $props()
 </script>
 
-<Wrapper>
+<Wrapper class="w-full p-4">
 	<div class="flex items-center gap-2">
 		{@render icon?.()}
-		<h3 class="font-cursive text-2xl">{title}</h3>
+		<h3 class="font-cursive text-2xl font-semibold">{title}</h3>
 	</div>
 
 	<!-- <Divider /> -->

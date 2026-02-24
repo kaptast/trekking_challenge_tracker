@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte'
 	import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements'
+	import Wrapper from './Wrapper.svelte'
 
 	type Props = {
 		icon?: Snippet
@@ -16,48 +17,17 @@
 </script>
 
 {#if isLink}
-	<a class="button" {href} {...rest}>
-		{@render icon?.()}
-		{label}
+	<a class="inline-block" {href} {...rest}>
+		<Wrapper class="px-8 py-1">
+			{@render icon?.()}
+			{label}
+		</Wrapper>
 	</a>
 {:else}
-	<button class="button" {onclick} {...rest}>
-		{@render icon?.()}
-		{label}
+	<button class="inline-block" {onclick} {...rest}>
+		<Wrapper class="px-8 py-1">
+			{@render icon?.()}
+			{label}
+		</Wrapper>
 	</button>
 {/if}
-
-<style>
-	.button {
-		font-size: 16px;
-		font-weight: 600;
-		color: #3b4045;
-
-		/* 2. Core Button Styles */
-		background-color: #ffffff;
-		padding: 8px 24px;
-		cursor: pointer;
-
-		/* 3. The Sketchy Border */
-		border: 2px solid #5c6166;
-		/* This specific border-radius creates a slightly uneven, hand-drawn rectangle */
-		border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
-
-		/* 4. The Solid Drop Shadow */
-		/* x-offset, y-offset, blur-radius (0 for solid edge), color */
-		box-shadow: 3px 3px 0px #b3b8bc;
-
-		/* Smooth transition for the hover effect */
-		transition: all 0.15s ease-in-out;
-	}
-
-	.button:hover {
-		box-shadow: 1px 1px 0px #b3b8bc;
-		transform: translate(2px, 2px);
-	}
-
-	.button:focus {
-		outline: none;
-		border-color: #2b2f33;
-	}
-</style>

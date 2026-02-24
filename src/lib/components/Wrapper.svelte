@@ -1,11 +1,13 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte'
+	import type { ClassValue } from 'svelte/elements'
 
 	type Props = {
 		children: Snippet
+		class?: ClassValue
 	}
 
-	let { children }: Props = $props()
+	let { children, class: className }: Props = $props()
 
 	let width = $state(0)
 	let height = $state(0)
@@ -16,8 +18,6 @@
 		const q = length * 0.25
 		const h = length * 0.5
 		const tq = length * 0.75
-
-		console.log(`wavyLine: length=${length}, variation=${variation}, amplitude=${amplitude}`)
 
 		const patterns = [
 			`M0,0 Q${q},${amplitude} ${h},0 Q${tq},${-amplitude} ${length},0`,
@@ -34,7 +34,7 @@
 	const leftV = Math.floor(Math.random() * 2)
 </script>
 
-<div class="wrapper-container" bind:clientWidth={width} bind:clientHeight={height}>
+<div class="wrapper-container {className}" bind:clientWidth={width} bind:clientHeight={height}>
 	{#if width && height}
 		<svg class="border-svg">
 			<!-- Top: left→right along X -->
@@ -67,7 +67,6 @@
 <style>
 	.wrapper-container {
 		position: relative;
-		padding: 0.75rem;
 	}
 
 	.border-svg {
