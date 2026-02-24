@@ -11,61 +11,65 @@
 	{#each selectedActivityIds as activityId}
 		<input type="hidden" name="activityIds" value={activityId} />
 	{/each}
-	<dap-ds-table>
-		<dap-ds-table-row>
-			<dap-ds-table-header>Select</dap-ds-table-header>
-			<dap-ds-table-header>Id</dap-ds-table-header>
-			<dap-ds-table-header>Name</dap-ds-table-header>
-			<dap-ds-table-header>Distance</dap-ds-table-header>
-			<dap-ds-table-header>Moving Time</dap-ds-table-header>
-			<dap-ds-table-header>Type</dap-ds-table-header>
-			<dap-ds-table-header>Date</dap-ds-table-header>
-		</dap-ds-table-row>
-		{#await data.activities}
-			<dap-ds-table-row>
-				<dap-ds-table-cell colspan="6">Loading activities...</dap-ds-table-cell>
-			</dap-ds-table-row>
-		{:then activities}
-			{#if activities.length === 0}
-				<dap-ds-table-row>
-					<dap-ds-table-cell colspan="6">No activities found.</dap-ds-table-cell>
-				</dap-ds-table-row>
-			{:else}
-				{#each activities as activity}
-					<dap-ds-table-row>
-						<dap-ds-table-cell>
-							{#if activity.synced}
-								<span>✓</span>
-							{:else}
-								<dap-ds-checkbox
-									checked={selectedActivityIds.includes(activity.id)}
-									value={activity.id}
-									ondds-change={(e: any) => {
-										if (e.target.checked) {
-											selectedActivityIds = [...selectedActivityIds, activity.id]
-										} else {
-											selectedActivityIds = selectedActivityIds.filter((id) => id !== activity.id)
-										}
-									}}
-								></dap-ds-checkbox>
-							{/if}
-						</dap-ds-table-cell>
-						<dap-ds-table-cell>{activity.id}</dap-ds-table-cell>
-						<dap-ds-table-cell>{activity.name}</dap-ds-table-cell>
-						<dap-ds-table-cell><Distance value={activity.distance} /></dap-ds-table-cell>
-						<dap-ds-table-cell><Duration value={activity.moving_time} /></dap-ds-table-cell>
-						<dap-ds-table-cell>{activity.type}</dap-ds-table-cell>
-						<dap-ds-table-cell
-							>{new Date(activity.start_date).toLocaleDateString()}</dap-ds-table-cell
-						>
-					</dap-ds-table-row>
-				{/each}
-			{/if}
-		{:catch error}
-			<dap-ds-table-row>
-				<dap-ds-table-cell colspan="6">Error loading activities: {error.message}</dap-ds-table-cell>
-			</dap-ds-table-row>
-		{/await}
-	</dap-ds-table>
+	<table>
+		<thead>
+			<tr>
+				<th>Select</th>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Distance</th>
+				<th>Moving Time</th>
+				<th>Type</th>
+				<th>Date</th>
+			</tr>
+		</thead>
+		<tbody>
+			{#await data.activities}
+				<tr>
+					<td colspan="6">Loading activities...</td>
+				</tr>
+			{:then activities}
+				{#if activities.length === 0}
+					<tr>
+						<td colspan="6">No activities found.</td>
+					</tr>
+				{:else}
+					{#each activities as activity}
+						<tr>
+							<td>
+								{#if activity.synced}
+									<span>✓</span>
+								{:else}
+									<input
+										type="checkbox"
+										name="activityIds"
+										checked={selectedActivityIds.includes(activity.id)}
+										value={activity.id}
+										onchange={(e: any) => {
+											if (e.target.checked) {
+												selectedActivityIds = [...selectedActivityIds, activity.id]
+											} else {
+												selectedActivityIds = selectedActivityIds.filter((id) => id !== activity.id)
+											}
+										}}
+									/>
+								{/if}
+							</td>
+							<td>{activity.id}</td>
+							<td>{activity.name}</td>
+							<td><Distance value={activity.distance} /></td>
+							<td><Duration value={activity.moving_time} /></td>
+							<td>{activity.type}</td>
+							<td>{new Date(activity.start_date).toLocaleDateString()}</td>
+						</tr>
+					{/each}
+				{/if}
+			{:catch error}
+				<tr>
+					<td colspan="6">Error loading activities: {error.message}</td>
+				</tr>
+			{/await}
+		</tbody>
+	</table>
 	<button type="submit">Submit Selected</button>
 </form>

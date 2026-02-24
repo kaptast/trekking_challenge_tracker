@@ -70,9 +70,3 @@
 		<Button label="View All Activities" href="/activities" />
 	</Card>
 </div>
-
-<wired-card class="p-2" disableMultiStroke="true" roughness="1">
-	<h2>Wired Elements Card</h2>
-	<p>This is a card styled with the "wired" aesthetic.</p>
-	<wired-button disableMultiStroke="true" roughness="1">Click Me</wired-button>
-</wired-card>

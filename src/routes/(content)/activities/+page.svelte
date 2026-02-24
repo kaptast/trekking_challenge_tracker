@@ -7,39 +7,43 @@
 	let { data }: PageProps = $props()
 </script>
 
-<dap-ds-table>
-	<dap-ds-table-row>
-		<dap-ds-table-header>Name</dap-ds-table-header>
-		<dap-ds-table-header>Distance</dap-ds-table-header>
-		<dap-ds-table-header>Moving Time</dap-ds-table-header>
-		<dap-ds-table-header>Type</dap-ds-table-header>
-		<dap-ds-table-header>Map</dap-ds-table-header>
-	</dap-ds-table-row>
-	{#await data.activities}
-		<dap-ds-table-row>
-			<dap-ds-table-cell colspan="7">Loading activities...</dap-ds-table-cell>
-		</dap-ds-table-row>
-	{:then activities}
-		{#if activities.length === 0}
-			<dap-ds-table-row>
-				<dap-ds-table-cell colspan="7">No activities found.</dap-ds-table-cell>
-			</dap-ds-table-row>
-		{:else}
-			{#each activities as activity}
-				<dap-ds-table-row>
-					<dap-ds-table-cell>{activity.name}</dap-ds-table-cell>
-					<dap-ds-table-cell><Distance value={activity.distance} /></dap-ds-table-cell>
-					<dap-ds-table-cell><Duration value={activity.movingTime ?? 0} /></dap-ds-table-cell>
-					<dap-ds-table-cell>{activity.type}</dap-ds-table-cell>
-					<dap-ds-table-cell>
-						<SummaryMap summaryPolyline={activity.polyline ?? ''} />
-					</dap-ds-table-cell>
-				</dap-ds-table-row>
-			{/each}
-		{/if}
-	{:catch error}
-		<dap-ds-table-row>
-			<dap-ds-table-cell colspan="7">Error loading activities: {error.message}</dap-ds-table-cell>
-		</dap-ds-table-row>
-	{/await}
-</dap-ds-table>
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Distance</th>
+			<th>Moving Time</th>
+			<th>Type</th>
+			<th>Map</th>
+		</tr>
+	</thead>
+	<tbody>
+		{#await data.activities}
+			<tr>
+				<td colspan="7">Loading activities...</td>
+			</tr>
+		{:then activities}
+			{#if activities.length === 0}
+				<tr>
+					<td colspan="7">No activities found.</td>
+				</tr>
+			{:else}
+				{#each activities as activity}
+					<tr>
+						<td>{activity.name}</td>
+						<td><Distance value={activity.distance} /></td>
+						<td><Duration value={activity.movingTime ?? 0} /></td>
+						<td>{activity.type}</td>
+						<td>
+							<SummaryMap summaryPolyline={activity.polyline ?? ''} />
+						</td>
+					</tr>
+				{/each}
+			{/if}
+		{:catch error}
+			<tr>
+				<td colspan="7">Error loading activities: {error.message}</td>
+			</tr>
+		{/await}
+	</tbody>
+</table>

@@ -11,25 +11,11 @@
 	let teamName = $state('')
 </script>
 
-<dap-ds-modal
-	id="basicmodal"
-	title={m.createTeam()}
-	{...createTeamDialogState.open ? { open: true } : {}}
-	ondds-closed={() => {
-		createTeamDialogState.open = false
-		teamName = ''
-	}}
-	ondds-ok={() => {
-		onCreateTeam(teamName)
-		teamName = ''
-	}}
->
-	<dap-ds-stack direction="column">
-		<dap-ds-input
-			value={teamName}
-			ondds-input={(e: CustomEvent<{ value: string }>) => (teamName = e.detail.value)}
-			label={m.teamName()}
-			required
-		></dap-ds-input>
-	</dap-ds-stack>
-</dap-ds-modal>
+<dialog id="basicmodal" title={m.createTeam()} open={createTeamDialogState.open}>
+	<input
+		value={teamName}
+		oninput={(e: Event) => (teamName = (e.target as HTMLInputElement).value)}
+		placeholder={m.teamName()}
+		required
+	/>
+</dialog>
