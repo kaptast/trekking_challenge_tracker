@@ -1,15 +1,78 @@
 <script lang="ts">
-	import Button from '$lib/components/WireframeButton.svelte'
+	import Button from '$lib/components/Button.svelte'
 	import Card from '$lib/components/Card.svelte'
 	import Divider from '$lib/components/Divider.svelte'
 </script>
 
-<Card>
-	<div class="w-fit p-2">
-		<h3>🥇 Mountain Goats</h3>
-		<Divider />
-		<p>812 km</p>
+<div class="space-y-2 p-10">
+	<Card title="Active Challenge">
+		{#snippet icon()}
+			🥇
+		{/snippet}
 
-		<Button label="View details" href="/teams/1" />
+		<h4 class="font-cursive text-xl">Spring Alpine Quest</h4>
+		<p class="font-serif">Group: Mountain Goats</p>
+
+		<Button label="View details" href="/challenges/1" />
+	</Card>
+
+	<div class="flex gap-2">
+		<Card title="My Group">
+			{#snippet icon()}
+				🥇
+			{/snippet}
+
+			<h4 class="font-cursive text-xl">Mountain Goats</h4>
+
+			<Button label="Create Group" href="/groups/create" />
+			<Button label="Join Group" href="/groups" />
+		</Card>
+
+		<Card title="My Activity Summary">
+			{#snippet icon()}
+				🥇
+			{/snippet}
+
+			<div>
+				<span>This Week: 42 km</span>
+				<Divider />
+				<span>Elevation: 1,250 m</span>
+				<Divider />
+				<span>Activities: 3</span>
+				<Divider />
+			</div>
+
+			<Button label="Sync with Strava" href="/activities/sync" />
+			<Button label="Import GPX" href="/activities/import" />
+		</Card>
 	</div>
-</Card>
+
+	<Card title="Recent Group Activities">
+		{#snippet icon()}
+			🥇
+		{/snippet}
+
+		<ul>
+			<li>
+				<strong>Alice</strong> hiked 15 km in the Alps. (2h ago)
+				<Divider />
+			</li>
+			<li>
+				<strong>Bob</strong> biked 30 km in the Rockies. (5h ago)
+				<Divider />
+			</li>
+			<li>
+				<strong>Charlie</strong> ran 10 km in the city. (1d ago)
+				<Divider />
+			</li>
+		</ul>
+
+		<Button label="View All Activities" href="/activities" />
+	</Card>
+</div>
+
+<wired-card class="p-2" disableMultiStroke="true" roughness="1">
+	<h2>Wired Elements Card</h2>
+	<p>This is a card styled with the "wired" aesthetic.</p>
+	<wired-button disableMultiStroke="true" roughness="1">Click Me</wired-button>
+</wired-card>

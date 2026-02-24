@@ -16,23 +16,19 @@
 </script>
 
 {#if isLink}
-	<a class="wireframe-button" {href} {...rest}>
+	<a class="button" {href} {...rest}>
 		{@render icon?.()}
 		{label}
 	</a>
 {:else}
-	<button class="wireframe-button" {onclick} {...rest}>
+	<button class="button" {onclick} {...rest}>
 		{@render icon?.()}
 		{label}
 	</button>
 {/if}
 
 <style>
-	/* Styling for the hand-drawn wireframe button */
-	.wireframe-button {
-		/* 1. Typography */
-		/* Using system fallback fonts that look handwritten */
-		font-family: 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', cursive, sans-serif;
+	.button {
 		font-size: 16px;
 		font-weight: 600;
 		color: #3b4045;
@@ -55,12 +51,12 @@
 		transition: all 0.15s ease-in-out;
 	}
 
-	.wireframe-button:hover {
+	.button:hover {
 		box-shadow: 1px 1px 0px #b3b8bc;
 		transform: translate(2px, 2px);
 	}
 
-	.wireframe-button:focus {
+	.button:focus {
 		outline: none;
 		border-color: #2b2f33;
 	}
