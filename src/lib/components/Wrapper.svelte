@@ -6,9 +6,17 @@
 		children: Snippet
 		class?: ClassValue
 		strokeWidths?: { top?: number; right?: number; bottom?: number; left?: number }
+		bottomLeftDecoration?: Snippet
+		bottomRightDecoration?: Snippet
 	}
 
-	let { children, class: className, strokeWidths }: Props = $props()
+	let {
+		children,
+		class: className,
+		strokeWidths,
+		bottomLeftDecoration,
+		bottomRightDecoration
+	}: Props = $props()
 
 	const sw = $derived({
 		top: strokeWidths?.top ?? 1.5,
@@ -72,6 +80,16 @@
 	{/if}
 	<div class="content">
 		{@render children()}
+	</div>
+
+	<div class="absolute inset-0 overflow-hidden -z-10">
+		<div class="absolute -bottom-0.5 -left-0.5">
+			{@render bottomLeftDecoration?.()}
+		</div>
+
+		<div class="absolute -right-0.5 -bottom-0.5">
+			{@render bottomRightDecoration?.()}
+		</div>
 	</div>
 </div>
 
