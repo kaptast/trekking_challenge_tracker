@@ -5,9 +5,17 @@
 	type Props = {
 		children: Snippet
 		class?: ClassValue
+		strokeWidths?: { top?: number; right?: number; bottom?: number; left?: number }
 	}
 
-	let { children, class: className }: Props = $props()
+	let { children, class: className, strokeWidths }: Props = $props()
+
+	const sw = $derived({
+		top: strokeWidths?.top ?? 1.5,
+		right: strokeWidths?.right ?? 1.5,
+		bottom: strokeWidths?.bottom ?? 1.5,
+		left: strokeWidths?.left ?? 1.5
+	})
 
 	let width = $state(0)
 	let height = $state(0)
@@ -38,24 +46,27 @@
 	{#if width && height}
 		<svg class="border-svg">
 			<!-- Top: left→right along X -->
-			<path d={wavyLine(width, topV)} class="border-line" />
+			<path d={wavyLine(width, topV)} class="border-line" style="stroke-width: {sw.top}" />
 			<!-- Right: top→bottom, rotated 90° around (width, 0) -->
 			<path
 				d={wavyLine(height, rightV)}
 				transform="translate({width},0) rotate(90)"
 				class="border-line"
+				style="stroke-width: {sw.right}"
 			/>
 			<!-- Bottom: right→left, rotated 180° around (width, height) -->
 			<path
 				d={wavyLine(width, bottomV)}
 				transform="translate({width},{height}) rotate(180)"
 				class="border-line"
+				style="stroke-width: {sw.bottom}"
 			/>
 			<!-- Left: bottom→top, rotated 270° around (0, height) -->
 			<path
 				d={wavyLine(height, leftV)}
 				transform="translate(0,{height}) rotate(270)"
 				class="border-line"
+				style="stroke-width: {sw.left}"
 			/>
 		</svg>
 	{/if}
@@ -82,7 +93,6 @@
 	.border-line {
 		fill: none;
 		stroke: #606267;
-		stroke-width: 2;
 		stroke-linecap: round;
 		vector-effect: non-scaling-stroke;
 	}

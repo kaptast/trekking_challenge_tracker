@@ -31,8 +31,8 @@
 
 	.divider-line {
 		fill: none;
-		stroke: #5c6166;
-		stroke-width: 2;
+		stroke: #606267;
+		stroke-width: 1.5;
 		stroke-linecap: round;
 		vector-effect: non-scaling-stroke;
 	}

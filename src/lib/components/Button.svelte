@@ -18,14 +18,14 @@
 
 {#if isLink}
 	<a class="inline-block" {href} {...rest}>
-		<Wrapper class="px-8 py-1">
+		<Wrapper class="px-8 py-1" strokeWidths={{ top: 1.5, right: 2.5, bottom: 2.5, left: 2.5 }}>
 			{@render icon?.()}
 			{label}
 		</Wrapper>
 	</a>
 {:else}
 	<button class="inline-block" {onclick} {...rest}>
-		<Wrapper class="px-8 py-1">
+		<Wrapper class="px-8 py-1" strokeWidths={{ top: 1.5, right: 2.5, bottom: 2.5, left: 2.5 }}>
 			{@render icon?.()}
 			{label}
 		</Wrapper>
