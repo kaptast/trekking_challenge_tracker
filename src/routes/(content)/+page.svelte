@@ -2,6 +2,9 @@
 	import Button from '$lib/components/Button.svelte'
 	import Card from '$lib/components/Card.svelte'
 	import Divider from '$lib/components/Divider.svelte'
+
+	const randDec = () => `/${Math.floor(Math.random() * 9) + 1}.png`
+	const dec = Array.from({ length: 5 }, randDec)
 </script>
 
 <div class="space-y-2 p-10">
@@ -28,23 +31,12 @@
 			<p class="text-lg">Group: Mountain Goats</p>
 
 			<div class="mx-auto w-fit">
-				<Button label="View details" href="/challenges/1" />
+				<Button label="View details" href="/challenges/1" class="bg-stone-50" />
 			</div>
 		</div>
 
 		{#snippet bottomRightDecoration()}
-			<svg
-				width="55"
-				height="34"
-				viewBox="0 0 55 34"
-				fill="none"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<path
-					d="M18.5223 10.9303L1.02232 33.4303H54.0223V19.4303L50.5223 21.9303L40.0223 0.93029L25.5223 19.4303L18.5223 10.9303Z"
-					fill="#C5C7CB"
-				/>
-			</svg>
+			<img src={dec[0]} alt="decoration" class="-mr-10 -mb-2 h-12 w-auto" />
 		{/snippet}
 	</Card>
 
@@ -78,38 +70,16 @@
 			<Divider />
 
 			<div class="mt-2 grid grid-rows-2 place-content-center gap-2">
-				<Button label="Create Group" href="/groups/create" />
-				<Button label="Join Group" href="/groups" />
+				<Button label="Create Group" href="/groups/create" class="bg-forest-300" />
+				<Button label="Join Group" href="/groups" class="bg-sand-200" />
 			</div>
 
 			{#snippet bottomLeftDecoration()}
-				<svg
-					width="69"
-					height="33"
-					viewBox="0 0 69 33"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<path
-						d="M6.5 0.699783L0.5 5.69978V31.6998H67L50 21.6998L41.5 26.1998L27.5 10.1998L21.5 18.1998L6.5 0.699783Z"
-						fill="#C5C7CB"
-					/>
-				</svg>
+				<img src={dec[1]} alt="decoration" class="h-12 w-auto" />
 			{/snippet}
 
 			{#snippet bottomRightDecoration()}
-				<svg
-					width="50"
-					height="32"
-					viewBox="0 0 50 32"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<path
-						d="M18.8505 15.8657L1.35052 31.3657L49.3505 30.3657V16.8657L34.3505 0.865662L25.8505 17.8657L18.8505 15.8657Z"
-						fill="#C5C7CB"
-					/>
-				</svg>
+				<img src={dec[2]} alt="decoration" class="h-12 w-auto" />
 			{/snippet}
 		</Card>
 
@@ -128,23 +98,12 @@
 			</div>
 
 			<div class="mt-2 grid grid-rows-2 place-content-center gap-2">
-				<Button label="Sync with Strava" href="/activities/sync" />
-				<Button label="Import GPX" href="/activities/import" />
+				<Button label="Sync with Strava" href="/activities/sync" class="bg-[#fc4c02]" />
+				<Button label="Import GPX" href="/activities/import" class="bg-alpine-400" />
 			</div>
 
 			{#snippet bottomRightDecoration()}
-				<svg
-					width="30"
-					height="23"
-					viewBox="0 0 30 23"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<path
-						d="M0.362076 22.162L10.3621 11.662L15.3621 16.162L26.8621 0.661972L29.3621 2.16197V22.162H0.862076"
-						fill="#C5C7CB"
-					/>
-				</svg>
+				<img src={dec[3]} alt="decoration" class="h-12 w-auto" />
 			{/snippet}
 		</Card>
 	</div>
@@ -174,18 +133,7 @@
 		</div>
 
 		{#snippet bottomRightDecoration()}
-			<svg
-				width="66"
-				height="38"
-				viewBox="0 0 66 38"
-				fill="none"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<path
-					d="M21.2441 12.9319C14.4107 20.9319 0.644064 36.9319 0.244064 36.9319H65.2441L64.7441 11.4319L54.7441 22.9319L43.7441 0.931885L27.7441 21.4319L21.2441 12.9319Z"
-					fill="#C5C7CB"
-				/>
-			</svg>
+			<img src={dec[4]} alt="decoration" class="h-12 w-auto" />
 		{/snippet}
 	</Card>
 </div>

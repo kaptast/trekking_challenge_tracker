@@ -8,6 +8,7 @@
 		strokeWidths?: { top?: number; right?: number; bottom?: number; left?: number }
 		bottomLeftDecoration?: Snippet
 		bottomRightDecoration?: Snippet
+		backgroundImage?: string
 	}
 
 	let {
@@ -15,7 +16,8 @@
 		class: className,
 		strokeWidths,
 		bottomLeftDecoration,
-		bottomRightDecoration
+		bottomRightDecoration,
+		backgroundImage
 	}: Props = $props()
 
 	const sw = $derived({
@@ -48,9 +50,18 @@
 	const rightV = Math.floor(Math.random() * 2)
 	const bottomV = Math.floor(Math.random() * 2)
 	const leftV = Math.floor(Math.random() * 2)
+
+	const bgPosX = Math.floor(Math.random() * 100)
+	const bgPosY = Math.floor(Math.random() * 100)
 </script>
 
 <div class="wrapper-container {className}" bind:clientWidth={width} bind:clientHeight={height}>
+	{#if backgroundImage}
+		<div
+			class="absolute inset-0 -z-20 bg-cover opacity-50"
+			style="background-image: url('{backgroundImage}'); background-position: {bgPosX}% {bgPosY}%;"
+		></div>
+	{/if}
 	{#if width && height}
 		<svg class="border-svg">
 			<!-- Top: left→right along X -->
@@ -82,12 +93,12 @@
 		{@render children()}
 	</div>
 
-	<div class="absolute inset-0 overflow-hidden -z-10">
+	<div class="absolute inset-0 -z-10 overflow-hidden">
 		<div class="absolute -bottom-0.5 -left-0.5">
 			{@render bottomLeftDecoration?.()}
 		</div>
 
-		<div class="absolute -right-0.5 -bottom-0.5">
+		<div class="-Z-10 absolute -right-0.5 -bottom-0.5">
 			{@render bottomRightDecoration?.()}
 		</div>
 	</div>
@@ -96,6 +107,7 @@
 <style>
 	.wrapper-container {
 		position: relative;
+		isolation: isolate;
 	}
 
 	.border-svg {
