@@ -20,9 +20,13 @@ export const auth = betterAuth({
 		},
 		modelName: 'user'
 	},
+	emailAndPassword: {
+		enabled: true
+	},
 	account: {
 		accountLinking: {
-			enabled: true
+			enabled: true,
+			trustedProviders: ['strava']
 		}
 	},
 	plugins: [

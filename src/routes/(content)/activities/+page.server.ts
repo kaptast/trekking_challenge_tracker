@@ -6,7 +6,8 @@ import { eq } from 'drizzle-orm'
 
 export const load: PageServerLoad = async ({ locals }) => {
 	return {
-		activities: loadActivities(locals)
+		activities: loadActivities(locals),
+		stravaLinked: Boolean(locals.user?.stravaAthleteId)
 	}
 }
 
@@ -16,7 +17,7 @@ async function loadActivities(locals: App.Locals): Promise<Array<typeof activity
 	}
 
 	if (!locals.user.stravaAthleteId) {
-		error(400, 'Strava athlete ID not found for user')
+		return []
 	}
 
 	return db
