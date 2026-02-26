@@ -3,8 +3,15 @@
 	import Card from '$lib/components/Card.svelte'
 	import Divider from '$lib/components/Divider.svelte'
 
-	const randDec = () => `/${Math.floor(Math.random() * 9) + 1}.png`
-	const dec = Array.from({ length: 5 }, randDec)
+	function randomDecoration(side: 'left' | 'right'): string {
+		const numberOfDecorations = {
+			left: 9,
+			right: 6
+		}
+
+		const randomIndex = Math.floor(Math.random() * numberOfDecorations[side]) + 1
+		return `/decorations/${side}/${randomIndex}.png`
+	}
 </script>
 
 <div class="space-y-2 p-10">
@@ -36,7 +43,7 @@
 		</div>
 
 		{#snippet bottomRightDecoration()}
-			<img src={dec[0]} alt="decoration" class="-mr-10 -mb-2 h-12 w-auto" />
+			<img src={randomDecoration('right')} alt="decoration" class="-mr-10 -mb-2 h-12 w-auto" />
 		{/snippet}
 	</Card>
 
@@ -75,11 +82,11 @@
 			</div>
 
 			{#snippet bottomLeftDecoration()}
-				<img src={dec[1]} alt="decoration" class="h-12 w-auto" />
+				<img src={randomDecoration('left')} alt="decoration" class="h-12 w-auto" />
 			{/snippet}
 
 			{#snippet bottomRightDecoration()}
-				<img src={dec[2]} alt="decoration" class="h-12 w-auto" />
+				<img src={randomDecoration('right')} alt="decoration" class="h-12 w-auto" />
 			{/snippet}
 		</Card>
 
@@ -103,7 +110,7 @@
 			</div>
 
 			{#snippet bottomRightDecoration()}
-				<img src={dec[3]} alt="decoration" class="h-12 w-auto" />
+				<img src={randomDecoration('right')} alt="decoration" class="h-12 w-auto" />
 			{/snippet}
 		</Card>
 	</div>
@@ -133,7 +140,7 @@
 		</div>
 
 		{#snippet bottomRightDecoration()}
-			<img src={dec[4]} alt="decoration" class="h-12 w-auto" />
+			<img src={randomDecoration('right')} alt="decoration" class="h-12 w-auto" />
 		{/snippet}
 	</Card>
 </div>
