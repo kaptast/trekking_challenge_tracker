@@ -4,9 +4,14 @@
 	import Distance from '$lib/components/Distance.svelte'
 	import Duration from '$lib/components/Duration.svelte'
 	import Button from '$lib/components/Button.svelte'
+	import GpxUpload from '$lib/components/GpxUpload.svelte'
 
 	let { data }: PageProps = $props()
 </script>
+
+<div class="mb-6">
+	<GpxUpload />
+</div>
 
 <table>
 	<thead>
