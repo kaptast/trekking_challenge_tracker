@@ -8,50 +8,43 @@
 	let { data }: PageProps = $props()
 </script>
 
-{#if !data.stravaLinked}
-	<div class="flex flex-col items-center gap-4 py-16 text-center">
-		<p class="text-stone-600">Connect your Strava account to see your activities.</p>
-		<Button label="Connect Strava" href="/auth" class="bg-orange-50 text-orange-700" />
-	</div>
-{:else}
-	<table>
-		<thead>
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Distance</th>
+			<th>Moving Time</th>
+			<th>Type</th>
+			<th>Map</th>
+		</tr>
+	</thead>
+	<tbody>
+		{#await data.activities}
 			<tr>
-				<th>Name</th>
-				<th>Distance</th>
-				<th>Moving Time</th>
-				<th>Type</th>
-				<th>Map</th>
+				<td colspan="7">Loading activities...</td>
 			</tr>
-		</thead>
-		<tbody>
-			{#await data.activities}
+		{:then activities}
+			{#if activities.length === 0}
 				<tr>
-					<td colspan="7">Loading activities...</td>
+					<td colspan="7">No activities found.</td>
 				</tr>
-			{:then activities}
-				{#if activities.length === 0}
+			{:else}
+				{#each activities as activity}
 					<tr>
-						<td colspan="7">No activities found.</td>
+						<td>{activity.name}</td>
+						<td><Distance value={activity.distance} /></td>
+						<td><Duration value={activity.movingTime ?? 0} /></td>
+						<td>{activity.type}</td>
+						<td>
+							<SummaryMap summaryPolyline={activity.polyline ?? ''} />
+						</td>
 					</tr>
-				{:else}
-					{#each activities as activity}
-						<tr>
-							<td>{activity.name}</td>
-							<td><Distance value={activity.distance} /></td>
-							<td><Duration value={activity.movingTime ?? 0} /></td>
-							<td>{activity.type}</td>
-							<td>
-								<SummaryMap summaryPolyline={activity.polyline ?? ''} />
-							</td>
-						</tr>
-					{/each}
-				{/if}
-			{:catch error}
-				<tr>
-					<td colspan="7">Error loading activities: {error.message}</td>
-				</tr>
-			{/await}
-		</tbody>
-	</table>
-{/if}
+				{/each}
+			{/if}
+		{:catch error}
+			<tr>
+				<td colspan="7">Error loading activities: {error.message}</td>
+			</tr>
+		{/await}
+	</tbody>
+</table>

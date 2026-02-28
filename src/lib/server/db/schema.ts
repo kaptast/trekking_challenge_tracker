@@ -1,26 +1,26 @@
 import { relations } from 'drizzle-orm'
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
+import { pgTable, text, integer, numeric, bigint } from 'drizzle-orm/pg-core'
 
-export const team = sqliteTable('team', {
+export const team = pgTable('team', {
 	id: text('id')
 		.primaryKey()
 		.$defaultFn(() => crypto.randomUUID()),
 	name: text('name').notNull()
 })
 
-export const teamMember = sqliteTable('team_member', {
-	id: integer('id').primaryKey(),
+export const teamMember = pgTable('team_member', {
+	id: text('id').primaryKey(),
 	teamId: text('team_id')
 		.notNull()
 		.references(() => team.id, { onDelete: 'cascade' })
 })
 
-export const activity = sqliteTable('activity', {
-	id: integer('id').primaryKey(),
-	athleteId: integer('athlete_id').notNull(),
+export const activity = pgTable('activity', {
+	id: bigint('id', { mode: 'number' }).primaryKey(),
+	userId: text('user_id').notNull(),
 	name: text('name').notNull(),
-	distance: integer('distance').notNull(),
-	movingTime: integer('moving_time'),
+	distance: numeric('distance').notNull(),
+	movingTime: numeric('moving_time'),
 	type: text('type'),
 	sportType: text('sport_type'),
 	workoutType: integer('workout_type'),
@@ -33,7 +33,7 @@ export const activity = sqliteTable('activity', {
 	locationState: text('location_state'),
 	locationCountry: text('location_country'),
 	polyline: text('polyline'),
-	maxSpeed: integer('max_speed')
+	maxSpeed: numeric('max_speed')
 })
 
 export const teamRelations = relations(team, ({ many }) => ({
@@ -50,7 +50,7 @@ export const teamMemberRelations = relations(teamMember, ({ one, many }) => ({
 
 export const activityRelations = relations(activity, ({ one }) => ({
 	athlete: one(teamMember, {
-		fields: [activity.athleteId],
+		fields: [activity.userId],
 		references: [teamMember.id]
 	})
 }))

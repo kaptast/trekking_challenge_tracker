@@ -11,7 +11,11 @@ export const load: PageServerLoad = async ({ request, fetch }) => {
 }
 
 export const actions = {
-	sync: async ({ request, fetch }) => {
+	sync: async ({ request, fetch, locals }) => {
+		if (!locals.user) {
+			error(401, 'Unauthorized')
+		}
+
 		const formData = await request.formData()
 		const activitiesToSync = formData.getAll('activityIds') as string[]
 
@@ -33,7 +37,7 @@ export const actions = {
 					.insert(activity)
 					.values({
 						id: stravaActivity.id,
-						athleteId: stravaActivity.athlete.id,
+						userId: locals.user.id,
 						name: stravaActivity.name,
 						distance: stravaActivity.distance,
 						movingTime: stravaActivity.moving_time,
@@ -77,6 +81,7 @@ async function fetchActivities(
 		.select({ id: activity.id })
 		.from(activity)
 		.where(inArray(activity.id, activityIds))
+		.execute()
 	const savedActivityIds = new Set(savedActivities.map((a) => a.id))
 
 	const activitiesWithSyncStatus: SyncedActivity[] = activities.map((act) => ({

@@ -11,18 +11,20 @@ export const load: PageServerLoad = async ({ locals }) => {
 	}
 }
 
-async function loadActivities(locals: App.Locals): Promise<Array<typeof activity.$inferSelect>> {
+async function loadActivities(locals: App.Locals) {
 	if (!locals.user) {
 		error(401, 'Unauthorized')
 	}
 
-	if (!locals.user.stravaAthleteId) {
-		return []
-	}
-
 	return db
-		.select()
+		.select({
+			name: activity.name,
+			distance: activity.distance,
+			movingTime: activity.movingTime,
+			type: activity.type,
+			polyline: activity.polyline
+		})
 		.from(activity)
-		.where(eq(activity.athleteId, locals.user.stravaAthleteId))
+		.where(eq(activity.userId, locals.user.id))
 		.execute()
 }
