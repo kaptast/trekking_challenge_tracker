@@ -23,12 +23,7 @@
 	}: Props = $props()
 </script>
 
-<Wrapper
-	class="w-full p-4 {className}"
-	backgroundImage="/forest.png"
-	{bottomLeftDecoration}
-	{bottomRightDecoration}
->
+<Wrapper class="w-full p-4 {className}" {bottomLeftDecoration} {bottomRightDecoration}>
 	<div class="flex items-center gap-2">
 		{@render icon?.()}
 		<h3 class="font-cursive text-2xl font-semibold">{title}</h3>

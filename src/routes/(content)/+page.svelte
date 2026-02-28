@@ -2,16 +2,6 @@
 	import Button from '$lib/components/Button.svelte'
 	import Card from '$lib/components/Card.svelte'
 	import Divider from '$lib/components/Divider.svelte'
-
-	function randomDecoration(side: 'left' | 'right'): string {
-		const numberOfDecorations = {
-			left: 9,
-			right: 6
-		}
-
-		const randomIndex = Math.floor(Math.random() * numberOfDecorations[side]) + 1
-		return `/decorations/${side}/${randomIndex}.png`
-	}
 </script>
 
 <div class="space-y-2 p-10">
@@ -41,10 +31,6 @@
 				<Button label="View details" href="/challenges/1" class="bg-stone-50" />
 			</div>
 		</div>
-
-		{#snippet bottomRightDecoration()}
-			<img src={randomDecoration('right')} alt="decoration" class="-mr-10 -mb-2 h-12 w-auto" />
-		{/snippet}
 	</Card>
 
 	<div class="flex gap-2">
@@ -80,14 +66,6 @@
 				<Button label="Create Group" href="/groups/create" class="bg-forest-300" />
 				<Button label="Join Group" href="/groups" class="bg-sand-200" />
 			</div>
-
-			{#snippet bottomLeftDecoration()}
-				<img src={randomDecoration('left')} alt="decoration" class="h-12 w-auto" />
-			{/snippet}
-
-			{#snippet bottomRightDecoration()}
-				<img src={randomDecoration('right')} alt="decoration" class="h-12 w-auto" />
-			{/snippet}
 		</Card>
 
 		<Card title="My Activity Summary">
@@ -108,10 +86,6 @@
 				<Button label="Sync with Strava" href="/activities/sync" class="bg-[#fc4c02]" />
 				<Button label="Import GPX" href="/activities/import" class="bg-alpine-400" />
 			</div>
-
-			{#snippet bottomRightDecoration()}
-				<img src={randomDecoration('right')} alt="decoration" class="h-12 w-auto" />
-			{/snippet}
 		</Card>
 	</div>
 
@@ -138,9 +112,5 @@
 		<div class="mt-2 grid place-content-center">
 			<Button label="View All Activities" href="/activities" />
 		</div>
-
-		{#snippet bottomRightDecoration()}
-			<img src={randomDecoration('right')} alt="decoration" class="h-12 w-auto" />
-		{/snippet}
 	</Card>
 </div>
