@@ -1,25 +1,15 @@
 import { betterAuth } from 'better-auth'
 import { genericOAuth } from 'better-auth/plugins'
+import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { sveltekitCookies } from 'better-auth/svelte-kit'
 import { env } from '$env/dynamic/private'
 import { getRequestEvent } from '$app/server'
+import { db } from './db'
 
 export const auth = betterAuth({
 	baseURL: env.ORIGIN,
 	secret: env.BETTER_AUTH_SECRET,
-	user: {
-		additionalFields: {
-			username: {
-				type: 'string',
-				required: false
-			},
-			stravaAthleteId: {
-				type: 'number',
-				required: false
-			}
-		},
-		modelName: 'user'
-	},
+	database: drizzleAdapter(db, { provider: 'pg' }),
 	emailAndPassword: {
 		enabled: true
 	},

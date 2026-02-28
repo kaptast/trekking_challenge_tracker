@@ -54,3 +54,5 @@ export const activityRelations = relations(activity, ({ one }) => ({
 		references: [teamMember.id]
 	})
 }))
+
+export * from './auth.schema'

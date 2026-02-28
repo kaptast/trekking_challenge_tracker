@@ -15,7 +15,7 @@ To recreate this project with the same configuration:
 
 ```sh
 # recreate this project
-bun x sv create --template minimal --types ts --add prettier eslint vitest="usages:unit,component" tailwindcss="plugins:none" sveltekit-adapter="adapter:node" drizzle="database:sqlite+sqlite:libsql" better-auth="demo:github" paraglide="languageTags:hu+demo:no" mcp="ide:vscode+setup:local" --install bun trekking_challenge_tracker
+bun x sv create --template minimal --types ts --add prettier eslint vitest="usages:unit,component" tailwindcss="plugins:none" sveltekit-adapter="adapter:node" drizzle="database:postgresql+postgresql:postgres.js+docker:yes" better-auth="demo:password" paraglide="languageTags:hu+demo:no" --install bun ./
 ```
 
 ## Developing
