@@ -11,7 +11,12 @@ export const load: PageServerLoad = async ({ locals }) => {
 	}
 }
 
-async function loadActivities(locals: App.Locals) {
+type Activity = Pick<
+	typeof activity.$inferSelect,
+	'name' | 'distance' | 'movingTime' | 'type' | 'polyline'
+>
+
+async function loadActivities(locals: App.Locals): Promise<Array<Activity>> {
 	if (!locals.user) {
 		error(401, 'Unauthorized')
 	}

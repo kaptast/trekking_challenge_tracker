@@ -1,5 +1,5 @@
 import { relations } from 'drizzle-orm'
-import { pgTable, text, integer, numeric, bigint } from 'drizzle-orm/pg-core'
+import { pgTable, text, integer, decimal, bigint } from 'drizzle-orm/pg-core'
 
 export const team = pgTable('team', {
 	id: text('id')
@@ -19,8 +19,8 @@ export const activity = pgTable('activity', {
 	id: bigint('id', { mode: 'number' }).primaryKey(),
 	userId: text('user_id').notNull(),
 	name: text('name').notNull(),
-	distance: numeric('distance').notNull(),
-	movingTime: numeric('moving_time'),
+	distance: decimal('distance').notNull(),
+	movingTime: decimal('moving_time'),
 	type: text('type'),
 	sportType: text('sport_type'),
 	workoutType: integer('workout_type'),
@@ -33,7 +33,7 @@ export const activity = pgTable('activity', {
 	locationState: text('location_state'),
 	locationCountry: text('location_country'),
 	polyline: text('polyline'),
-	maxSpeed: numeric('max_speed')
+	maxSpeed: decimal('max_speed')
 })
 
 export const teamRelations = relations(team, ({ many }) => ({
