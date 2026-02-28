@@ -16,6 +16,7 @@ export const auth = betterAuth({
 	account: {
 		accountLinking: {
 			enabled: true,
+			allowDifferentEmails: true,
 			trustedProviders: ['strava']
 		}
 	},
@@ -30,17 +31,16 @@ export const auth = betterAuth({
 					tokenUrl: 'https://www.strava.com/oauth/token',
 					userInfoUrl: 'https://www.strava.com/api/v3/athlete',
 					scopes: ['activity:read_all'],
-					mapProfileToUser: (user) => {
+					mapProfileToUser: (profile) => {
 						return {
-							email: user.email || `${user.id}@strava.local`, // Provide a fallback email
+							email: profile.email || `${profile.id}@strava.local`, // Provide a fallback email
 							name:
-								user.firstname && user.lastname
-									? `${user.firstname} ${user.lastname}`
-									: user.username,
-							emailVerified: user.emailVerified || false,
-							image: user.profile || user.profile_medium,
-							username: user.username,
-							stravaAthleteId: user.id // Store Strava athlete ID as custom field
+								profile.firstname && profile.lastname
+									? `${profile.firstname} ${profile.lastname}`
+									: profile.username,
+							emailVerified: profile.emailVerified || false,
+							image: profile.profile || profile.profile_medium,
+							username: profile.username
 						}
 					}
 				}
