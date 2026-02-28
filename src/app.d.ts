@@ -3,7 +3,6 @@ import type { User, Session } from 'better-auth'
 // Extend better-auth User with custom fields
 interface ExtendedUser extends User {
 	username?: string
-	stravaAthleteId?: number
 }
 
 // See https://svelte.dev/docs/kit/types#app.d.ts

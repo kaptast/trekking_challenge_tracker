@@ -21,11 +21,11 @@ export const joinTeam = command(
 	}),
 	async ({ id }) => {
 		const { locals } = getRequestEvent()
-		if (!locals.user || !locals.user.stravaAthleteId) {
+		if (!locals.user) {
 			return { success: false, message: 'User not authenticated' }
 		}
 
-		await db.insert(teamMember).values({ teamId: id, id: locals.user.stravaAthleteId }).execute()
+		await db.insert(teamMember).values({ teamId: id, id: locals.user.id }).execute()
 		return { success: true, message: 'Joined team successfully' }
 	}
 )
@@ -36,13 +36,13 @@ export const leaveTeam = command(
 	}),
 	async ({ id }) => {
 		const { locals } = getRequestEvent()
-		if (!locals.user || !locals.user.stravaAthleteId) {
+		if (!locals.user) {
 			return { success: false, message: 'User not authenticated' }
 		}
 
 		await db
 			.delete(teamMember)
-			.where(and(eq(teamMember.teamId, id), eq(teamMember.id, locals.user.stravaAthleteId)))
+			.where(and(eq(teamMember.teamId, id), eq(teamMember.id, locals.user.id)))
 			.execute()
 		return { success: true, message: 'Left team successfully' }
 	}

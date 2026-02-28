@@ -6,6 +6,8 @@
 	let { data, form } = $props()
 
 	let mode: 'signIn' | 'signUp' = $state('signIn')
+
+	const stravaAccount = $derived(data.accounts.find((acc) => acc.providerId === 'strava'))
 </script>
 
 <div class="mx-auto max-w-sm space-y-4 p-6">
@@ -19,17 +21,18 @@
 				<hr class="border-stone-200" />
 
 				<div class="space-y-2">
-					<p class="text-sm font-medium">Strava Connection</p>
-
-					{#if data.stravaLinked}
-						<p class="text-green-700 text-sm">Connected</p>
-						<form method="POST" action="?/unlinkStrava" use:enhance>
-							<Button
-								label="Disconnect Strava"
-								type="submit"
-								class="bg-red-50 text-red-700 w-full"
-							/>
-						</form>
+					{#if stravaAccount}
+						{#if stravaAccount.providerId === 'strava'}
+							<p class="text-sm font-medium">Strava Connection</p>
+							<p class="text-green-700 text-sm">Connected as {stravaAccount.accountId}</p>
+							<form method="POST" action="?/unlinkStrava" use:enhance>
+								<Button
+									label="Disconnect Strava"
+									type="submit"
+									class="bg-red-50 text-red-700 w-full"
+								/>
+							</form>
+						{/if}
 					{:else}
 						<p class="text-stone-500 text-sm">Not connected</p>
 						<form method="POST" action="?/linkStrava" use:enhance>

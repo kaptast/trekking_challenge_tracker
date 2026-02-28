@@ -6,8 +6,7 @@ import { eq } from 'drizzle-orm'
 
 export const load: PageServerLoad = async ({ locals }) => {
 	return {
-		activities: loadActivities(locals),
-		stravaLinked: Boolean(locals.user?.stravaAthleteId)
+		activities: loadActivities(locals)
 	}
 }
 

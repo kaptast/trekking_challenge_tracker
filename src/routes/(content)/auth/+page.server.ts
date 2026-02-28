@@ -2,9 +2,13 @@ import { auth } from '$lib/server/auth'
 import { fail, redirect, type Actions, type ServerLoad } from '@sveltejs/kit'
 import { APIError } from 'better-auth'
 
-export const load: ServerLoad = async ({ locals }) => {
+export const load: ServerLoad = async ({ request }) => {
+	const accounts = await auth.api.listUserAccounts({
+		headers: request.headers
+	})
+
 	return {
-		stravaLinked: Boolean(locals.user?.stravaAthleteId)
+		accounts
 	}
 }
 

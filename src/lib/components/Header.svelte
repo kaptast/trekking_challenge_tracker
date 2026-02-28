@@ -6,7 +6,6 @@
 			| {
 					name?: string | null | undefined
 					image?: string | null | undefined
-					stravaAthleteId?: number | null | undefined
 			  }
 			| undefined
 	}
@@ -47,9 +46,6 @@
 		<nav class="flex items-center gap-3 text-sm">
 			{#if user}
 				<span class="text-stone-600">{user.name}</span>
-				{#if !user.stravaAthleteId}
-					<a href="/auth" class="text-orange-700 underline hover:no-underline">Connect Strava</a>
-				{/if}
 				<a href="/auth" class="text-stone-700 underline hover:no-underline">Account</a>
 			{:else}
 				<a href="/auth" class="text-stone-700 underline hover:no-underline">Sign in</a>
