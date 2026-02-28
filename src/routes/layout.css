@@ -1,46 +1,39 @@
 @import 'tailwindcss';
 
 @theme {
-	--font-cursive: 'Patrick Hand', cursive;
-
 	--color-*: initial;
 
-	--color-stone-50: #f6f3ed;
-	--color-stone-100: #e7e1d6;
-	--color-stone-200: #d6cfc2;
-	--color-stone-300: #b8b0a3;
-	--color-stone-600: #5f584f;
+	--color-black: #090605;
+	--color-sand-light: #fcfbe7;
+	--color-sand: #e2c19c;
+	--color-green: #2e8f09;
+	--color-blue: #19589f;
+	--color-blue-dark: #323a4f;
+	--color-orange: #f66704;
+	--color-orange-dark: #c14903;
+	--color-purple: #733d8c;
+	--color-purple-dark: #3e306c;
+}
 
-	--color-forest-100: #dceedc;
-	--color-forest-300: #a3d6a3;
-	--color-forest-500: #4caf50;
-	--color-forest-700: #2e7d32;
-	--color-forest-900: #1b4d20;
-
-	--color-moss-200: #cfe3b3;
-	--color-moss-400: #9ccc65;
-	--color-moss-600: #6b8e23;
-
-	--color-sky-100: #dceffd;
-	--color-sky-300: #93c5fd;
-	--color-sky-500: #3b82f6;
-	--color-sky-700: #1d4ed8;
-
-	--color-sand-200: #fde9a9;
-	--color-sand-400: #f4c430;
-	--color-sand-600: #c99700;
-
-	--color-trail-300: #f6b26b;
-	--color-trail-500: #e67e22;
-	--color-trail-700: #ba5a15;
-
-	--color-summit-400: #ef5350;
-	--color-summit-600: #c62828;
-
-	--color-alpine-400: #5dade2;
-	--color-alpine-600: #2e86c1;
+@layer utilities {
+	.chipped-corners {
+		clip-path: polygon(
+			0 4px,
+			4px 4px,
+			4px 0,
+			calc(100% - 4px) 0,
+			calc(100% - 4px) 4px,
+			100% 4px,
+			100% calc(100% - 4px),
+			calc(100% - 4px) calc(100% - 4px),
+			calc(100% - 4px) 100%,
+			4px 100%,
+			4px calc(100% - 4px),
+			0 calc(100% - 4px)
+		);
+	}
 }
 
 body {
-	@apply font-cursive;
+	background-color: var(--color-blue-dark);
 }

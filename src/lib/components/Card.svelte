@@ -1,35 +1,28 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte'
-	import Wrapper from './Wrapper.svelte'
-	import Divider from './Divider.svelte'
-	import type { ClassValue } from 'svelte/elements'
 
 	type Props = {
 		title: string
-		icon?: Snippet
 		children: Snippet
-		class?: ClassValue
-		bottomLeftDecoration?: Snippet
-		bottomRightDecoration?: Snippet
 	}
 
-	let {
-		title,
-		icon,
-		children,
-		bottomLeftDecoration,
-		bottomRightDecoration,
-		class: className
-	}: Props = $props()
+	let { title, children }: Props = $props()
 </script>
 
-<Wrapper class="w-full p-4 {className}" {bottomLeftDecoration} {bottomRightDecoration}>
-	<div class="flex items-center gap-2">
-		{@render icon?.()}
-		<h3 class="font-cursive text-2xl font-semibold">{title}</h3>
+<div class="relative bg-sand p-1">
+	<div class="chipped-corners relative z-10 bg-black p-0.5">
+		<div class="chipped-corners bg-sand p-1">
+			<div
+				class="chipped-corners block bg-blue-dark px-4 py-1 text-center font-bold text-sand-light uppercase"
+			>
+				{title}
+			</div>
+		</div>
 	</div>
 
-	<Divider />
-
-	{@render children()}
-</Wrapper>
+	<div class="chipped-corners z-0 mx-1 -mt-3 mb-1 bg-black p-0.5">
+		<div class="chipped-corners bg-blue-dark px-2 pt-4 pb-1">
+			{@render children()}
+		</div>
+	</div>
+</div>
