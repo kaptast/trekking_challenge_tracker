@@ -7,17 +7,6 @@
 <Hero />
 
 <div class="space-y-2 p-10">
-	<Card title="Active Challenge">
-		<div class="mx-auto w-4/5 space-y-2">
-			<h4 class="text-xl font-medium">Spring Alpine Quest</h4>
-			<p class="text-lg">Group: Mountain Goats</p>
-
-			<div class="mx-auto w-fit">
-				<Button label="View details" href="/challenges/1" />
-			</div>
-		</div>
-	</Card>
-
 	<div class="flex gap-2">
 		<Card title="My Group">
 			<h4 class="font-cursive text-xl">Mountain Goats</h4>

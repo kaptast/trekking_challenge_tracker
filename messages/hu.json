@@ -1,8 +1,10 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"title": "Túrakihívás",
 	"home": "Kezdőlap",
 	"teams": "Csapatok",
 	"noTeams": "Nincsenek csapatok",
+	"activeChallenge": "Aktív kihívás",
 	"challenges": "Kihívások",
 	"noChallenges": "Nincsenek kihívások",
 	"loginWith": "{provider} bejelentkezés",
@@ -34,5 +36,6 @@
 			"type=hike": "Túra",
 			"type=*": "Egyéb"
 		}
-	}]
+	}],
+	"details": "Részletek"
 }
