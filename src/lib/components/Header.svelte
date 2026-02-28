@@ -18,7 +18,7 @@
 		<div class="chipped-corners bg-sand p-1">
 			<div class="chipped-corners bg-black p-0.5">
 				<div
-					class="chipped-corners flex items-center gap-x-4 bg-blue-dark p-1 font-bold text-sand-light"
+					class="chipped-corners flex items-center gap-x-4 bg-blue-dark px-1 font-bold text-sand-light"
 				>
 					<a href="/" class=""> LOGO </a>
 
@@ -34,8 +34,12 @@
 
 					{#if user}
 						<a href="/auth" class="ml-auto flex items-center gap-x-1">
-							<span class="size-10 border-x-2 border-black">
-								<img src={user?.image} alt={user.name} />
+							<span class="grid size-10 place-items-center border-x-2 border-black bg-[#2E3440]">
+								<img
+									src={user?.image || '/avatar.png'}
+									alt={user.name}
+									class="size-11/12 object-cover"
+								/>
 							</span>
 							{user.name}
 						</a>
