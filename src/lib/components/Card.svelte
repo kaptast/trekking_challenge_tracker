@@ -3,7 +3,7 @@
 
 	type Props = {
 		title: string
-		children: Snippet
+		children?: Snippet
 	}
 
 	let { title, children }: Props = $props()
@@ -22,7 +22,7 @@
 
 	<div class="chipped-corners z-0 mx-1 -mt-3 mb-1 bg-black p-0.5">
 		<div class="chipped-corners bg-blue-dark px-2 pt-4 pb-1">
-			{@render children()}
+			{@render children?.()}
 		</div>
 	</div>
 </div>

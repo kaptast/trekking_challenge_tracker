@@ -4,7 +4,7 @@
 	import Card from './Card.svelte'
 </script>
 
-<div class="hero flex flex-col items-center pt-20">
+<div class="hero chipped-corners flex flex-col items-center border-2 border-black pt-20 pb-10">
 	<h1 class="mb-8 text-4xl font-black text-sand-light uppercase text-shadow-black text-shadow-lg">
 		{m.title()}
 	</h1>
@@ -19,8 +19,6 @@
 			</div>
 		</div>
 	</Card>
-
-	<div class="mt-8 w-full bg-blue-dark p-4"></div>
 </div>
 
 <style>
