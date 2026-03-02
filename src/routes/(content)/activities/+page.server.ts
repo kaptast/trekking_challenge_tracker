@@ -30,5 +30,6 @@ async function loadActivities(locals: App.Locals): Promise<Array<Activity>> {
 		})
 		.from(activity)
 		.where(eq(activity.userId, locals.user.id))
+		.orderBy(activity.startDate)
 		.execute()
 }
