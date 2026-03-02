@@ -3,6 +3,7 @@
 @theme {
 	--color-*: initial;
 
+	--color-dark-gray: #101010;
 	--color-black: #090605;
 	--color-sand-light: #fcfbe7;
 	--color-sand: #e7ceaf;
@@ -35,5 +36,5 @@
 }
 
 body {
-	background-color: var(--color-blue-dark);
+	background-color: var(--color-dark-gray);
 }

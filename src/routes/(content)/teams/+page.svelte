@@ -1,11 +1,17 @@
 <script lang="ts">
+	import Button from '$lib/components/Button.svelte'
+	import CreateTeamDialog from '$lib/components/CreateTeamDialog/CreateTeamDialog.svelte'
 	import Distance from '$lib/components/Distance.svelte'
 	import { m } from '$lib/paraglide/messages'
 	import { joinTeam, leaveTeam } from '../data.remote'
 	import type { PageProps } from './$types'
 
 	let { data }: PageProps = $props()
+
+	let createTeamDialog = $state<CreateTeamDialog | null>(null)
 </script>
+
+<Button onclick={() => createTeamDialog?.open()} label={m.createTeam()} />
 
 <table>
 	<thead>
@@ -76,3 +82,5 @@
 		{/await}
 	</tbody>
 </table>
+
+<CreateTeamDialog bind:this={createTeamDialog} />
