@@ -17,6 +17,8 @@
 	"points": "Pontok",
 	"leaderboard": "Ranglista",
 	"createTeam": "Csapat létrehozása",
+	"createYourOwnTeam": "Hozz létre csapatot!",
+	"createOrJoinTeam": "Készíts saját csapatot, vagy csatlakozz meglévőhöz!",
 	"myTeam": "Csapatom",
 	"joinTeam": "Csatlakozás",
 	"teamName": "Csapat neve",
@@ -40,5 +42,9 @@
 			"type=*": "Egyéb"
 		}
 	}],
-	"details": "Részletek"
+	"details": "Részletek",
+	"uploadAndSync": "Feltöltés és szinkronizálás",
+	"uploadAGpxFileOrSnycFromStrava": "GPX fájl feltöltése vagy aktivitások szinkronizálása Straváról.",
+	"earnPoints": "Pontszerzés",
+	"earnPointsForTheLeaderboard": "Szerezz pontokat minden tevékenyéségeddel, és segíts a csapatodnak a ranglista élére kerülni!"
 }

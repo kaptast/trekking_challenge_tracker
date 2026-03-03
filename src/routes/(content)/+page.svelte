@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte'
 	import Card from '$lib/components/Card.svelte'
-	import Hero from '$lib/components/Hero.svelte'
 
 	import { m } from '$lib/paraglide/messages'
 
@@ -10,39 +9,68 @@
 	let { data }: PageProps = $props()
 </script>
 
-<Hero />
+<div class="flex flex-col items-center justify-center gap-y-7 py-16">
+	<h1 class="text-outline-2 text-outline-black text-5xl font-black text-brown-100 uppercase">
+		Túrakihívás 2026
+	</h1>
 
-<div class="grid grid-cols-3 gap-4 pt-4">
-	<Card title={m.myActivities()}>
-		{#await data.activities then activities}
-			{#if activities.length > 0}
-				<ul class="space-y-2">
-					{#each activities as activity}
-						<li class="bg-gray-100 flex items-center justify-between rounded-md p-4">
-							<div>
-								<div class="text-gray-900 text-sm font-medium">{activity.name}</div>
-								{#if activity.startDate}
-									<div class="text-gray-500 text-sm">
-										{new Date(activity.startDate).toLocaleDateString()}
-									</div>
-								{/if}
-							</div>
-						</li>
-					{/each}
-				</ul>
-			{/if}
-		{/await}
+	<Button label="Lépj be a kalandba!" href="/auth" />
+</div>
+
+<div class="grid grid-cols-3 grid-rows-2 gap-4 pt-4">
+	<Card>
+		<div class="grid place-items-center p-4 text-center">
+			<div class="flex gap-2">
+				<img src="/gpx.png" alt="GPX file format" class="size-20" />
+				<img src="/strava.png" alt="Strava Sync" class="size-20" />
+			</div>
+
+			<h3 class="mt-4 text-2xl font-bold text-black uppercase">{m.uploadAndSync()}</h3>
+			<h4 class="text-base font-semibold text-black">{m.uploadAGpxFileOrSnycFromStrava()}</h4>
+		</div>
 	</Card>
 
-	<Card title={m.myTeam()}>
-		{#await data.team then team}
-			{#if team}
-				<div class="space-y-2">
-					<div class="text-gray-900 text-sm font-medium">{team.name}</div>
-				</div>
-			{/if}
-		{/await}
+	<Card>
+		<div class="grid place-items-center p-4 text-center">
+			<div class="flex gap-2"></div>
+
+			<h3 class="mt-4 text-2xl font-bold text-black uppercase">{m.createYourOwnTeam()}</h3>
+			<h4 class="text-base font-semibold text-black">{m.createOrJoinTeam()}</h4>
+		</div>
 	</Card>
 
-	<Card title={m.leaderboard()}></Card>
+	<Card>
+		<div class="grid place-items-center p-4 text-center">
+			<div class="flex gap-2">
+				<img src="/xp.png" alt="XP" class="size-20" />
+			</div>
+
+			<h3 class="mt-4 text-2xl font-bold text-black uppercase">{m.earnPoints()}</h3>
+			<h4 class="text-base font-semibold text-black">{m.earnPointsForTheLeaderboard()}</h4>
+		</div>
+	</Card>
+
+	<Card class="col-span-2">
+		<div class="grid place-items-center p-4 text-center">
+			<div class="flex gap-2">
+				<img src="/gpx.png" alt="GPX file format" class="size-20" />
+				<img src="/strava.png" alt="Strava Sync" class="size-20" />
+			</div>
+
+			<h3 class="mt-4 text-2xl font-bold text-black uppercase">{m.uploadAndSync()}</h3>
+			<h4 class="text-base font-semibold text-black">{m.uploadAGpxFileOrSnycFromStrava()}</h4>
+		</div>
+	</Card>
+
+	<Card>
+		<div class="grid place-items-center p-4 text-center">
+			<div class="flex gap-2">
+				<img src="/gpx.png" alt="GPX file format" class="size-20" />
+				<img src="/strava.png" alt="Strava Sync" class="size-20" />
+			</div>
+
+			<h3 class="mt-4 text-2xl font-bold text-black uppercase">{m.uploadAndSync()}</h3>
+			<h4 class="text-base font-semibold text-black">{m.uploadAGpxFileOrSnycFromStrava()}</h4>
+		</div>
+	</Card>
 </div>
