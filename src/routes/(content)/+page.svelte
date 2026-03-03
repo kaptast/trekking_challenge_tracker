@@ -10,27 +10,29 @@
 </script>
 
 <div class="flex flex-col items-center justify-center gap-y-7 py-16">
-	<h1 class="text-outline-2 text-outline-black text-5xl font-black text-brown-100 uppercase">
+	<h1
+		class="text-outline-2 text-outline-black font-pixel text-7xl tracking-tight text-brown-100 uppercase"
+	>
 		Túrakihívás 2026
 	</h1>
 
-	<Button label="Lépj be a kalandba!" href="/auth" size="large" />
+	<Button label="Lépj be a kalandba!" href="/auth" size="large" class="font-mono" />
 </div>
 
-<div class="grid grid-cols-3 grid-rows-2 gap-4 pt-4">
-	<Card>
+<div class="grid grid-cols-12 grid-rows-2 gap-4 pt-4">
+	<Card class="col-span-4">
 		<div class="grid place-items-center p-4 text-center">
 			<div class="flex gap-2">
 				<img src="/gpx.png" alt="GPX file format" class="size-20" />
 				<img src="/strava.png" alt="Strava Sync" class="size-20" />
 			</div>
 
-			<h3 class="mt-4 text-2xl font-bold text-black uppercase">{m.uploadAndSync()}</h3>
+			<h3 class="mt-4 font-sans text-2xl font-bold text-black uppercase">{m.uploadAndSync()}</h3>
 			<h4 class="text-base font-semibold text-black">{m.uploadAGpxFileOrSnycFromStrava()}</h4>
 		</div>
 	</Card>
 
-	<Card>
+	<Card class="col-span-4">
 		<div class="grid place-items-center p-4 text-center">
 			<img src="/team.png" alt="Team" class="h-20" />
 
@@ -39,7 +41,7 @@
 		</div>
 	</Card>
 
-	<Card>
+	<Card class="col-span-4">
 		<div class="grid place-items-center p-4 text-center">
 			<img src="/xp.png" alt="XP" class="size-20" />
 
@@ -48,7 +50,7 @@
 		</div>
 	</Card>
 
-	<Card class="col-span-2">
+	<Card class="col-span-9">
 		<div class="grid place-items-center p-4 text-center">
 			<div class="flex gap-2">
 				<img src="/gpx.png" alt="GPX file format" class="size-20" />
@@ -60,7 +62,7 @@
 		</div>
 	</Card>
 
-	<Card>
+	<Card class="col-span-3">
 		<div class="grid place-items-center p-4 text-center">
 			<div class="flex gap-2">
 				<img src="/gpx.png" alt="GPX file format" class="size-20" />
