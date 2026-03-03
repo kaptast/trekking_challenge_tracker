@@ -31,7 +31,7 @@
 	<a class="chipped-corners inline-block cursor-pointer bg-black p-0.5 pb-1" {href} {...rest}>
 		<span class="chipped-corners block bg-brown-200 p-1">
 			<span
-				class="{className} chipped-corners text-outline text-outline-black block px-4 py-1 text-center font-bold uppercase {variant} {size}"
+				class="{className} chipped-corners text-outline text-outline-black block px-4 py-1 text-center font-pixel font-bold uppercase {variant} {size}"
 			>
 				{label}
 			</span>
@@ -41,7 +41,7 @@
 	<button class="chipped-corners cursor-pointer bg-black p-0.5 pb-1" {onclick} {...rest}>
 		<span class="chipped-corners block bg-brown-200 p-1">
 			<span
-				class="{className} chipped-corners text-outline text-outline-black block px-4 py-1 text-center font-bold uppercase {variant} {size}"
+				class="{className} chipped-corners text-outline text-outline-black block px-4 py-1 text-center font-pixel font-bold uppercase {variant} {size}"
 			>
 				{label}
 			</span>
@@ -52,7 +52,7 @@
 <style>
 	.primary {
 		color: var(--color-brown-100);
-		background-color: var(--color-brown-400);
+		background-color: var(--color-brown-450);
 	}
 
 	.secondary {

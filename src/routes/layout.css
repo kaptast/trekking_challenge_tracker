@@ -1,6 +1,16 @@
 @import 'tailwindcss';
 
+/* In layout.css */
+@font-face {
+	font-family: 'Upheaval';
+	src: url('/upheavtt.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
 @theme {
+	--font-pixel: 'Upheaval', sans-serif;
+
 	--color-*: initial;
 
 	--color-black: #000514;
@@ -12,6 +22,7 @@
 	--color-brown-200: #d3c2a4;
 	--color-brown-300: #e2ccb4;
 	--color-brown-400: #987f6b;
+	--color-brown-450: #7f5a40;
 	--color-brown-500: #362219;
 	--color-brown-600: #3c2d2a;
 	--color-brown-800: #231917;

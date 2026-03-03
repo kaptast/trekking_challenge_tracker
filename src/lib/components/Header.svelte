@@ -19,7 +19,7 @@
 	<a
 		{href}
 		class={[
-			'chipped-corners text-outline px-2 py-0.5 uppercase',
+			'chipped-corners px-2 py-0.5 font-pixel uppercase',
 			active
 				? 'text-outline-gold-800 border border-brown-900 bg-brown-800 text-gold'
 				: 'text-outline-black text-brown-100'
