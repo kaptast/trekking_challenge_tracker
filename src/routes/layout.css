@@ -3,38 +3,69 @@
 @theme {
 	--color-*: initial;
 
-	--color-dark-gray: #101010;
-	--color-black: #090605;
-	--color-sand-light: #fcfbe7;
-	--color-sand: #e7ceaf;
-	--color-green: #2e8f09;
-	--color-blue: #19589f;
-	--color-blue-dark: #323a4f;
-	--color-orange: #f66704;
-	--color-orange-dark: #c14903;
-	--color-purple: #733d8c;
-	--color-purple-dark: #3e306c;
+	--color-black: #000514;
+
+	--color-sand-100: #fffff7;
+	--color-sand-300: #cfc0a3;
+
+	--color-brown-100: #f2e6d0;
+	--color-brown-200: #d3c2a4;
+	--color-brown-300: #e2ccb4;
+	--color-brown-400: #987f6b;
+	--color-brown-500: #362219;
+	--color-brown-600: #3c2d2a;
+	--color-brown-800: #231917;
+	--color-brown-900: #201614;
+
+	--color-gold: #ddbc6f;
+	--color-gold-800: #200f00;
+
+	--color-olive-500: #5f6a25;
 }
 
 @layer utilities {
 	.chipped-corners {
 		clip-path: polygon(
 			0 4px,
-			4px 4px,
+			2px 4px,
+			2px 2px,
+			4px 2px,
 			4px 0,
 			calc(100% - 4px) 0,
-			calc(100% - 4px) 4px,
+			calc(100% - 4px) 2px,
+			calc(100% - 2px) 2px,
+			calc(100% - 2px) 4px,
 			100% 4px,
 			100% calc(100% - 4px),
-			calc(100% - 4px) calc(100% - 4px),
+			calc(100% - 2px) calc(100% - 4px),
+			calc(100% - 2px) calc(100% - 2px),
+			calc(100% - 4px) calc(100% - 2px),
 			calc(100% - 4px) 100%,
 			4px 100%,
-			4px calc(100% - 4px),
+			4px calc(100% - 2px),
+			2px calc(100% - 2px),
+			2px calc(100% - 4px),
 			0 calc(100% - 4px)
 		);
 	}
 }
 
 body {
-	background-color: var(--color-dark-gray);
+	background-color: var(--color-black);
+}
+
+.text-outline {
+	-webkit-text-stroke-width: 0.5px;
+}
+
+.text-outline-2 {
+	-webkit-text-stroke-width: 2px;
+}
+
+.text-outline-black {
+	-webkit-text-stroke-color: var(--color-black);
+}
+
+.text-outline-gold-800 {
+	-webkit-text-stroke-color: var(--color-gold-800);
 }

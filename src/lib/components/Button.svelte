@@ -26,20 +26,20 @@
 </script>
 
 {#if isLink}
-	<a class="chipped-corners inline-block cursor-pointer bg-black p-0.5" {href} {...rest}>
-		<span class="chipped-corners block bg-sand p-1">
+	<a class="chipped-corners inline-block cursor-pointer bg-black p-0.5 pb-1" {href} {...rest}>
+		<span class="chipped-corners block bg-brown-200 p-1">
 			<span
-				class="{className} chipped-corners block px-4 py-1 text-center font-bold uppercase {variant} "
+				class="{className} chipped-corners text-outline text-outline-black block px-4 py-1 text-center font-bold uppercase {variant} "
 			>
 				{label}
 			</span>
 		</span>
 	</a>
 {:else}
-	<button class="chipped-corners cursor-pointer bg-black p-0.5" {onclick} {...rest}>
-		<span class="chipped-corners block bg-sand p-1">
+	<button class="chipped-corners cursor-pointer bg-black p-0.5 pb-1" {onclick} {...rest}>
+		<span class="chipped-corners block bg-brown-200 p-1">
 			<span
-				class="{className} chipped-corners block px-4 py-1 text-center font-bold uppercase {variant} "
+				class="{className} chipped-corners text-outline text-outline-black0 block px-4 py-1 text-center font-bold uppercase {variant} "
 			>
 				{label}
 			</span>
@@ -49,17 +49,17 @@
 
 <style>
 	.primary {
-		color: var(--color-sand-light);
-		background-color: var(--color-green);
+		color: var(--color-brown-100);
+		background-color: var(--color-brown-400);
 	}
 
 	.secondary {
-		color: var(--color-sand-light);
-		background-color: var(--color-blue);
+		color: var(--color-brown-100);
+		background-color: var(--color-olive-500);
 	}
 
 	.strava {
 		color: var(--color-black);
-		background-color: var(--color-orange);
+		background-color: #fc5200;
 	}
 </style>
