@@ -6,7 +6,8 @@ import { eq } from 'drizzle-orm'
 export const load: PageServerLoad = async ({ locals }) => {
 	return {
 		activities: loadActivities(locals),
-		team: loadTeam(locals)
+		team: loadTeam(locals),
+		teams: loadTeams()
 	}
 }
 
@@ -45,4 +46,8 @@ async function loadTeam(locals: App.Locals) {
 		.execute()
 
 	return result[0] ?? null
+}
+
+async function loadTeams() {
+	return db.select({ id: team.id, name: team.name }).from(team).orderBy(team.name).execute()
 }

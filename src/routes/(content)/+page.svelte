@@ -1,8 +1,9 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte'
 	import Card from '$lib/components/Card.svelte'
+	import Table from '$lib/components/Table.svelte'
 
-	import { m } from '$lib/paraglide/messages'
+	import { m, teams } from '$lib/paraglide/messages'
 
 	import type { PageProps } from './$types'
 
@@ -51,15 +52,16 @@
 	</Card>
 
 	<Card class="col-span-9">
-		<div class="grid place-items-center p-4 text-center">
-			<div class="flex gap-2">
-				<img src="/gpx.png" alt="GPX file format" class="size-20" />
-				<img src="/strava.png" alt="Strava Sync" class="size-20" />
-			</div>
-
-			<h3 class="mt-4 text-2xl font-bold text-black uppercase">{m.uploadAndSync()}</h3>
-			<h4 class="text-base font-semibold text-black">{m.uploadAGpxFileOrSnycFromStrava()}</h4>
-		</div>
+		<Table title="Top csapatok">
+			{#await data.teams then teams}
+				{#each teams as team}
+					<div>
+						<div>{team.name}</div>
+						<div>0</div>
+					</div>
+				{/each}
+			{/await}
+		</Table>
 	</Card>
 
 	<Card class="col-span-3">
