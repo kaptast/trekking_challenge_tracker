@@ -11,7 +11,7 @@
 
 <div class="flex flex-col items-center justify-center gap-y-7 py-16">
 	<h1
-		class="text-outline-2 font-pixel text-7xl tracking-tight text-brown-100 uppercase text-shadow-black"
+		class="text-3d text-3d-thicker font-pixel text-7xl text-brown-100 uppercase text-shadow-black"
 	>
 		Túrakihívás 2026
 	</h1>
