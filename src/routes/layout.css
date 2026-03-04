@@ -60,57 +60,47 @@
 		);
 	}
 
-	/*
-	 * 3D text effect. Parameters (set on the element or a parent):
-	 *   --text-3d-depth : bottom & right extrusion thickness (default: 4px)
-	 *   color           : set via .text-shadow-* Tailwind utilities
-	 *
-	 * Example – smaller depth:
-	 *   class="text-3d [--text-3d-depth:2px] text-shadow-black"
-	 */
 	.text-3d {
 		--text-3d-depth: 2px;
-		--_c: var(--tw-text-shadow-color);
-		--_d1: calc(var(--text-3d-depth) / 4);
-		--_d2: calc(var(--text-3d-depth) / 2);
-		--_d3: calc(var(--text-3d-depth) * 3 / 4);
-		--_d4: var(--text-3d-depth);
+		--text-3d-depth-1: calc(var(--text-3d-depth) / 4);
+		--text-3d-depth-2: calc(var(--text-3d-depth) / 2);
+		--text-3d-depth-3: calc(var(--text-3d-depth) * 3 / 4);
+		--text-3d-depth-4: var(--text-3d-depth);
 		text-shadow:
-			/* top & left border (2px) */
-			-1px 0 0 var(--_c),
-			-2px 0 0 var(--_c),
-			0 -1px 0 var(--_c),
-			0 -2px 0 var(--_c),
-			-1px -1px 0 var(--_c),
-			-2px -2px 0 var(--_c),
-			/* top-right corner */ var(--_d1) -1px 0 var(--_c),
-			var(--_d2) -1px 0 var(--_c),
-			var(--_d3) -1px 0 var(--_c),
-			var(--_d4) -1px 0 var(--_c),
-			var(--_d1) -2px 0 var(--_c),
-			var(--_d2) -2px 0 var(--_c),
-			var(--_d3) -2px 0 var(--_c),
-			var(--_d4) -2px 0 var(--_c),
-			/* bottom-left corner */ -1px var(--_d1) 0 var(--_c),
-			-2px var(--_d1) 0 var(--_c),
-			-1px var(--_d2) 0 var(--_c),
-			-2px var(--_d2) 0 var(--_c),
-			-1px var(--_d3) 0 var(--_c),
-			-2px var(--_d3) 0 var(--_c),
-			-1px var(--_d4) 0 var(--_c),
-			-2px var(--_d4) 0 var(--_c),
-			/* bottom & right extrusion */ var(--_d1) 0 0 var(--_c),
-			var(--_d2) 0 0 var(--_c),
-			var(--_d3) 0 0 var(--_c),
-			var(--_d4) 0 0 var(--_c),
-			0 var(--_d1) 0 var(--_c),
-			0 var(--_d2) 0 var(--_c),
-			0 var(--_d3) 0 var(--_c),
-			0 var(--_d4) 0 var(--_c),
-			var(--_d1) var(--_d1) 0 var(--_c),
-			var(--_d2) var(--_d2) 0 var(--_c),
-			var(--_d3) var(--_d3) 0 var(--_c),
-			var(--_d4) var(--_d4) 0 var(--_c);
+			-1px 0 0 var(--tw-text-shadow-color),
+			-2px 0 0 var(--tw-text-shadow-color),
+			0 -1px 0 var(--tw-text-shadow-color),
+			0 -2px 0 var(--tw-text-shadow-color),
+			-1px -1px 0 var(--tw-text-shadow-color),
+			-2px -2px 0 var(--tw-text-shadow-color),
+			var(--text-3d-depth-1) -1px 0 var(--tw-text-shadow-color),
+			var(--text-3d-depth-2) -1px 0 var(--tw-text-shadow-color),
+			var(--text-3d-depth-3) -1px 0 var(--tw-text-shadow-color),
+			var(--text-3d-depth-4) -1px 0 var(--tw-text-shadow-color),
+			var(--text-3d-depth-1) -2px 0 var(--tw-text-shadow-color),
+			var(--text-3d-depth-2) -2px 0 var(--tw-text-shadow-color),
+			var(--text-3d-depth-3) -2px 0 var(--tw-text-shadow-color),
+			var(--text-3d-depth-4) -2px 0 var(--tw-text-shadow-color),
+			-1px var(--text-3d-depth-1) 0 var(--tw-text-shadow-color),
+			-2px var(--text-3d-depth-1) 0 var(--tw-text-shadow-color),
+			-1px var(--text-3d-depth-2) 0 var(--tw-text-shadow-color),
+			-2px var(--text-3d-depth-2) 0 var(--tw-text-shadow-color),
+			-1px var(--text-3d-depth-3) 0 var(--tw-text-shadow-color),
+			-2px var(--text-3d-depth-3) 0 var(--tw-text-shadow-color),
+			-1px var(--text-3d-depth-4) 0 var(--tw-text-shadow-color),
+			-2px var(--text-3d-depth-4) 0 var(--tw-text-shadow-color),
+			var(--text-3d-depth-1) 0 0 var(--tw-text-shadow-color),
+			var(--text-3d-depth-2) 0 0 var(--tw-text-shadow-color),
+			var(--text-3d-depth-3) 0 0 var(--tw-text-shadow-color),
+			var(--text-3d-depth-4) 0 0 var(--tw-text-shadow-color),
+			0 var(--text-3d-depth-1) 0 var(--tw-text-shadow-color),
+			0 var(--text-3d-depth-2) 0 var(--tw-text-shadow-color),
+			0 var(--text-3d-depth-3) 0 var(--tw-text-shadow-color),
+			0 var(--text-3d-depth-4) 0 var(--tw-text-shadow-color),
+			var(--text-3d-depth-1) var(--text-3d-depth-1) 0 var(--tw-text-shadow-color),
+			var(--text-3d-depth-2) var(--text-3d-depth-2) 0 var(--tw-text-shadow-color),
+			var(--text-3d-depth-3) var(--text-3d-depth-3) 0 var(--tw-text-shadow-color),
+			var(--text-3d-depth-4) var(--text-3d-depth-4) 0 var(--tw-text-shadow-color);
 	}
 
 	.text-3d-thick {
