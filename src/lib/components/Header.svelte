@@ -21,8 +21,8 @@
 		class={[
 			'chipped-corners px-2 py-0.5 font-pixel uppercase',
 			active
-				? 'text-outline-gold-800 border border-brown-900 bg-brown-800 text-gold'
-				: 'text-outline-black text-brown-100'
+				? 'border border-brown-900 bg-brown-800 text-gold text-shadow-gold-800'
+				: 'text-brown-100 text-shadow-black'
 		].join(' ')}
 	>
 		{label}
