@@ -3,7 +3,8 @@
 	import Card from '$lib/components/Card.svelte'
 	import Table from '$lib/components/Table.svelte'
 
-	import { m, teams } from '$lib/paraglide/messages'
+	import { m } from '$lib/paraglide/messages'
+	import { localizeHref } from '$lib/paraglide/runtime'
 
 	import type { PageProps } from './$types'
 
@@ -17,7 +18,7 @@
 		Túrakihívás 2026
 	</h1>
 
-	<Button label="Lépj be a kalandba!" href="/auth" size="large" class="font-mono" />
+	<Button label="Lépj be a kalandba!" href={localizeHref('/auth')} size="large" class="font-mono" />
 </div>
 
 <div class="grid grid-cols-12 grid-rows-2 gap-4 pt-4">
@@ -54,14 +55,20 @@
 	<Card class="col-span-9">
 		<Table title="Top csapatok">
 			{#await data.teams then teams}
-				{#each teams as team}
-					<div>
+				{#each teams as team, index (index)}
+					<div class="grid grid-cols-[auto_1fr_auto_auto] gap-x-4 font-semibold">
+						<div>{index + 1}.</div>
 						<div>{team.name}</div>
-						<div>0</div>
+						<div>{m.pointsValue({ count: 0 })}</div>
+						<div>{m.distanceValue({ distance: 0 })}</div>
 					</div>
 				{/each}
 			{/await}
 		</Table>
+
+		<a href={localizeHref('/leaderboard')} class="ml-auto px-4 font-semibold uppercase">
+			{m.viewLeaderboard()}
+		</a>
 	</Card>
 
 	<Card class="col-span-3">
