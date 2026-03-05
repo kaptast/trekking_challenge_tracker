@@ -2,7 +2,13 @@ import { auth } from '$lib/server/auth'
 import { fail, redirect, type Actions, type ServerLoad } from '@sveltejs/kit'
 import { APIError } from 'better-auth'
 
-export const load: ServerLoad = async ({ request }) => {
+export const load: ServerLoad = async ({ request, locals }) => {
+	if (!locals.user) {
+		return {
+			accounts: []
+		}
+	}
+
 	const accounts = await auth.api.listUserAccounts({
 		headers: request.headers
 	})
