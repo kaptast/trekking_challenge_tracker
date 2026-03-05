@@ -1,13 +1,12 @@
 import { activity, team, teamMember } from '$lib/server/db/schema'
 import type { PageServerLoad } from './$types'
 import { db } from '$lib/server/db'
-import { eq } from 'drizzle-orm'
+import { eq, sql } from 'drizzle-orm'
 
-export const load: PageServerLoad = async ({ locals }) => {
+export const load: PageServerLoad = async () => {
 	return {
-		activities: loadActivities(locals),
-		team: loadTeam(locals),
-		teams: loadTeams()
+		teams: loadLeaderboard(),
+		stats: summarizeActivities()
 	}
 }
 
@@ -48,6 +47,18 @@ async function loadTeam(locals: App.Locals) {
 	return result[0] ?? null
 }
 
-async function loadTeams() {
+async function loadLeaderboard() {
 	return db.select({ id: team.id, name: team.name }).from(team).orderBy(team.name).execute()
+}
+
+async function summarizeActivities() {
+	const activities = await db
+		.select({
+			distance: sql<number>`cast(sum(${activity.distance}) as float)`,
+			activityCount: sql<number>`count(*)`
+		})
+		.from(activity)
+		.execute()
+
+	return activities[0]
 }

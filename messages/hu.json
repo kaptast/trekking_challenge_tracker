@@ -49,5 +49,7 @@
 	"uploadAGpxFileOrSnycFromStrava": "GPX fájl feltöltése vagy aktivitások szinkronizálása Straváról.",
 	"earnPoints": "Pontszerzés",
 	"earnPointsForTheLeaderboard": "Szerezz pontokat minden tevékenyéségeddel, és segíts a csapatodnak a ranglista élére kerülni!",
-	"viewLeaderboard": "Ranglista megtekintése"
+	"viewLeaderboard": "Ranglista megtekintése",
+	"sumOfDistances": "{distance} megtett km",
+	"totalActivities": "{count} tevékenység"
 }

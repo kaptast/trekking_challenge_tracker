@@ -25,8 +25,8 @@
 	<Card class="col-span-4">
 		<div class="grid place-items-center p-4 text-center">
 			<div class="flex gap-2">
-				<img src="/gpx.png" alt="GPX file format" class="size-20" />
-				<img src="/strava.png" alt="Strava Sync" class="size-20" />
+				<img src="/gpx.png" alt="GPX file format" class="size-20 min-h-20 min-w-20" />
+				<img src="/strava.png" alt="Strava Sync" class="size-20 min-h-20 min-w-20" />
 			</div>
 
 			<h3 class="mt-4 font-sans text-2xl font-bold text-black uppercase">{m.uploadAndSync()}</h3>
@@ -36,7 +36,7 @@
 
 	<Card class="col-span-4">
 		<div class="grid place-items-center p-4 text-center">
-			<img src="/team.png" alt="Team" class="h-20" />
+			<img src="/team.png" alt="Team" class="w-50 min-w-50" />
 
 			<h3 class="mt-4 text-2xl font-bold text-black uppercase">{m.createYourOwnTeam()}</h3>
 			<h4 class="text-base font-semibold text-black">{m.createOrJoinTeam()}</h4>
@@ -45,7 +45,7 @@
 
 	<Card class="col-span-4">
 		<div class="grid place-items-center p-4 text-center">
-			<img src="/xp.png" alt="XP" class="size-20" />
+			<img src="/xp.png" alt="XP" class="size-20 min-h-20 min-w-20" />
 
 			<h3 class="mt-4 text-2xl font-bold text-black uppercase">{m.earnPoints()}</h3>
 			<h4 class="text-base font-semibold text-black">{m.earnPointsForTheLeaderboard()}</h4>
@@ -73,13 +73,17 @@
 
 	<Card class="col-span-3">
 		<div class="grid place-items-center p-4 text-center">
-			<div class="flex gap-2">
-				<img src="/gpx.png" alt="GPX file format" class="size-20" />
-				<img src="/strava.png" alt="Strava Sync" class="size-20" />
-			</div>
+			<img src="/xp.png" alt="XP" class="size-20 min-h-20 min-w-20" />
 
-			<h3 class="mt-4 text-2xl font-bold text-black uppercase">{m.uploadAndSync()}</h3>
-			<h4 class="text-base font-semibold text-black">{m.uploadAGpxFileOrSnycFromStrava()}</h4>
+			{#await data.stats then stats}
+				{@const distance = (stats.distance ?? 0) / 1000}
+				<h3 class="mt-4 text-xl font-bold text-black uppercase">
+					{m.sumOfDistances({ distance: distance.toFixed(2) })}
+				</h3>
+				<h4 class="text-lg font-semibold text-black">
+					{m.totalActivities({ count: stats.activityCount })}
+				</h4>
+			{/await}
 		</div>
 	</Card>
 </div>
