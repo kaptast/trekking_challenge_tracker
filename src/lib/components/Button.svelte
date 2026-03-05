@@ -28,7 +28,11 @@
 </script>
 
 {#if isLink}
-	<a class="chipped-corners inline-block cursor-pointer bg-black p-0.5 pb-1" {href} {...rest}>
+	<a
+		class="chipped-corners inline-block cursor-pointer bg-black p-0.5 pb-1 hover:mb-0.5 hover:pb-0.5"
+		{href}
+		{...rest}
+	>
 		<span class="chipped-corners block bg-brown-200 p-1">
 			<span
 				class="{className} chipped-corners text-3d text-3d-thick block px-4 py-1 text-center font-pixel font-bold uppercase text-shadow-black {variant} {size}"
@@ -38,7 +42,11 @@
 		</span>
 	</a>
 {:else}
-	<button class="chipped-corners cursor-pointer bg-black p-0.5 pb-1" {onclick} {...rest}>
+	<button
+		class="chipped-corners cursor-pointer bg-black p-0.5 pb-1 hover:mb-0.5 hover:pb-0.5"
+		{onclick}
+		{...rest}
+	>
 		<span class="chipped-corners block bg-brown-200 p-1">
 			<span
 				class="{className} chipped-corners text-3d text-3d-thick block px-4 py-1 text-center font-pixel font-bold uppercase text-shadow-black {variant} {size}"
