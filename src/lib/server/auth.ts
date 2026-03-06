@@ -5,6 +5,8 @@ import { sveltekitCookies } from 'better-auth/svelte-kit'
 import { env } from '$env/dynamic/private'
 import { getRequestEvent } from '$app/server'
 import { db } from './db'
+import { eq } from 'drizzle-orm'
+import { user } from './db/auth.schema'
 
 export const auth = betterAuth({
 	baseURL: env.ORIGIN,
@@ -47,5 +49,35 @@ export const auth = betterAuth({
 			]
 		}),
 		sveltekitCookies(getRequestEvent) // make sure this is the last plugin in the array
-	]
+	],
+	databaseHooks: {
+		account: {
+			create: {
+				after: async ({ accessToken, providerId, userId }) => {
+					if (providerId === 'strava') {
+						const response = await fetch('https://www.strava.com/api/v3/athlete', {
+							headers: {
+								Authorization: `Bearer ${accessToken}`
+							}
+						})
+						if (!response.ok) {
+							console.error('Failed to fetch Strava profile:', response.statusText)
+							return
+						}
+
+						const stravaProfile = await response.json()
+
+						if (stravaProfile.profile || stravaProfile.profile_medium) {
+							await db
+								.update(user)
+								.set({
+									image: stravaProfile.profile || stravaProfile.profile_medium
+								})
+								.where(eq(user.id, userId))
+						}
+					}
+				}
+			}
+		}
+	}
 })
