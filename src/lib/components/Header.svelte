@@ -23,7 +23,7 @@
 		class={[
 			'chipped-corners text-3d px-2 py-0.5 font-pixel tracking-wider uppercase',
 			active
-				? 'border border-brown-900 bg-brown-800 text-gold text-shadow-gold-800'
+				? 'text-gold-500 border border-brown-900 bg-brown-800 text-shadow-gold-800'
 				: 'text-brown-100 text-shadow-black'
 		].join(' ')}
 	>
