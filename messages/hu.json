@@ -16,6 +16,8 @@
 	"syncActivities": "Tevékenységek szinkronizálása",
 	"noActivities": "Nincsenek tevékenységek",
 	"points": "Pontok",
+	"distance": "Távolság",
+	"members": "Tagok",
 	"pointsValue": "{count} pont",
 	"distanceValue": "{distance} km",
 	"leaderboard": "Ranglista",
