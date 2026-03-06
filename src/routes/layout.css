@@ -1,15 +1,14 @@
 @import 'tailwindcss';
 
-/* In layout.css */
 @font-face {
-	font-family: 'Upheaval';
-	src: url('/upheavtt.ttf') format('truetype');
+	font-family: 'Cute Pixel';
+	src: url('/CutePixel.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
 
 @theme {
-	--font-pixel: 'Upheaval', sans-serif;
+	--font-pixel: 'Cute Pixel', sans-serif;
 
 	--color-*: initial;
 
