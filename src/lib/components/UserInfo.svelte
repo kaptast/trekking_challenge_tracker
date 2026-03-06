@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { m } from '$lib/paraglide/messages'
 	import { localizeHref } from '$lib/paraglide/runtime'
-	import Button from './Button.svelte'
 
 	type Props = {
 		user:
@@ -16,13 +16,11 @@
 
 <a href={localizeHref('/auth')} class="chipped-corners absolute right-4 bg-black p-0.5">
 	<div class="chipped-corners bg-brown-400 p-0.5">
-		<div class="chipped-corners bg-brown-600 px-4 py-1">
+		<div class="chipped-corners bg-brown-600">
 			{#if user}
-				<span class="ml-auto flex items-center gap-x-1">
-					<img src={user?.image || '/avatar.png'} alt={user.name} class="size-10 object-cover" />
-				</span>
+				<img src={user?.image || '/avatar.png'} alt={user.name} class="size-10 object-cover" />
 			{:else}
-				<span>Sign in</span>
+				<span>{m.login()}</span>
 			{/if}
 		</div>
 	</div>
