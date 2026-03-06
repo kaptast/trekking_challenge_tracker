@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/state'
 	import UserInfo from './UserInfo.svelte'
+	import { m } from '$lib/paraglide/messages'
+	import { localizeHref } from '$lib/paraglide/runtime'
 
 	type Props = {
 		user:
@@ -33,9 +35,9 @@
 	<div class="border-y-4 border-brown-400 bg-brown-600">
 		<div class="relative mx-auto flex max-w-7xl items-center gap-x-4 px-4 font-bold text-brown-100">
 			<nav class="flex items-center gap-3">
-				{@render link('/', 'Home')}
-				{@render link('/activities', 'Activities')}
-				{@render link('/teams', 'Teams')}
+				{@render link(localizeHref('/'), m.home())}
+				{@render link(localizeHref('/activities'), m.activities())}
+				{@render link(localizeHref('/teams'), m.teams())}
 			</nav>
 
 			<UserInfo {user} />
