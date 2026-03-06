@@ -19,8 +19,8 @@ export const activity = pgTable('activity', {
 	id: bigint('id', { mode: 'number' }).primaryKey(),
 	userId: text('user_id').notNull(),
 	name: text('name').notNull(),
-	distance: decimal('distance').notNull(),
-	movingTime: decimal('moving_time'),
+	distance: decimal('distance', { mode: 'number' }).notNull(),
+	movingTime: decimal('moving_time', { mode: 'number' }),
 	type: text('type'),
 	sportType: text('sport_type'),
 	workoutType: integer('workout_type'),
@@ -33,7 +33,7 @@ export const activity = pgTable('activity', {
 	locationState: text('location_state'),
 	locationCountry: text('location_country'),
 	polyline: text('polyline'),
-	maxSpeed: decimal('max_speed')
+	maxSpeed: decimal('max_speed', { mode: 'number' })
 })
 
 export const teamRelations = relations(team, ({ many }) => ({
