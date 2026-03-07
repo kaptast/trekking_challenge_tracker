@@ -76,7 +76,7 @@
 <Card>
 	<div class="w-full px-1.5 py-1">
 		<!-- header row -->
-		<div class="row header">
+		<div class="row header px-2">
 			<div class="col-rank">#</div>
 			<div class="col-name">{m.teamName()}</div>
 			<div class="col-std">{m.points()}</div>
@@ -108,7 +108,7 @@
 							<div class="chipped-corners bg-gold-700 p-0.5">
 								<div class="chipped-corners bg-gold-100 p-0.5">
 									<div class="chipped-corners bg-gold-600 p-0.5">
-										<div class="chipped-corners row bg-brown-300 px-1">
+										<div class="chipped-corners row bg-brown-300 p-1">
 											{@render row(index, team, isMember, memberOfAnyTeam)}
 										</div>
 									</div>
@@ -116,7 +116,7 @@
 							</div>
 						</div>
 					{:else}
-						<div class="row">
+						<div class="row px-2 py-3.5">
 							{@render row(index, team, isMember, memberOfAnyTeam)}
 						</div>
 					{/if}
@@ -159,7 +159,6 @@
 		color: var(--color-brown-450);
 		text-align: center;
 		font-size: 1.5rem;
-		padding: 0.5rem 0.75rem;
 	}
 
 	.row > *:last-child {
