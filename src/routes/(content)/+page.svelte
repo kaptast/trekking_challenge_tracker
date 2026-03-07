@@ -72,11 +72,20 @@
 
 			{#await data.stats then stats}
 				{@const distance = (stats.distance ?? 0) / 1000}
-				<h3 class="mt-4 text-xl font-bold text-black uppercase">
-					{m.sumOfDistances({ distance: distance.toFixed(2) })}
-				</h3>
+				{@const averageDistance = (stats.averageDistance ?? 0) / 1000}
+				<h3 class="mt-4 text-xl font-bold text-black uppercase">Statisztika</h3>
+
+				<h4 class="text-lg font-semibold text-black">
+					{m.totalDistance({ distance: distance.toFixed(2) })}
+				</h4>
 				<h4 class="text-lg font-semibold text-black">
 					{m.totalActivities({ count: stats.activityCount })}
+				</h4>
+				<h4 class="text-lg font-semibold text-black">
+					{m.averageDistance({ distance: averageDistance.toFixed(2) })}
+				</h4>
+				<h4 class="text-lg font-semibold text-black">
+					{m.averageActivities({ count: stats.averageActivityCountPerUser })}
 				</h4>
 			{/await}
 		</div>

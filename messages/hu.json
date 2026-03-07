@@ -53,6 +53,9 @@
 	"earnPoints": "Pontszerzés",
 	"earnPointsForTheLeaderboard": "Szerezz pontokat minden tevékenyéségeddel, és segíts a csapatodnak a ranglista élére kerülni!",
 	"viewLeaderboard": "Ranglista megtekintése",
-	"sumOfDistances": "{distance} megtett km",
-	"totalActivities": "{count} tevékenység"
+	"statistics": "Statisztika",
+	"totalDistance": "Összesen {distance} km",
+	"averageDistance": "Átlagosan {distance} km",
+	"totalActivities": "Összesen {count} tevékenység",
+	"averageActivities": "Átlagosan {count} tevékenység"
 }
