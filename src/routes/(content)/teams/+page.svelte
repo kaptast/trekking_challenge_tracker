@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { invalidate } from '$app/navigation'
 	import Button from '$lib/components/Button.svelte'
 	import Card from '$lib/components/Card.svelte'
 	import CreateTeamDialog from '$lib/components/CreateTeamDialog/CreateTeamDialog.svelte'
@@ -40,6 +41,16 @@
 			}[]
 		}[]
 	}
+
+	async function leave(id: string) {
+		await leaveTeam({ id })
+		invalidate('teams')
+	}
+
+	async function join(id: string) {
+		await joinTeam({ id })
+		invalidate('teams')
+	}
 </script>
 
 {#snippet row(index: number, team: Team, isMember: boolean, memberOfAnyTeam: boolean)}
@@ -58,11 +69,11 @@
 	</div>
 	<div>
 		{#if isMember}
-			<Button onclick={async () => await leaveTeam({ id: team.id })} label={m.leaveTeam()} />
+			<Button onclick={async () => await leave(team.id)} label={m.leaveTeam()} />
 		{/if}
 
 		{#if !memberOfAnyTeam}
-			<Button onclick={async () => await joinTeam({ id: team.id })} label={m.joinTeam()} />
+			<Button onclick={async () => await join(team.id)} label={m.joinTeam()} />
 		{/if}
 	</div>
 {/snippet}

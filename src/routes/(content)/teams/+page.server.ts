@@ -1,6 +1,8 @@
 import { db } from '$lib/server/db'
 
-export const load = async () => {
+export const load = async ({ depends }) => {
+	depends('teams')
+
 	return {
 		teams: loadTeams()
 	}
