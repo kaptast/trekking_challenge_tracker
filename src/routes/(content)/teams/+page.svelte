@@ -3,6 +3,7 @@
 	import Card from '$lib/components/Card.svelte'
 	import CreateTeamDialog from '$lib/components/CreateTeamDialog/CreateTeamDialog.svelte'
 	import Distance from '$lib/components/Distance.svelte'
+	import Hero from '$lib/components/Hero.svelte'
 	import { m } from '$lib/paraglide/messages'
 	import { joinTeam, leaveTeam } from '../data.remote'
 	import type { PageProps } from './$types'
@@ -66,7 +67,11 @@
 	</div>
 {/snippet}
 
-<Button onclick={() => createTeamDialog?.open()} label={m.createTeam()} />
+<Hero title={m.teams()} />
+
+<div class="mb-1 flex w-full justify-end">
+	<Button onclick={() => createTeamDialog?.open()} label={m.createTeam()} />
+</div>
 
 <Card>
 	<div class="w-full px-1.5 py-1">
@@ -95,7 +100,7 @@
 						<div class="relative">
 							<div class="chipped-corners absolute -top-0.75 left-13 z-10 bg-gold-800 p-0.5">
 								<div
-									class="chipped-corners bg-gold-500 px-1 text-sm font-semibold text-gold-800 uppercase"
+									class="chipped-corners bg-gold-500 px-1 py-0.5 text-sm leading-3.5 font-semibold text-gold-800 uppercase"
 								>
 									{m.yourTeam()}
 								</div>

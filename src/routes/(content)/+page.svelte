@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte'
 	import Card from '$lib/components/Card.svelte'
+	import Hero from '$lib/components/Hero.svelte'
 	import Table from '$lib/components/Table.svelte'
 
 	import { m } from '$lib/paraglide/messages'
@@ -11,15 +12,9 @@
 	let { data }: PageProps = $props()
 </script>
 
-<div class="flex flex-col items-center justify-center gap-y-7 py-16">
-	<h1
-		class="text-3d text-3d-thicker font-pixel text-7xl text-brown-100 uppercase text-shadow-black"
-	>
-		Túrakihívás 2026
-	</h1>
-
+<Hero title="Túrakihívás 2026">
 	<Button label="Lépj be a kalandba!" href={localizeHref('/auth')} size="large" class="font-mono" />
-</div>
+</Hero>
 
 <div class="grid grid-cols-12 grid-rows-2 gap-4 pt-4">
 	<Card class="col-span-4">
