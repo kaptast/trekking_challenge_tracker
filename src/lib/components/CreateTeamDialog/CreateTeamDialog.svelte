@@ -4,8 +4,6 @@
 	import { createTeam } from './team.remote.js'
 	import Card from '../Card.svelte'
 
-	let teamName = $state('')
-
 	let dialog = $state<HTMLDialogElement | null>(null)
 
 	export function open() {
@@ -14,21 +12,32 @@
 
 	function close() {
 		dialog?.close()
+		resetFields()
+	}
+
+	function resetFields() {
+		createTeam.fields.name.set('')
 	}
 </script>
 
-<dialog bind:this={dialog} class="w-full max-w-md">
+<dialog bind:this={dialog} onclose={resetFields} class="w-full max-w-md bg-transparent">
 	<Card title={m.createTeam()}>
-		<form {...createTeam} class="flex flex-col gap-6 px-6 py-6">
+		<form
+			{...createTeam.enhance(async ({ submit }) => {
+				await submit()
+				close()
+			})}
+			class="flex w-full flex-col gap-6 px-6 py-6"
+		>
 			<div class="flex flex-col gap-2">
-				<label for="name" class="text-sm font-semibold tracking-wider text-sand-light uppercase">
+				<label for="name" class="text-sm font-semibold tracking-wider text-brown-500 uppercase">
 					{m.teamName()}
 				</label>
 
 				<div class="chipped-corners bg-sand/10 p-px">
 					<input
 						{...createTeam.fields.name.as('text')}
-						class="chipped-corners block w-full bg-dark-gray px-4 py-2 text-sand placeholder:text-sand/30 focus:outline-none"
+						class="chipped-corners block w-full bg-brown-300 px-4 py-2 text-brown-500 focus:outline-none"
 					/>
 				</div>
 			</div>
