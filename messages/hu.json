@@ -57,5 +57,11 @@
 	"totalDistance": "Összesen {distance} km",
 	"averageDistance": "Átlagosan {distance} km",
 	"totalActivities": "Összesen {count} tevékenység",
-	"averageActivities": "Átlagosan {count} tevékenység"
+	"averageActivities": "Átlagosan {count} tevékenység",
+	"name": "Név",
+	"email": "E-mail",
+	"password": "Jelszó",
+	"alreadyHaveAnAccount": "Már van fiókod?",
+	"noAccount": "Még nincs fiókod?",
+	"createAccount": "Fiók létrehozása"
 }

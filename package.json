@@ -52,6 +52,8 @@
 		"vitest-browser-svelte": "^2.0.2"
 	},
 	"dependencies": {
+		"@dicebear/collection": "^9.4.0",
+		"@dicebear/core": "^9.4.0",
 		"@mapbox/polyline": "^1.2.1",
 		"@types/mapbox__polyline": "^1.0.5",
 		"postgres": "^3.4.8",
