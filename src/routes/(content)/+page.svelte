@@ -21,7 +21,14 @@
 		<div class="grid place-items-center p-4 text-center">
 			<div class="flex gap-2">
 				<img src="/gpx.png" alt="GPX file format" class="size-20 min-h-20 min-w-20" />
-				<img src="/strava.png" alt="Strava Sync" class="size-20 min-h-20 min-w-20" />
+
+				<div class="chipped-corners bg-black p-0.5">
+					<img
+						src="/strava.png"
+						alt="Strava Sync"
+						class="chipped-corners size-19 min-h-19 min-w-19"
+					/>
+				</div>
 			</div>
 
 			<h3 class="mt-4 font-sans text-2xl font-bold text-black uppercase">{m.uploadAndSync()}</h3>
