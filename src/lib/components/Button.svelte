@@ -69,7 +69,7 @@
 	}
 
 	.strava {
-		color: var(--color-black);
+		color: #fff;
 		background-color: #fc5200;
 	}
 

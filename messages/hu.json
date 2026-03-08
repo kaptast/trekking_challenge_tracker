@@ -63,5 +63,8 @@
 	"password": "Jelszó",
 	"alreadyHaveAnAccount": "Már van fiókod?",
 	"noAccount": "Még nincs fiókod?",
-	"createAccount": "Fiók létrehozása"
+	"createAccount": "Fiók létrehozása",
+	"connectedWith": "Csatlakoztatva a {id} fiókkal",
+	"disconnect": "Kapcsolat bontása",
+	"notConnected": "Nincs fiók csatlakoztatva"
 }
