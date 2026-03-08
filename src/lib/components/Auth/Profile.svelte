@@ -5,6 +5,7 @@
 	import { createAvatar } from '@dicebear/core'
 	import { pixelArt } from '@dicebear/collection'
 	import type { User } from 'better-auth'
+	import { m } from '$lib/paraglide/messages'
 
 	type Props = {
 		user: User
@@ -29,7 +30,7 @@
 	const avatar = $derived(
 		createAvatar(pixelArt, {
 			seed,
-			size: 80
+			size: 128
 		}).toDataUri()
 	)
 
@@ -46,8 +47,8 @@
 <div class="profile-grid grid gap-4">
 	<Card class="account">
 		<div class="account-grid grid w-full gap-1 p-1">
-			<div class="avatar chipped-corners relative size-20 bg-brown-450">
-				<img src={avatar} alt="Avatar" class="size-20" />
+			<div class="avatar chipped-corners relative size-32 bg-brown-450">
+				<img src={avatar} alt="Avatar" class="size-32" />
 
 				<button
 					class="absolute inset-0 grid cursor-pointer place-items-center bg-black text-[#fff] opacity-0 transition-opacity hover:opacity-40"
@@ -94,7 +95,14 @@
 				{/if}
 			</div>
 
-			<div class="user-name text-2xl font-semibold uppercase">{user.name}</div>
+			<div class="user-name text-2xl font-semibold uppercase">
+				{user.name}
+			</div>
+
+			<form class="sign-out" method="POST" action="?/signOut" use:enhance>
+				<Button label={m.logout()} type="submit" />
+			</form>
+
 			<div class="email text-base font-medium">{user.email}</div>
 
 			<div class="team chipped-corners bg-brown-200 p-1">Team</div>
@@ -123,9 +131,7 @@
 
 		<hr class="border-stone-200" />
 
-		<form method="POST" action="?/signOut" use:enhance>
-			<Button label="Sign out" type="submit" class="w-full" />
-		</form> -->
+		 -->
 	</Card>
 
 	<Card class="badges"></Card>
@@ -149,6 +155,7 @@
 	.account-grid {
 		grid-template-areas:
 			'avatar user-name'
+			'avatar sign-out'
 			'avatar email'
 			'team team';
 	}
