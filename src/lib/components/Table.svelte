@@ -1,15 +1,13 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte'
-	import type { ClassValue } from 'svelte/elements'
 
 	type Props = {
 		children?: Snippet
 		header?: Snippet
-		class?: ClassValue
 		title?: string
 	}
 
-	let { children, header, class: className, title }: Props = $props()
+	let { children, header, title }: Props = $props()
 </script>
 
 <div class="size-full p-4">
@@ -18,7 +16,7 @@
 		<div class="my-2 w-full border-b-2 border-brown-200"></div>
 	{/if}
 
-	<div class="table w-full">
+	<div class="table w-full space-y-1">
 		{@render header?.()}
 		{@render children?.()}
 	</div>

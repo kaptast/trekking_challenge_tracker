@@ -1,21 +1,56 @@
 import { auth } from '$lib/server/auth'
+import { db } from '$lib/server/db'
+import { activity, team, teamMember } from '$lib/server/db/schema'
+import type { Activity } from '$lib/types'
 import { fail, redirect, type Actions, type ServerLoad } from '@sveltejs/kit'
-import { APIError } from 'better-auth'
+import { APIError, type User } from 'better-auth'
+import { eq } from 'drizzle-orm'
 
 export const load: ServerLoad = async ({ request, locals }) => {
 	if (!locals.user) {
 		return {
-			accounts: []
+			accounts: [],
+			latestActivity: null,
+			activities: [],
+			team: null
 		}
 	}
 
-	const accounts = await auth.api.listUserAccounts({
-		headers: request.headers
-	})
-
 	return {
-		accounts
+		accounts: auth.api.listUserAccounts({
+			headers: request.headers
+		}),
+		team: loadTeam(locals.user),
+		activities: loadActivities(locals.user),
+		latestActivity: loadActivities(locals.user, 1)
 	}
+}
+
+async function loadTeam(user: User) {
+	const result = await db
+		.select({ id: team.id, name: team.name })
+		.from(team)
+		.innerJoin(teamMember, eq(teamMember.teamId, team.id))
+		.where(eq(teamMember.id, user.id))
+		.limit(1)
+		.execute()
+
+	return result[0] ?? null
+}
+
+async function loadActivities(user: User, limit: number = 5): Promise<Array<Activity>> {
+	return db
+		.select({
+			name: activity.name,
+			distance: activity.distance,
+			startDate: activity.startDate,
+			type: activity.type
+		})
+		.from(activity)
+		.where(eq(activity.userId, user.id))
+		.orderBy(activity.startDate)
+		.limit(limit)
+		.execute()
 }
 
 export const actions: Actions = {

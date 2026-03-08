@@ -11,9 +11,14 @@
 
 <div class="mx-auto max-w-sm space-y-4 p-6">
 	{#if data.user}
-		<Profile user={data.user} accounts={data.accounts} />
+		<Profile
+			user={data.user}
+			accounts={data.accounts}
+			activities={data.activities}
+			latestActivity={data.latestActivity}
+		/>
 	{:else}
-		<Card title={mode === 'signIn' ? 'Sign In' : 'Create Account'}>
+		<Card>
 			<div class="space-y-4 p-2">
 				{#if form?.message}
 					<p class="bg-red-50 text-red-700 rounded px-3 py-2 text-sm">{form.message}</p>
