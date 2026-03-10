@@ -1,6 +1,9 @@
 <script lang="ts">
 	import Card from '$lib/components/Card.svelte'
+	import { m } from '$lib/paraglide/messages'
 	import type { Stats } from '$lib/types'
+	import Distance from '$lib/components/Distance.svelte'
+	import Duration from '$lib/components/Duration.svelte'
 
 	type Props = {
 		stats: Stats | null
@@ -11,18 +14,33 @@
 
 <Card class="stats">
 	{#if stats}
-		<div class="space-y-2">
-			<p>Total Activities: {stats.activityCount}</p>
-			<p>Total Distance: {(stats.totalDistance / 1000).toFixed(2)} km</p>
-			<p>Average Distance: {(stats.averageDistance / 1000).toFixed(2)} km</p>
-			<p>Longest Distance: {(stats.longestDistance / 1000).toFixed(2)} km</p>
-			<p>Total Time: {(stats.totalTime / 3600).toFixed(2)} hours</p>
-			<p>Average Time: {(stats.averageTime / 3600).toFixed(2)} hours</p>
-			<p>Longest Time: {(stats.longestTime / 3600).toFixed(2)} hours</p>
-			<p>Longest Streak: {stats.longestStreak} days</p>
+		<div class="grid grid-cols-2 gap-2">
+			<span class="font-semibold uppercase">{m.stats_totalActivities()}</span>
+			<span class="place-self-end font-medium">{stats.activityCount}</span>
+
+			<span class="font-semibold uppercase">{m.stats_totalDistance()}</span>
+			<span class="place-self-end font-medium"><Distance value={stats.totalDistance} /></span>
+
+			<span class="font-semibold uppercase">{m.stats_averageDistance()}</span>
+			<span class="place-self-end font-medium"><Distance value={stats.averageDistance} /></span>
+
+			<span class="font-semibold uppercase">{m.stats_longestDistance()}</span>
+			<span class="place-self-end font-medium"><Distance value={stats.longestDistance} /></span>
+
+			<span class="font-semibold uppercase">{m.stats_totalTime()}</span>
+			<span class="place-self-end font-medium"><Duration value={stats.totalTime} /></span>
+
+			<span class="font-semibold uppercase">{m.stats_averageTime()}</span>
+			<span class="place-self-end font-medium"><Duration value={stats.averageTime} /></span>
+
+			<span class="font-semibold uppercase">{m.stats_longestTime()}</span>
+			<span class="place-self-end font-medium"><Duration value={stats.longestTime} /></span>
+
+			<span class="font-semibold uppercase">{m.stats_longestStreak()}</span>
+			<span class="place-self-end font-medium">{m.streak({ value: stats.longestStreak })}</span>
 		</div>
 	{:else}
-		<p>No stats available.</p>
+		<p>{m.noData()}</p>
 	{/if}
 </Card>
 

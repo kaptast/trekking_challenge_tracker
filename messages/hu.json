@@ -21,7 +21,6 @@
 	"distance": "Távolság",
 	"members": "Tagok",
 	"pointsValue": "{count} pont",
-	"distanceValue": "{distance} km",
 	"leaderboard": "Ranglista",
 	"createTeam": "Csapat létrehozása",
 	"createYourOwnTeam": "Hozz létre csapatot!",
@@ -60,6 +59,14 @@
 	"averageDistance": "Átlagosan {distance} km",
 	"totalActivities": "Összesen {count} tevékenység",
 	"averageActivities": "Átlagosan {count} tevékenység",
+	"stats_totalActivities": "Összes tevékenység",
+	"stats_totalDistance": "Összes távolság",
+	"stats_averageDistance": "Átlagos távolság",
+	"stats_longestDistance": "Leghosszabb távolság",
+	"stats_totalTime": "Összes idő",
+	"stats_averageTime": "Átlagos idő",
+	"stats_longestTime": "Leghosszabb idő",
+	"stats_longestStreak": "Leghosszabb sorozat",
 	"name": "Név",
 	"email": "E-mail",
 	"password": "Jelszó",
@@ -68,5 +75,6 @@
 	"createAccount": "Fiók létrehozása",
 	"connectedWith": "Csatlakoztatva a {id} fiókkal",
 	"disconnect": "Kapcsolat bontása",
-	"notConnected": "Nincs fiók csatlakoztatva"
+	"notConnected": "Nincs fiók csatlakoztatva",
+	"streak": "{value} nap"
 }
