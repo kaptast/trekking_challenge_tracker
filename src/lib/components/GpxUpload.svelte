@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { m } from '$lib/paraglide/messages'
 	import Button from './Button.svelte'
+	import Card from './Card.svelte'
 
 	let isDragging = $state(false)
 	let selectedFile = $state<File | null>(null)
@@ -8,7 +10,7 @@
 
 	function validateFile(file: File): boolean {
 		if (!file.name.toLowerCase().endsWith('.gpx')) {
-			errorMessage = 'Only .gpx files are allowed.'
+			errorMessage = m.onlyGpxFilesAllowed()
 			return false
 		}
 		errorMessage = null
@@ -55,52 +57,47 @@
 	}
 </script>
 
-<div class="chipped-corners bg-black p-0.5">
-	<div class="chipped-corners bg-sand p-1">
-		<div class="chipped-corners bg-blue-dark p-4">
-			<!-- svelte-ignore a11y_no_static_element_interactions -->
-			<div
-				class={[
-					'drop-zone cursor-pointer rounded-lg border-2 border-dashed border-sand px-8 py-4 text-center font-bold text-sand-light uppercase transition-colors',
-					isDragging && 'drag-over'
-				]}
-				role="button"
-				tabindex="0"
-				aria-label="Drop zone for GPX files"
-				ondragover={onDragOver}
-				ondragleave={onDragLeave}
-				ondrop={onDrop}
-				onclick={openFilePicker}
-				onkeydown={(e) => e.key === 'Enter' && openFilePicker()}
-			>
-				<p class="text-xl">DROP YOUR QUEST FILE</p>
-				<p class="text-xl">(.gpx)</p>
+<Card>
+	<div
+		class={[
+			'drop-zone cursor-pointer rounded-lg border-2 border-dashed px-8 py-4 text-center font-bold uppercase transition-colors',
+			isDragging && 'drag-over'
+		]}
+		role="button"
+		tabindex="0"
+		aria-label={m.dropZoneAriaLabel()}
+		ondragover={onDragOver}
+		ondragleave={onDragLeave}
+		ondrop={onDrop}
+		onclick={openFilePicker}
+		onkeydown={(e) => e.key === 'Enter' && openFilePicker()}
+	>
+		<p class="text-xl">{m.dropYourQuestFile()}</p>
+		<p class="text-xl">(.gpx)</p>
 
-				{#if selectedFile}
-					<p class="mt-3 text-sm text-green">{selectedFile.name}</p>
-				{/if}
+		{#if selectedFile}
+			<p class="mt-3 text-sm text-olive-500">{selectedFile.name}</p>
+		{/if}
 
-				{#if errorMessage}
-					<p class="mt-3 text-sm text-orange">{errorMessage}</p>
-				{/if}
+		{#if errorMessage}
+			<p class="mt-3 text-sm text-gold-600">{errorMessage}</p>
+		{/if}
 
-				<div class="my-2 border-b border-dashed border-black"></div>
+		<div class="my-2 border-b border-dashed border-black"></div>
 
-				<input
-					bind:this={fileInput}
-					type="file"
-					accept=".gpx"
-					class="hidden"
-					onchange={onInputChange}
-				/>
+		<input
+			bind:this={fileInput}
+			type="file"
+			accept=".gpx"
+			class="hidden"
+			onchange={onInputChange}
+		/>
 
-				<div class="mt-2 flex justify-center">
-					<Button label="Feltöltés" onclick={handleUpload} disabled={!selectedFile} />
-				</div>
-			</div>
+		<div class="mt-2 flex justify-center">
+			<Button label={m.upload()} onclick={handleUpload} disabled={!selectedFile} />
 		</div>
 	</div>
-</div>
+</Card>
 
 <style>
 	.drop-zone:hover,

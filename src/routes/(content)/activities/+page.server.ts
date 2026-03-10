@@ -2,7 +2,7 @@ import { error } from '@sveltejs/kit'
 import type { PageServerLoad } from './$types'
 import { db } from '$lib/server/db'
 import { activity } from '$lib/server/db/schema'
-import { eq } from 'drizzle-orm'
+import { eq, desc } from 'drizzle-orm'
 
 export const load: PageServerLoad = async ({ locals }) => {
 	return {
@@ -12,7 +12,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 type Activity = Pick<
 	typeof activity.$inferSelect,
-	'name' | 'distance' | 'movingTime' | 'type' | 'polyline'
+	'id' | 'name' | 'distance' | 'movingTime' | 'type' | 'polyline'
 >
 
 async function loadActivities(locals: App.Locals): Promise<Array<Activity>> {
@@ -22,6 +22,7 @@ async function loadActivities(locals: App.Locals): Promise<Array<Activity>> {
 
 	return db
 		.select({
+			id: activity.id,
 			name: activity.name,
 			distance: activity.distance,
 			movingTime: activity.movingTime,
@@ -30,6 +31,6 @@ async function loadActivities(locals: App.Locals): Promise<Array<Activity>> {
 		})
 		.from(activity)
 		.where(eq(activity.userId, locals.user.id))
-		.orderBy(activity.startDate)
+		.orderBy(desc(activity.startDate))
 		.execute()
 }

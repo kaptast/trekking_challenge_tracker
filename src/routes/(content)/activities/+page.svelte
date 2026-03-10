@@ -5,51 +5,89 @@
 	import Duration from '$lib/components/Duration.svelte'
 	import Button from '$lib/components/Button.svelte'
 	import GpxUpload from '$lib/components/GpxUpload.svelte'
+	import Card from '$lib/components/Card.svelte'
+	import { localizeHref } from '$lib/paraglide/runtime'
+	import { m } from '$lib/paraglide/messages'
 
 	let { data }: PageProps = $props()
 </script>
 
-<div class="mb-6">
+<div class="mb-4 flex gap-4">
 	<GpxUpload />
+
+	<Card class="basis-1/2">
+		<div class="p-4">
+			<Button
+				variant="strava"
+				size="large"
+				href={localizeHref('/activities/sync')}
+				label="Import from Strava"
+			/>
+		</div>
+	</Card>
 </div>
 
-<table>
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Distance</th>
-			<th>Moving Time</th>
-			<th>Type</th>
-			<th>Map</th>
-		</tr>
-	</thead>
-	<tbody>
+<Card>
+	<div class="w-full px-1.5 py-1">
+		<!-- header row -->
+		<div class="row header px-2">
+			<div class="col-name">Name</div>
+			<div class="col-std">{m.distance()}</div>
+			<div class="col-std">Moving time</div>
+			<div class="col-std">Type</div>
+			<div class="col-std">Map</div>
+		</div>
+
 		{#await data.activities}
-			<tr>
-				<td colspan="7">Loading activities...</td>
-			</tr>
+			<div class="row"><div class="col-full text-center italic">{m.loading()}</div></div>
 		{:then activities}
 			{#if activities.length === 0}
-				<tr>
-					<td colspan="7">No activities found.</td>
-				</tr>
+				<div class="row"><div class="col-full text-center italic">{m.noActivities()}</div></div>
 			{:else}
-				{#each activities as activity}
-					<tr>
-						<td>{activity.name}</td>
-						<td><Distance value={activity.distance} /></td>
-						<td><Duration value={activity.movingTime ?? 0} /></td>
-						<td>{activity.type}</td>
-						<td>
+				{#each activities as activity, index (index)}
+					<div class="row px-2 py-3.5">
+						<div class="truncate">{activity.name}</div>
+						<div><Distance value={activity.distance} /></div>
+						<div><Duration value={activity.movingTime ?? 0} /></div>
+						<div>{activity.type}</div>
+						<div class="place-self-end">
 							<SummaryMap summaryPolyline={activity.polyline ?? ''} />
-						</td>
-					</tr>
+						</div>
+					</div>
 				{/each}
 			{/if}
 		{:catch error}
-			<tr>
-				<td colspan="7">Error loading activities: {error.message}</td>
-			</tr>
+			<div class="row">
+				<div class="col-full text-red-600 text-center">
+					Error loading activities: {error.message}
+				</div>
+			</div>
 		{/await}
-	</tbody>
-</table>
+	</div>
+</Card>
+
+<style>
+	.row {
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		align-items: center;
+
+		border-bottom: 1px solid var(--color-brown-200);
+		font-weight: 700;
+		color: var(--color-brown-800);
+	}
+
+	.row:last-child {
+		border-bottom: none;
+	}
+
+	.row.header {
+		font-weight: 600;
+		font-size: 0.8rem;
+		letter-spacing: 0.05em;
+	}
+
+	.row > *:last-child {
+		text-align: right;
+	}
+</style>

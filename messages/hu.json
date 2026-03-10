@@ -76,5 +76,9 @@
 	"connectedWith": "Csatlakoztatva a {id} fiókkal",
 	"disconnect": "Kapcsolat bontása",
 	"notConnected": "Nincs fiók csatlakoztatva",
-	"streak": "{value} nap"
+	"streak": "{value} nap",
+	"onlyGpxFilesAllowed": "Csak .gpx fájlok engedélyezettek.",
+	"dropZoneAriaLabel": "GPX fájlok számára fenntartott terület",
+	"dropYourQuestFile": "Dobd ide a küldetés fájlodat!",
+	"upload": "Feltöltés"
 }
