@@ -1,20 +1,21 @@
 <script lang="ts">
-	import Card from '$lib/components/Card.svelte'
 	import type { User, Account } from 'better-auth'
 	import AccountComponent from './Account.svelte'
 	import Strava from './Strava.svelte'
 	import Activities from './Activities.svelte'
-	import type { Activity } from '$lib/types'
+	import type { Activity, Stats } from '$lib/types'
 	import LatestActivity from './LatestActivity.svelte'
+	import UserStats from './UserStats.svelte'
 
 	type Props = {
 		user: User
 		accounts: Promise<Array<Account>> | never[]
 		activities: Promise<Array<Activity>> | never[]
 		latestActivity: Promise<Array<Activity>> | null
+		stats: Promise<Stats> | null
 	}
 
-	let { user, accounts, activities, latestActivity }: Props = $props()
+	let { user, accounts, activities, latestActivity, stats }: Props = $props()
 </script>
 
 <div class="profile-grid grid gap-4">
@@ -24,7 +25,9 @@
 		<Strava accounts={account} />
 	{/await}
 
-	<Card class="stats"></Card>
+	{#await stats then userStats}
+		<UserStats stats={userStats} />
+	{/await}
 
 	{#await activities then acts}
 		<Activities activities={acts} />
@@ -42,9 +45,5 @@
 			'account stats stats'
 			'strava stats stats'
 			'activities activities latest-activity';
-	}
-
-	.profile-grid :global(.stats) {
-		grid-area: stats;
 	}
 </style>

@@ -16,6 +16,7 @@
 			accounts={data.accounts}
 			activities={data.activities}
 			latestActivity={data.latestActivity}
+			stats={data.stats}
 		/>
 	{:else}
 		<Card>

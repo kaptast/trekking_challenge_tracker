@@ -1,10 +1,10 @@
 import { auth } from '$lib/server/auth'
 import { db } from '$lib/server/db'
 import { activity, team, teamMember } from '$lib/server/db/schema'
-import type { Activity } from '$lib/types'
+import type { Activity, Stats } from '$lib/types'
 import { fail, redirect, type Actions, type ServerLoad } from '@sveltejs/kit'
 import { APIError, type User } from 'better-auth'
-import { eq } from 'drizzle-orm'
+import { desc, eq, sql } from 'drizzle-orm'
 
 export const load: ServerLoad = async ({ request, locals }) => {
 	if (!locals.user) {
@@ -12,7 +12,8 @@ export const load: ServerLoad = async ({ request, locals }) => {
 			accounts: [],
 			latestActivity: null,
 			activities: [],
-			team: null
+			team: null,
+			stats: null
 		}
 	}
 
@@ -22,7 +23,8 @@ export const load: ServerLoad = async ({ request, locals }) => {
 		}),
 		team: loadTeam(locals.user),
 		activities: loadActivities(locals.user),
-		latestActivity: loadActivities(locals.user, 1)
+		latestActivity: loadActivities(locals.user, 1),
+		stats: summarizeActivities(locals.user)
 	}
 }
 
@@ -48,9 +50,49 @@ async function loadActivities(user: User, limit: number = 5): Promise<Array<Acti
 		})
 		.from(activity)
 		.where(eq(activity.userId, user.id))
-		.orderBy(activity.startDate)
+		.orderBy(desc(activity.startDate))
 		.limit(limit)
 		.execute()
+}
+
+async function summarizeActivities(user: User): Promise<Stats> {
+	const [statsResult, streakResult] = await Promise.all([
+		db
+			.select({
+				activityCount: sql<number>`count(*)`,
+				totalDistance: sql<number>`cast(sum(${activity.distance}) as float)`,
+				averageDistance: sql<number>`cast(avg(${activity.distance}) as float)`,
+				longestDistance: sql<number>`cast(max(${activity.distance}) as float)`,
+				totalTime: sql<number>`cast(sum(${activity.movingTime}) as float)`,
+				averageTime: sql<number>`cast(avg(${activity.movingTime}) as float)`,
+				longestTime: sql<number>`cast(max(${activity.movingTime}) as float)`
+			})
+			.from(activity)
+			.where(eq(activity.userId, user.id))
+			.execute(),
+		db.execute(sql`
+			SELECT COALESCE(MAX(cnt), 0)::int AS longest_streak
+			FROM (
+				SELECT COUNT(*) AS cnt
+				FROM (
+					SELECT
+						day,
+						day - (ROW_NUMBER() OVER (ORDER BY day))::int AS grp
+					FROM (
+						SELECT DISTINCT CAST(${activity.startDate} AS date) AS day
+						FROM ${activity}
+						WHERE ${activity.userId} = ${user.id}
+					) distinct_days
+				) grouped
+				GROUP BY grp
+			) streaks
+		`)
+	])
+
+	return {
+		...statsResult[0],
+		longestStreak: Number(streakResult[0]?.longest_streak ?? 0)
+	}
 }
 
 export const actions: Actions = {
