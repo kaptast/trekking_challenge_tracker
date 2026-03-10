@@ -3,6 +3,7 @@
 	import Card from '$lib/components/Card.svelte'
 	import Table from '$lib/components/Table.svelte'
 	import type { Activity } from '$lib/types'
+	import Distance from '$lib/components/Distance.svelte'
 
 	type Props = {
 		activities: Array<Activity>
@@ -18,7 +19,7 @@
 				<div>{index + 1}.</div>
 				<div>{activity.name}</div>
 				<div>{m.pointsValue({ count: 0 })}</div>
-				<div>{m.distanceValue({ distance: activity.distance / 1000 })}</div>
+				<div><Distance value={activity.distance} /></div>
 			</div>
 		{/each}
 	</Table>

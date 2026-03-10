@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte'
 	import Card from '$lib/components/Card.svelte'
+	import Distance from '$lib/components/Distance.svelte'
 	import Hero from '$lib/components/Hero.svelte'
 	import Table from '$lib/components/Table.svelte'
 
@@ -62,7 +63,7 @@
 						<div>{index + 1}.</div>
 						<div>{team.name}</div>
 						<div>{m.pointsValue({ count: 0 })}</div>
-						<div>{m.distanceValue({ distance: 0 })}</div>
+						<div><Distance value={0} /></div>
 					</div>
 				{/each}
 			{/await}
