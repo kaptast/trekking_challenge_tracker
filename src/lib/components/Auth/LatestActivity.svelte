@@ -15,7 +15,7 @@
 		<div class="grid grid-cols-[auto_1fr_auto_auto] gap-x-4 font-semibold">
 			<div>{activity.name}</div>
 			<div>{m.pointsValue({ count: 0 })}</div>
-			<div>{m.distanceValue({ distance: 0 })}</div>
+			<div>{m.distanceValue({ distance: activity.distance / 1000 })}</div>
 		</div>
 	</Card>
 {/if}

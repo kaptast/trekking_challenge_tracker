@@ -18,7 +18,7 @@
 				<div>{index + 1}.</div>
 				<div>{activity.name}</div>
 				<div>{m.pointsValue({ count: 0 })}</div>
-				<div>{m.distanceValue({ distance: 0 })}</div>
+				<div>{m.distanceValue({ distance: activity.distance / 1000 })}</div>
 			</div>
 		{/each}
 	</Table>
