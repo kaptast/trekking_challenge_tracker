@@ -9,28 +9,26 @@
 	let mode: 'signIn' | 'signUp' = $state('signIn')
 </script>
 
-<div class="mx-auto max-w-sm space-y-4 p-6">
-	{#if data.user}
-		<Profile
-			user={data.user}
-			accounts={data.accounts}
-			activities={data.activities}
-			latestActivity={data.latestActivity}
-			stats={data.stats}
-		/>
-	{:else}
-		<Card>
-			<div class="space-y-4 p-2">
-				{#if form?.message}
-					<p class="bg-red-50 text-red-700 rounded px-3 py-2 text-sm">{form.message}</p>
-				{/if}
+{#if data.user}
+	<Profile
+		user={data.user}
+		accounts={data.accounts}
+		activities={data.activities}
+		latestActivity={data.latestActivity}
+		stats={data.stats}
+	/>
+{:else}
+	<Card>
+		<div class="space-y-4 p-2">
+			{#if form?.message}
+				<p class="bg-red-50 text-red-700 rounded px-3 py-2 text-sm">{form.message}</p>
+			{/if}
 
-				{#if mode === 'signIn'}
-					<Login onSignUpClick={() => (mode = 'signUp')} />
-				{:else}
-					<Register onSignInClick={() => (mode = 'signIn')} />
-				{/if}
-			</div>
-		</Card>
-	{/if}
-</div>
+			{#if mode === 'signIn'}
+				<Login onSignUpClick={() => (mode = 'signUp')} />
+			{:else}
+				<Register onSignInClick={() => (mode = 'signIn')} />
+			{/if}
+		</div>
+	</Card>
+{/if}
