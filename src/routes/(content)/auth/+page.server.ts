@@ -18,6 +18,7 @@ export const load: ServerLoad = async ({ request, locals }) => {
 	}
 
 	return {
+		avatarSeed: locals.user.avatarSeed ?? null,
 		accounts: auth.api.listUserAccounts({
 			headers: request.headers
 		}),

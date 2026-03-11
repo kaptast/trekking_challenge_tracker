@@ -6,15 +6,25 @@
 	import { enhance } from '$app/forms'
 	import Button from '$lib/components/Button.svelte'
 	import { m } from '$lib/paraglide/messages'
+	import { untrack } from 'svelte'
+	import { invalidateAll } from '$app/navigation'
+	import { saveAvatarSeed } from './account.remote'
 
 	type Props = {
 		user: User
+		avatarSeed: string | null | undefined
 	}
 
-	let { user }: Props = $props()
+	let { user, avatarSeed }: Props = $props()
 
-	let seed = $state('KOMI')
+	let seed = $state(untrack(() => avatarSeed ?? user.name ?? user.id))
 	let changedAvatar = $state(false)
+
+	$effect(() => {
+		if (!changedAvatar) {
+			seed = avatarSeed ?? user.name ?? user.id
+		}
+	})
 
 	const avatar = $derived(
 		createAvatar(pixelArt, {
@@ -28,8 +38,10 @@
 		changedAvatar = true
 	}
 
-	function saveAvatar() {
+	async function saveAvatar() {
+		await saveAvatarSeed({ seed })
 		changedAvatar = false
+		await invalidateAll()
 	}
 </script>
 

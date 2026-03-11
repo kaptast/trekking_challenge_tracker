@@ -15,6 +15,13 @@ export const auth = betterAuth({
 	emailAndPassword: {
 		enabled: true
 	},
+	user: {
+		additionalFields: {
+			avatarSeed: {
+				type: 'string'
+			}
+		}
+	},
 	account: {
 		accountLinking: {
 			enabled: true,

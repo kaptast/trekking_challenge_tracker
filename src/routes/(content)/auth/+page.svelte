@@ -12,6 +12,7 @@
 {#if data.user}
 	<Profile
 		user={data.user}
+		avatarSeed={data.avatarSeed}
 		accounts={data.accounts}
 		activities={data.activities}
 		latestActivity={data.latestActivity}

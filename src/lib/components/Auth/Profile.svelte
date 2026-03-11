@@ -9,17 +9,18 @@
 
 	type Props = {
 		user: User
+		avatarSeed: string | null | undefined
 		accounts: Promise<Array<Account>> | never[]
 		activities: Promise<Array<Activity>> | never[]
 		latestActivity: Promise<Array<Activity>> | null
 		stats: Promise<Stats> | null
 	}
 
-	let { user, accounts, activities, latestActivity, stats }: Props = $props()
+	let { user, avatarSeed, accounts, activities, latestActivity, stats }: Props = $props()
 </script>
 
 <div class="profile-grid grid gap-4">
-	<AccountComponent {user} />
+	<AccountComponent {user} {avatarSeed} />
 
 	{#await accounts then account}
 		<Strava accounts={account} />
