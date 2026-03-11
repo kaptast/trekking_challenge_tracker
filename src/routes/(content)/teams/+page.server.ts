@@ -13,7 +13,8 @@ async function loadTeams() {
 		with: {
 			members: {
 				with: {
-					activities: true
+					activities: true,
+					user: true
 				}
 			}
 		}

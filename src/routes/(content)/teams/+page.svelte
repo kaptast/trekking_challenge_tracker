@@ -6,8 +6,10 @@
 	import Distance from '$lib/components/Distance.svelte'
 	import Hero from '$lib/components/Hero.svelte'
 	import { m } from '$lib/paraglide/messages'
+	import { createAvatar } from '@dicebear/core'
 	import { joinTeam, leaveTeam } from '../data.remote'
 	import type { PageProps } from './$types'
+	import { pixelArt } from '@dicebear/collection'
 
 	let { data }: PageProps = $props()
 
@@ -19,6 +21,10 @@
 		members: {
 			id: string
 			teamId: string
+			user: {
+				name: string
+				avatarSeed: string | null
+			}
 			activities: {
 				id: number
 				name: string
@@ -57,7 +63,17 @@
 	<div class="col-rank">{index + 1}</div>
 	<div>{team.name}</div>
 	<div>{0}</div>
-	<div>{team.members.length}</div>
+	<div class="flex items-center gap-1">
+		{#each team.members as member (member.id)}
+			{@const avatar = createAvatar(pixelArt, {
+				seed: member.user.avatarSeed ?? '',
+				size: 32
+			}).toDataUri()}
+			<div class="chipped-corners bg-brown-450" title={member.user.name}>
+				<img src={avatar} alt="Avatar" class="size-8" />
+			</div>
+		{/each}
+	</div>
 	<div>
 		<Distance
 			value={team.members.reduce(

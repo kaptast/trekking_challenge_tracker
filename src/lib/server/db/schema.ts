@@ -1,5 +1,6 @@
 import { relations } from 'drizzle-orm'
 import { pgTable, text, integer, decimal, bigint } from 'drizzle-orm/pg-core'
+import { user } from './auth.schema'
 
 export const team = pgTable('team', {
 	id: text('id')
@@ -9,7 +10,9 @@ export const team = pgTable('team', {
 })
 
 export const teamMember = pgTable('team_member', {
-	id: text('id').primaryKey(),
+	id: text('id')
+		.primaryKey()
+		.references(() => user.id, { onDelete: 'cascade' }),
 	teamId: text('team_id')
 		.notNull()
 		.references(() => team.id, { onDelete: 'cascade' })
@@ -44,6 +47,10 @@ export const teamMemberRelations = relations(teamMember, ({ one, many }) => ({
 	team: one(team, {
 		fields: [teamMember.teamId],
 		references: [team.id]
+	}),
+	user: one(user, {
+		fields: [teamMember.id],
+		references: [user.id]
 	}),
 	activities: many(activity)
 }))
