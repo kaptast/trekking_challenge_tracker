@@ -3,6 +3,7 @@ import { db } from '$lib/server/db'
 import { teamMember } from '$lib/server/db/schema'
 import { and, eq } from 'drizzle-orm'
 import { z } from 'zod'
+import { error } from '@sveltejs/kit'
 
 export const joinTeam = command(
 	z.object({
@@ -11,7 +12,7 @@ export const joinTeam = command(
 	async ({ id }) => {
 		const { locals } = getRequestEvent()
 		if (!locals.user) {
-			return { success: false, message: 'User not authenticated' }
+			error(401, 'User not authenticated')
 		}
 
 		await db.insert(teamMember).values({ teamId: id, id: locals.user.id }).execute()
@@ -26,7 +27,7 @@ export const leaveTeam = command(
 	async ({ id }) => {
 		const { locals } = getRequestEvent()
 		if (!locals.user) {
-			return { success: false, message: 'User not authenticated' }
+			error(401, 'User not authenticated')
 		}
 
 		await db

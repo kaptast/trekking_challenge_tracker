@@ -1,4 +1,4 @@
-import { form } from '$app/server'
+import { form, getRequestEvent } from '$app/server'
 import { db } from '$lib/server/db'
 import { team } from '$lib/server/db/schema'
 import { redirect } from '@sveltejs/kit'
@@ -9,6 +9,11 @@ export const createTeam = form(
 		name: z.string().min(1, 'Team name is required')
 	}),
 	async ({ name }) => {
+		const { locals } = getRequestEvent()
+		if (!locals.user) {
+			redirect(303, '/auth')
+		}
+
 		await db.insert(team).values({ name }).execute()
 
 		redirect(303, '/teams')
