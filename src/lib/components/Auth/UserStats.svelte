@@ -18,23 +18,37 @@
 			<span class="font-semibold uppercase">{m.stats_totalActivities()}</span>
 			<span class="place-self-end font-medium">{stats.activityCount}</span>
 
+			<div class="col-span-2 border-t-2 border-brown-300"></div>
+
 			<span class="font-semibold uppercase">{m.stats_totalDistance()}</span>
 			<span class="place-self-end font-medium"><Distance value={stats.totalDistance} /></span>
+
+			<div class="col-span-2 border-t-2 border-brown-300"></div>
 
 			<span class="font-semibold uppercase">{m.stats_averageDistance()}</span>
 			<span class="place-self-end font-medium"><Distance value={stats.averageDistance} /></span>
 
+			<div class="col-span-2 border-t-2 border-brown-300"></div>
+
 			<span class="font-semibold uppercase">{m.stats_longestDistance()}</span>
 			<span class="place-self-end font-medium"><Distance value={stats.longestDistance} /></span>
+
+			<div class="col-span-2 border-t-2 border-brown-300"></div>
 
 			<span class="font-semibold uppercase">{m.stats_totalTime()}</span>
 			<span class="place-self-end font-medium"><Duration value={stats.totalTime} /></span>
 
+			<div class="col-span-2 border-t-2 border-brown-300"></div>
+
 			<span class="font-semibold uppercase">{m.stats_averageTime()}</span>
 			<span class="place-self-end font-medium"><Duration value={stats.averageTime} /></span>
 
+			<div class="col-span-2 border-t-2 border-brown-300"></div>
+
 			<span class="font-semibold uppercase">{m.stats_longestTime()}</span>
 			<span class="place-self-end font-medium"><Duration value={stats.longestTime} /></span>
+
+			<div class="col-span-2 border-t-2 border-brown-300"></div>
 
 			<span class="font-semibold uppercase">{m.stats_longestStreak()}</span>
 			<span class="place-self-end font-medium">{m.streak({ value: stats.longestStreak })}</span>
