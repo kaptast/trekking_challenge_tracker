@@ -12,20 +12,22 @@
 	let { data }: PageProps = $props()
 </script>
 
-<div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-	<GpxUpload />
+{#if data.user}
+	<div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+		<GpxUpload />
 
-	<Card>
-		<div class="p-4">
-			<Button
-				variant="strava"
-				size="large"
-				href={localizeHref('/activities/sync')}
-				label="Import from Strava"
-			/>
-		</div>
-	</Card>
-</div>
+		<Card>
+			<div class="p-4">
+				<Button
+					variant="strava"
+					size="large"
+					href={localizeHref('/activities/sync')}
+					label={m.importFromStrava()}
+				/>
+			</div>
+		</Card>
+	</div>
+{/if}
 
 <Card>
 	<div class="w-full px-1.5 py-1">
@@ -58,7 +60,7 @@
 			{/if}
 		{:catch error}
 			<div class="row">
-				<div class="col-full text-red-600 text-center">
+				<div class="col-span-5 py-5 text-center! text-brown-500">
 					Error loading activities: {error.message}
 				</div>
 			</div>

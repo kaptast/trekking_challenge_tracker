@@ -80,5 +80,6 @@
 	"onlyGpxFilesAllowed": "Csak .gpx fájlok engedélyezettek.",
 	"dropZoneAriaLabel": "GPX fájlok számára fenntartott terület",
 	"dropYourQuestFile": "Dobd ide a küldetés fájlodat!",
-	"upload": "Feltöltés"
+	"upload": "Feltöltés",
+	"importFromStrava": "Importálás Stravaból"
 }

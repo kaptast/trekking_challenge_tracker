@@ -84,21 +84,25 @@
 		/>
 	</div>
 	<div>
-		{#if isMember}
-			<Button onclick={async () => await leave(team.id)} label={m.leaveTeam()} />
-		{/if}
+		{#if data.user}
+			{#if isMember}
+				<Button onclick={async () => await leave(team.id)} label={m.leaveTeam()} />
+			{/if}
 
-		{#if !memberOfAnyTeam}
-			<Button onclick={async () => await join(team.id)} label={m.joinTeam()} />
+			{#if !memberOfAnyTeam}
+				<Button onclick={async () => await join(team.id)} label={m.joinTeam()} />
+			{/if}
 		{/if}
 	</div>
 {/snippet}
 
 <Hero title={m.teams()} />
 
-<div class="mb-1 flex w-full justify-end">
-	<Button onclick={() => createTeamDialog?.open()} label={m.createTeam()} />
-</div>
+{#if data.user}
+	<div class="mb-1 flex w-full justify-end">
+		<Button onclick={() => createTeamDialog?.open()} label={m.createTeam()} />
+	</div>
+{/if}
 
 <Card>
 	<div class="w-full px-1.5 py-1">
