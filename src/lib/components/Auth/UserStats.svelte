@@ -14,7 +14,7 @@
 
 <Card class="stats">
 	{#if stats}
-		<div class="grid grid-cols-2 gap-2">
+		<div class="grid w-full grid-cols-2 gap-2 p-4">
 			<span class="font-semibold uppercase">{m.stats_totalActivities()}</span>
 			<span class="place-self-end font-medium">{stats.activityCount}</span>
 
