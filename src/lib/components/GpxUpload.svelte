@@ -60,7 +60,7 @@
 <Card>
 	<div
 		class={[
-			'drop-zone cursor-pointer rounded-lg border-2 border-dashed px-8 py-4 text-center font-bold uppercase transition-colors',
+			'drop-zone w-full cursor-pointer rounded-lg border-2 border-dashed px-8 py-4 text-center font-bold uppercase transition-colors',
 			isDragging && 'drag-over'
 		]}
 		role="button"

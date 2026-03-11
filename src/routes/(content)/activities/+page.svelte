@@ -12,10 +12,10 @@
 	let { data }: PageProps = $props()
 </script>
 
-<div class="mb-4 flex gap-4">
+<div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
 	<GpxUpload />
 
-	<Card class="basis-1/2">
+	<Card>
 		<div class="p-4">
 			<Button
 				variant="strava"
