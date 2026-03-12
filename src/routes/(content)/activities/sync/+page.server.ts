@@ -1,10 +1,14 @@
-import { error, type Actions } from '@sveltejs/kit'
+import { error, redirect, type Actions } from '@sveltejs/kit'
 import type { PageServerLoad } from './$types'
 import { db } from '$lib/server/db/index.js'
 import { activity } from '$lib/server/db/schema.js'
 import { inArray } from 'drizzle-orm'
 
-export const load: PageServerLoad = async ({ request, fetch }) => {
+export const load: PageServerLoad = async ({ request, fetch, locals }) => {
+	if (!locals.user) {
+		redirect(302, '/auth')
+	}
+
 	return {
 		activities: fetchActivities(request, fetch)
 	}
