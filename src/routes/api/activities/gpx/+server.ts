@@ -2,6 +2,7 @@ import { error, json } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
 import { db } from '$lib/server/db'
 import { activity } from '$lib/server/db/schema'
+import { eq, and } from 'drizzle-orm'
 import { XMLParser } from 'fast-xml-parser'
 import polyline from '@mapbox/polyline'
 
@@ -111,6 +112,24 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 
 	const startDate = trkpts[0].time ?? null
 	const encodedPolyline = polyline.encode(coords)
+
+	if (startDate) {
+		const duplicate = await db
+			.select({ id: activity.id })
+			.from(activity)
+			.where(
+				and(
+					eq(activity.userId, locals.user.id),
+					eq(activity.startDate, startDate),
+					eq(activity.type, activityType)
+				)
+			)
+			.limit(1)
+			.execute()
+		if (duplicate.length > 0) {
+			error(409, 'An activity with the same start time and type already exists')
+		}
+	}
 
 	const id = crypto.randomUUID()
 
