@@ -78,7 +78,7 @@
 		grid-template-columns: repeat(6, minmax(0, 1fr));
 		align-items: center;
 
-		border-bottom: 1px solid var(--color-brown-200);
+		border-bottom: 2px solid var(--color-brown-300);
 		font-weight: 700;
 		color: var(--color-brown-800);
 	}
