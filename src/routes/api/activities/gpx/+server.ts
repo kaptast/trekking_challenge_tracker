@@ -127,7 +127,8 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 			sportType: activityType,
 			startDate,
 			startDateLocal: startDate,
-			polyline: encodedPolyline
+			polyline: encodedPolyline,
+			source: 'gpx'
 		})
 		.execute()
 

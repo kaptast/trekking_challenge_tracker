@@ -39,7 +39,8 @@ export const activity = pgTable('activity', {
 	locationState: text('location_state'),
 	locationCountry: text('location_country'),
 	polyline: text('polyline'),
-	maxSpeed: decimal('max_speed', { mode: 'number' })
+	maxSpeed: decimal('max_speed', { mode: 'number' }),
+	source: text('source')
 })
 
 export const teamRelations = relations(team, ({ many }) => ({

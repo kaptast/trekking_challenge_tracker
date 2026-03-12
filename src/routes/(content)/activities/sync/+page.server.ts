@@ -57,7 +57,8 @@ export const actions = {
 						locationState: stravaActivity.location_state,
 						locationCountry: stravaActivity.location_country,
 						polyline: stravaActivity.map.summary_polyline,
-						maxSpeed: stravaActivity.max_speed
+						maxSpeed: stravaActivity.max_speed,
+						source: 'strava'
 					})
 					.execute()
 			}
