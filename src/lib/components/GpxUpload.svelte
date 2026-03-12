@@ -20,7 +20,6 @@
 	}
 
 	let isDragging = $state(false)
-	let selectedFile = $state<File | null>(null)
 	let errorMessage = $state<string | null>(null)
 	let fileInput = $state<HTMLInputElement | null>(null)
 	let isUploading = $state(false)
@@ -33,14 +32,6 @@
 		}
 		errorMessage = null
 		return true
-	}
-
-	function handleFileSelect(file: File) {
-		if (validateFile(file)) {
-			selectedFile = file
-		} else {
-			selectedFile = null
-		}
 	}
 
 	function onDragOver(e: DragEvent) {
@@ -56,17 +47,17 @@
 		e.preventDefault()
 		isDragging = false
 		const file = e.dataTransfer?.files?.[0]
-		if (file) {
-			handleFileSelect(file)
-			if (validateFile(file)) {
-				await uploadFile(file)
-			}
+		if (file && validateFile(file)) {
+			await uploadFile(file)
 		}
 	}
 
 	function onInputChange(e: Event) {
 		const file = (e.currentTarget as HTMLInputElement).files?.[0]
-		if (file) handleFileSelect(file)
+		if (file && validateFile(file)) {
+			uploadFile(file)
+		}
+		if (fileInput) fileInput.value = ''
 	}
 
 	function openFilePicker() {
@@ -87,18 +78,11 @@
 			}
 			const draft: DraftActivity = await res.json()
 			draftActivities = [...draftActivities, draft]
-			selectedFile = null
-			if (fileInput) fileInput.value = ''
 		} catch (err) {
 			errorMessage = err instanceof Error ? err.message : 'Upload failed'
 		} finally {
 			isUploading = false
 		}
-	}
-
-	async function handleUpload() {
-		if (!selectedFile) return
-		await uploadFile(selectedFile)
 	}
 
 	async function handleRemove(id: string) {
@@ -132,15 +116,11 @@
 		<p class="text-xl">{m.dropYourQuestFile()}</p>
 		<p class="text-xl">(.gpx)</p>
 
-		{#if selectedFile}
-			<p class="mt-3 text-sm text-olive-500">{selectedFile.name}</p>
-		{/if}
-
 		{#if errorMessage}
 			<p class="mt-3 text-sm text-gold-600">{errorMessage}</p>
 		{/if}
 
-		<div class="my-2 border-b border-dashed border-black"></div>
+		<div class="border-t-2 border-brown-300"></div>
 
 		<input
 			bind:this={fileInput}
@@ -150,48 +130,54 @@
 			onchange={onInputChange}
 		/>
 
-		<div class="mt-2 flex justify-center">
+		<div class="mt-2 flex justify-center pb-2">
 			<Button
 				label={isUploading ? '…' : m.upload()}
-				onclick={handleUpload}
-				disabled={!selectedFile || isUploading}
+				onclick={openFilePicker}
+				disabled={isUploading}
 			/>
 		</div>
 	</div>
 
 	{#if draftActivities.length > 0}
-		<div class="mt-2 border-t border-brown-200 px-4 pb-2">
+		<div class="w-full p-2">
 			<div class="py-2 text-xs font-semibold tracking-wider text-brown-500 uppercase">
-				Pending uploads
+				{m.pendingUploads()}
 			</div>
-			{#each draftActivities as draft (draft.id)}
-				<div class="flex items-center gap-3 border-b border-brown-100 py-2 last:border-none">
-					<div class="min-w-0 flex-1 truncate font-semibold text-brown-800">{draft.name}</div>
-					<div class="shrink-0 text-sm text-brown-600">
-						<Distance value={draft.distance} />
-					</div>
-					{#if draft.movingTime}
-						<div class="shrink-0 text-sm text-brown-600">
-							<Duration value={draft.movingTime} />
-						</div>
-					{/if}
-					<div class="shrink-0 text-xs text-brown-500">{draft.type}</div>
-					{#if draft.startDate}
-						<div class="shrink-0 text-xs text-brown-400">
-							{new Date(draft.startDate).toLocaleDateString()}
-						</div>
-					{/if}
-					<button
-						class="hover:text-brown-700 shrink-0 text-xs text-brown-400"
-						onclick={() => handleRemove(draft.id)}
-						aria-label="Remove {draft.name}"
+			<div>
+				{#each draftActivities as draft (draft.id)}
+					<div
+						class="flex w-full items-center justify-between border-b-2 border-solid border-brown-300 py-2 font-bold text-brown-800 last:border-b-0"
 					>
-						✕
-					</button>
-				</div>
-			{/each}
+						<div>
+							<Distance value={draft.distance} />
+						</div>
+
+						{#if draft.movingTime}
+							<div>
+								<Duration value={draft.movingTime} />
+							</div>
+						{/if}
+						<div>{draft.type}</div>
+
+						{#if draft.startDate}
+							<div>
+								{new Date(draft.startDate).toLocaleDateString()}
+							</div>
+						{/if}
+
+						<button
+							class="hover:text-brown-700 text-brown-400"
+							onclick={() => handleRemove(draft.id)}
+							aria-label="{draft.name} törlése"
+						>
+							✕
+						</button>
+					</div>
+				{/each}
+			</div>
 			<div class="mt-3 flex justify-end">
-				<Button label="Save all" onclick={handleSaveAll} />
+				<Button label={m.saveAll()} onclick={handleSaveAll} />
 			</div>
 		</div>
 	{/if}
