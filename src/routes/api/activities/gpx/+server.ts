@@ -5,6 +5,7 @@ import { activity } from '$lib/server/db/schema'
 import { eq, and } from 'drizzle-orm'
 import { XMLParser } from 'fast-xml-parser'
 import polyline from '@mapbox/polyline'
+import { m } from '$lib/paraglide/messages'
 
 interface TrkPt {
 	'@_lat': number
@@ -25,18 +26,18 @@ function haversineMeters(lat1: number, lon1: number, lat2: number, lon2: number)
 
 export const POST: RequestHandler = async ({ request, locals }) => {
 	if (!locals.user) {
-		error(401, 'Unauthorized')
+		error(401, m.unauthorized())
 	}
 
 	const formData = await request.formData()
 	const file = formData.get('file')
 
 	if (!(file instanceof File)) {
-		error(400, 'No file provided')
+		error(400, m.noFileProvided())
 	}
 
 	if (!file.name.toLowerCase().endsWith('.gpx')) {
-		error(400, 'Only .gpx files are allowed')
+		error(400, m.invalidFileType())
 	}
 
 	const text = await file.text()
@@ -46,18 +47,18 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 	try {
 		parsed = parser.parse(text)
 	} catch {
-		error(400, 'Invalid GPX file')
+		error(400, m.invalidGpxFile())
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const gpx = parsed?.gpx as any
 	if (!gpx) {
-		error(400, 'Invalid GPX file: missing <gpx> root element')
+		error(400, m.invalidGpxFile())
 	}
 
 	const trk = Array.isArray(gpx.trk) ? gpx.trk[0] : gpx.trk
 	if (!trk) {
-		error(400, 'Invalid GPX file: no <trk> element found')
+		error(400, m.invalidGpxFile())
 	}
 
 	const name: string = trk.name ?? file.name.replace(/\.gpx$/i, '')
@@ -66,13 +67,13 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 	const trkseg = Array.isArray(trk.trkseg) ? trk.trkseg[0] : trk.trkseg
 	const rawPts = trkseg?.trkpt
 	if (!rawPts) {
-		error(400, 'Invalid GPX file: no track points found')
+		error(400, m.invalidGpxFile())
 	}
 
 	const trkpts: TrkPt[] = Array.isArray(rawPts) ? rawPts : [rawPts]
 
 	if (trkpts.length < 2) {
-		error(400, 'GPX file must contain at least 2 track points')
+		error(400, m.invalidGpxFile())
 	}
 
 	// Calculate distance and collect coordinates for polyline
@@ -121,13 +122,14 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 				and(
 					eq(activity.userId, locals.user.id),
 					eq(activity.startDate, startDate),
-					eq(activity.type, activityType)
+					eq(activity.type, activityType),
+					eq(activity.isDraft, false)
 				)
 			)
 			.limit(1)
 			.execute()
 		if (duplicate.length > 0) {
-			error(409, 'An activity with the same start time and type already exists')
+			error(409, m.alreadyExists())
 		}
 	}
 

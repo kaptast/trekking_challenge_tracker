@@ -81,5 +81,12 @@
 	"dropZoneAriaLabel": "GPX fájlok számára fenntartott terület",
 	"dropYourQuestFile": "Dobd ide a küldetés fájlodat!",
 	"upload": "Feltöltés",
-	"importFromStrava": "Importálás Stravaból"
+	"importFromStrava": "Importálás Stravaból",
+	"saveAll": "Mentés",
+	"pendingUploads": "Függőben lévő feltöltések",
+	"unauthorized": "Nincs jogosultságod megtekinteni ezt az oldalt. Kérlek, jelentkezz be.",
+	"noFileProvided": "Nincs fájl megadva.",
+	"invalidFileType": "Érvénytelen fájltípus. Kérlek, .gpx fájlt tölts fel.",
+	"invalidGpxFile": "Érvénytelen GPX fájl. Kérlek, ellenőrizd a fájl tartalmát és próbáld újra.",
+	"alreadyExists": "Egy tevékenység már létezik ezzel a kezdő dátummal és típussal."
 }
