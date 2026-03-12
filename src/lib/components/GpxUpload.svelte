@@ -16,6 +16,7 @@
 		distance: number
 		movingTime: number | null
 		type: string
+		startDate: string | null
 	}
 
 	let isDragging = $state(false)
@@ -175,6 +176,11 @@
 						</div>
 					{/if}
 					<div class="shrink-0 text-xs text-brown-500">{draft.type}</div>
+					{#if draft.startDate}
+						<div class="shrink-0 text-xs text-brown-400">
+							{new Date(draft.startDate).toLocaleDateString()}
+						</div>
+					{/if}
 					<button
 						class="hover:text-brown-700 shrink-0 text-xs text-brown-400"
 						onclick={() => handleRemove(draft.id)}

@@ -18,7 +18,7 @@ export const load: PageServerLoad = async ({ locals, depends }) => {
 
 type Activity = Pick<
 	typeof activity.$inferSelect,
-	'id' | 'name' | 'distance' | 'movingTime' | 'type' | 'polyline'
+	'id' | 'name' | 'distance' | 'movingTime' | 'type' | 'polyline' | 'startDate'
 >
 
 async function loadActivities(locals: App.Locals): Promise<Array<Activity>> {
@@ -33,7 +33,8 @@ async function loadActivities(locals: App.Locals): Promise<Array<Activity>> {
 			distance: activity.distance,
 			movingTime: activity.movingTime,
 			type: activity.type,
-			polyline: activity.polyline
+			polyline: activity.polyline,
+			startDate: activity.startDate
 		})
 		.from(activity)
 		.where(and(eq(activity.userId, locals.user.id), eq(activity.isDraft, false)))

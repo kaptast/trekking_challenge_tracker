@@ -37,6 +37,7 @@
 			<div class="col-std">{m.distance()}</div>
 			<div class="col-std">Moving time</div>
 			<div class="col-std">Type</div>
+			<div class="col-std">Date</div>
 			<div class="col-std">Map</div>
 		</div>
 
@@ -52,6 +53,9 @@
 						<div><Distance value={activity.distance} /></div>
 						<div><Duration value={activity.movingTime ?? 0} /></div>
 						<div>{activity.type}</div>
+						<div>
+							{activity.startDate ? new Date(activity.startDate).toLocaleDateString() : '—'}
+						</div>
 						<div class="place-self-end">
 							<SummaryMap summaryPolyline={activity.polyline ?? ''} />
 						</div>
@@ -71,7 +75,7 @@
 <style>
 	.row {
 		display: grid;
-		grid-template-columns: repeat(5, minmax(0, 1fr));
+		grid-template-columns: repeat(6, minmax(0, 1fr));
 		align-items: center;
 
 		border-bottom: 1px solid var(--color-brown-200);
