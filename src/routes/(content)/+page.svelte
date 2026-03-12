@@ -62,8 +62,8 @@
 					<div class="grid grid-cols-[auto_1fr_auto_auto] gap-x-4 font-semibold">
 						<div>{index + 1}.</div>
 						<div>{team.name}</div>
-						<div>{m.pointsValue({ count: 0 })}</div>
-						<div><Distance value={0} /></div>
+						<div>{m.pointsValue({ count: team.points })}</div>
+						<div><Distance value={team.totalDistance} /></div>
 					</div>
 				{/each}
 			{/await}

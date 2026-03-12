@@ -46,6 +46,8 @@
 				maxSpeed: number | null
 			}[]
 		}[]
+		totalDistance: number
+		points: number
 	}
 
 	async function leave(id: string) {
@@ -62,7 +64,7 @@
 {#snippet row(index: number, team: Team, isMember: boolean, memberOfAnyTeam: boolean)}
 	<div class="col-rank">{index + 1}</div>
 	<div>{team.name}</div>
-	<div>{0}</div>
+	<div>{team.points}</div>
 	<div class="flex items-center gap-1">
 		{#each team.members as member (member.id)}
 			{@const avatar = createAvatar(pixelArt, {
@@ -75,13 +77,7 @@
 		{/each}
 	</div>
 	<div>
-		<Distance
-			value={team.members.reduce(
-				(acc, member) =>
-					acc + member.activities.reduce((acc, activity) => acc + activity.distance, 0),
-				0
-			)}
-		/>
+		<Distance value={team.totalDistance} />
 	</div>
 	<div>
 		{#if data.user}
