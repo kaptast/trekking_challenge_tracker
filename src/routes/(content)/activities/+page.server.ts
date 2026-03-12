@@ -2,12 +2,14 @@ import { error, redirect } from '@sveltejs/kit'
 import type { PageServerLoad } from './$types'
 import { db } from '$lib/server/db'
 import { activity } from '$lib/server/db/schema'
-import { eq, desc } from 'drizzle-orm'
+import { eq, and, desc } from 'drizzle-orm'
 
-export const load: PageServerLoad = async ({ locals }) => {
+export const load: PageServerLoad = async ({ locals, depends }) => {
 	if (!locals.user) {
 		redirect(302, '/auth')
 	}
+
+	depends('activities')
 
 	return {
 		activities: loadActivities(locals)
@@ -34,7 +36,7 @@ async function loadActivities(locals: App.Locals): Promise<Array<Activity>> {
 			polyline: activity.polyline
 		})
 		.from(activity)
-		.where(eq(activity.userId, locals.user.id))
+		.where(and(eq(activity.userId, locals.user.id), eq(activity.isDraft, false)))
 		.orderBy(desc(activity.startDate))
 		.execute()
 }

@@ -1,5 +1,5 @@
 import { relations } from 'drizzle-orm'
-import { pgTable, text, integer, decimal, bigint } from 'drizzle-orm/pg-core'
+import { pgTable, text, integer, decimal, boolean } from 'drizzle-orm/pg-core'
 import { user } from './auth.schema'
 
 export const team = pgTable('team', {
@@ -26,6 +26,7 @@ export const activity = pgTable('activity', {
 	name: text('name').notNull(),
 	distance: decimal('distance', { mode: 'number' }).notNull(),
 	movingTime: decimal('moving_time', { mode: 'number' }),
+	isDraft: boolean('is_draft').notNull().default(false),
 	type: text('type'),
 	sportType: text('sport_type'),
 	workoutType: integer('workout_type'),
