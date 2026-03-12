@@ -19,7 +19,7 @@
 		stats={data.stats}
 	/>
 {:else}
-	<Card>
+	<Card class="mx-auto w-fit">
 		<div class="space-y-4 p-2">
 			{#if form?.message}
 				<p class="bg-red-50 text-red-700 rounded px-3 py-2 text-sm">{form.message}</p>
