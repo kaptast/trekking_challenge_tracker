@@ -87,13 +87,27 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 		coords.push([lat, lon])
 	}
 
-	// Moving time: last timestamp minus first timestamp
-	const firstTime = trkpts[0].time ? new Date(trkpts[0].time).getTime() : null
-	const lastTime = trkpts[trkpts.length - 1].time
-		? new Date(trkpts[trkpts.length - 1].time!).getTime()
-		: null
-	const movingTimeSecs =
-		firstTime !== null && lastTime !== null ? Math.round((lastTime - firstTime) / 1000) : null
+	const MOVING_SPEED_THRESHOLD_MS = 0.5
+	let movingTimeSecs: number | null = null
+	const hasTimestamps = trkpts.every((pt) => pt.time)
+	if (hasTimestamps) {
+		let movingSecs = 0
+		for (let i = 1; i < trkpts.length; i++) {
+			const dt =
+				(new Date(trkpts[i].time!).getTime() - new Date(trkpts[i - 1].time!).getTime()) / 1000
+			if (dt <= 0) continue
+			const segDist = haversineMeters(
+				Number(trkpts[i - 1]['@_lat']),
+				Number(trkpts[i - 1]['@_lon']),
+				Number(trkpts[i]['@_lat']),
+				Number(trkpts[i]['@_lon'])
+			)
+			if (segDist / dt >= MOVING_SPEED_THRESHOLD_MS) {
+				movingSecs += dt
+			}
+		}
+		movingTimeSecs = Math.round(movingSecs)
+	}
 
 	const startDate = trkpts[0].time ?? null
 	const encodedPolyline = polyline.encode(coords)
