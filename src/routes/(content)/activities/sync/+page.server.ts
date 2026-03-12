@@ -40,7 +40,7 @@ export const actions = {
 				await db
 					.insert(activity)
 					.values({
-						id: stravaActivity.id,
+						id: stravaActivity.id.toString(),
 						userId: locals.user.id,
 						name: stravaActivity.name,
 						distance: stravaActivity.distance,
@@ -79,7 +79,7 @@ async function fetchActivities(
 	}
 
 	const activities = (await response.json()) as Activity[]
-	const activityIds = activities.map((activity) => activity.id)
+	const activityIds = activities.map((a) => a.id.toString())
 
 	const savedActivities = await db
 		.select({ id: activity.id })
@@ -90,7 +90,7 @@ async function fetchActivities(
 
 	const activitiesWithSyncStatus: SyncedActivity[] = activities.map((act) => ({
 		...act,
-		synced: savedActivityIds.has(act.id)
+		synced: savedActivityIds.has(act.id.toString())
 	}))
 
 	return activitiesWithSyncStatus

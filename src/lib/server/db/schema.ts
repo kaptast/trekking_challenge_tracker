@@ -19,7 +19,9 @@ export const teamMember = pgTable('team_member', {
 })
 
 export const activity = pgTable('activity', {
-	id: bigint('id', { mode: 'number' }).primaryKey(),
+	id: text('id')
+		.primaryKey()
+		.$defaultFn(() => crypto.randomUUID()),
 	userId: text('user_id').notNull(),
 	name: text('name').notNull(),
 	distance: decimal('distance', { mode: 'number' }).notNull(),

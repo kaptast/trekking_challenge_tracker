@@ -26,7 +26,7 @@
 				avatarSeed: string | null
 			}
 			activities: {
-				id: number
+				id: string
 				name: string
 				userId: string
 				distance: number
