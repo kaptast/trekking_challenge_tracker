@@ -59,6 +59,7 @@ async function summarizeActivities() {
 			averageActivityCountPerUser: sql<number>`cast(count(*) / nullif(count(distinct ${activity.userId}), 0) as float)`
 		})
 		.from(activity)
+		.where(eq(activity.isDraft, false))
 		.execute()
 
 	return activities[0]
