@@ -7,18 +7,16 @@ export function getPointsForActivity(activity: Activity) {
 	switch (activity.type) {
 		case 'Hike':
 		case 'Walk':
-			return distanceInKm // 1 point per km
+			return Math.floor(distanceInKm) // 1 point per km
 		case 'Run':
-			return distanceInKm * 0.5 // 0.5 points per km
+			return Math.floor(distanceInKm * 0.5) // 0.5 points per km
 		default:
-			return distanceInKm * 0.25 // 0.25 points per km for other types
+			return Math.floor(distanceInKm * 0.25) // 0.25 points per km for other types
 	}
 }
 
 export function calculateMemberPoints(activities: Activity[]) {
-	return Math.floor(
-		activities.reduce((total, activity) => total + getPointsForActivity(activity), 0)
-	)
+	return activities.reduce((total, activity) => total + getPointsForActivity(activity), 0)
 }
 
 export function calculateMemberDistance(activities: Activity[]) {

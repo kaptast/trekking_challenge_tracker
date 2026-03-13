@@ -1,4 +1,5 @@
 import { auth } from '$lib/server/auth'
+import { getPointsForActivity } from '$lib/server/calculatePoints'
 import { db } from '$lib/server/db'
 import { activity, team, teamMember } from '$lib/server/db/schema'
 import type { Activity, Stats } from '$lib/types'
@@ -42,7 +43,7 @@ async function loadTeam(user: User) {
 }
 
 async function loadActivities(user: User, limit: number = 5): Promise<Array<Activity>> {
-	return db
+	const activities = await db
 		.select({
 			name: activity.name,
 			distance: activity.distance,
@@ -54,6 +55,11 @@ async function loadActivities(user: User, limit: number = 5): Promise<Array<Acti
 		.orderBy(desc(activity.startDate))
 		.limit(limit)
 		.execute()
+
+	return activities.map((a) => ({
+		...a,
+		points: getPointsForActivity(a)
+	}))
 }
 
 async function summarizeActivities(user: User): Promise<Stats> {

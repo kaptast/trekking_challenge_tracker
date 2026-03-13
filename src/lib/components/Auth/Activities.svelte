@@ -16,9 +16,9 @@
 	<Table title={m.recentActivities()}>
 		{#each activities as activity, index (index)}
 			<div class="grid grid-cols-[auto_1fr_auto_auto] gap-x-4 font-semibold">
-				<div>{index + 1}.</div>
+				<div>{new Date(activity.startDate ?? 0).toLocaleDateString()}</div>
 				<div>{activity.name}</div>
-				<div>{m.pointsValue({ count: 0 })}</div>
+				<div>{m.pointsValue({ count: activity.points ?? 0 })}</div>
 				<div><Distance value={activity.distance} /></div>
 			</div>
 		{/each}
