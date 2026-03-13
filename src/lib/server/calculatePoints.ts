@@ -1,10 +1,10 @@
-import type { Activity } from '$lib/types'
+import type { Activity, SportType } from '$lib/types'
 
 // TODO: Rewamp this to use a more sophisticated points system based on activity type, distance, and other factors
 export function getPointsForActivity(activity: Activity) {
 	const distanceInKm = activity.distance / 1000
 
-	switch (activity.type) {
+	switch (activity.type as SportType) {
 		case 'Hike':
 		case 'Walk':
 			return Math.floor(distanceInKm) // 1 point per km
