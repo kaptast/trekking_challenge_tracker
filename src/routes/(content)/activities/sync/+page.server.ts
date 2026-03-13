@@ -58,6 +58,7 @@ export const actions = {
 						locationCountry: stravaActivity.location_country,
 						polyline: stravaActivity.map.summary_polyline,
 						maxSpeed: stravaActivity.max_speed,
+						athleteCount: stravaActivity.athlete_count,
 						source: 'strava'
 					})
 					.execute()

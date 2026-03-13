@@ -40,6 +40,7 @@ export const activity = pgTable('activity', {
 	locationCountry: text('location_country'),
 	polyline: text('polyline'),
 	maxSpeed: decimal('max_speed', { mode: 'number' }),
+	athleteCount: integer('athlete_count'),
 	source: text('source')
 })
 

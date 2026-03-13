@@ -2,7 +2,7 @@ import type { activity } from './server/db/schema'
 
 export type Activity = Pick<
 	typeof activity.$inferSelect,
-	'name' | 'distance' | 'startDate' | 'sportType' | 'polyline'
+	'name' | 'distance' | 'startDate' | 'sportType' | 'polyline' | 'athleteCount'
 > & {
 	points?: number
 }
