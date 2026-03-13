@@ -48,7 +48,8 @@ async function loadActivities(user: User, limit: number = 5): Promise<Array<Acti
 			name: activity.name,
 			distance: activity.distance,
 			startDate: activity.startDate,
-			type: activity.type
+			type: activity.type,
+			polyline: activity.polyline
 		})
 		.from(activity)
 		.where(and(eq(activity.userId, user.id), eq(activity.isDraft, false)))

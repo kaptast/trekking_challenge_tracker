@@ -1,11 +1,13 @@
 <script lang="ts">
 	import polyline from '@mapbox/polyline'
+	import type { ClassValue } from 'svelte/elements'
 
 	type Props = {
 		summaryPolyline: string
+		class?: ClassValue
 	}
 
-	let { summaryPolyline }: Props = $props()
+	let { summaryPolyline, class: classes = 'w-15 h-10' }: Props = $props()
 
 	const coordinates = $derived(polyline.decode(summaryPolyline))
 
@@ -53,6 +55,6 @@
 	})
 </script>
 
-<svg width="60" height="40" viewBox="0 0 600 400">
+<svg class={classes} viewBox="0 0 600 400">
 	<polyline points={svgPath} fill="none" stroke="var(--color-brown-500)" stroke-width="15" />
 </svg>
