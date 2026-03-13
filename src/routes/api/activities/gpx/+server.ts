@@ -122,7 +122,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 				and(
 					eq(activity.userId, locals.user.id),
 					eq(activity.startDate, startDate),
-					eq(activity.type, activityType),
+					eq(activity.sportType, activityType),
 					eq(activity.isDraft, false)
 				)
 			)
@@ -158,7 +158,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 		name,
 		distance: distanceMeters,
 		movingTime: movingTimeSecs,
-		type: activityType,
+		sportType: activityType,
 		polyline: encodedPolyline,
 		startDate
 	})

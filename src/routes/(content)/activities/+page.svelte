@@ -52,7 +52,7 @@
 						<div class="truncate">{activity.name}</div>
 						<div><Distance value={activity.distance} /></div>
 						<div><Duration value={activity.movingTime ?? 0} /></div>
-						<div>{activity.type}</div>
+						<div>{activity.sportType}</div>
 						<div>
 							{activity.startDate ? new Date(activity.startDate).toLocaleDateString() : '—'}
 						</div>

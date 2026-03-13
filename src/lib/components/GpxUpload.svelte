@@ -15,7 +15,7 @@
 		name: string
 		distance: number
 		movingTime: number | null
-		type: string
+		sportType: string
 		startDate: string | null
 	}
 
@@ -158,7 +158,7 @@
 								<Duration value={draft.movingTime} />
 							</div>
 						{/if}
-						<div>{draft.type}</div>
+						<div>{draft.sportType}</div>
 
 						{#if draft.startDate}
 							<div>
