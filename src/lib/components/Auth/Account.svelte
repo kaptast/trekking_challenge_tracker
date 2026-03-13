@@ -46,7 +46,7 @@
 </script>
 
 <Card class="account">
-	<div class="account-grid grid size-full gap-1 p-1">
+	<div class="account-grid grid size-full gap-2 p-1">
 		<div class="avatar chipped-corners relative size-32 bg-brown-450">
 			<img src={avatar} alt="Avatar" class="size-32" />
 
@@ -115,6 +115,7 @@
 
 	.account-grid {
 		grid-template-columns: 8rem 1fr;
+		grid-template-rows: auto auto auto 1fr;
 		grid-template-areas:
 			'avatar user-name'
 			'avatar sign-out'
