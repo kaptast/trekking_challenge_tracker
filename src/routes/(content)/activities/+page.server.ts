@@ -3,6 +3,7 @@ import type { PageServerLoad } from './$types'
 import { db } from '$lib/server/db'
 import { activity } from '$lib/server/db/schema'
 import { eq, and, desc } from 'drizzle-orm'
+import { getPointsForActivity } from '$lib/server/calculatePoints'
 
 export const load: PageServerLoad = async ({ locals, depends }) => {
 	if (!locals.user) {
@@ -21,12 +22,12 @@ type Activity = Pick<
 	'id' | 'name' | 'distance' | 'movingTime' | 'sportType' | 'polyline' | 'startDate'
 >
 
-async function loadActivities(locals: App.Locals): Promise<Array<Activity>> {
+async function loadActivities(locals: App.Locals): Promise<Array<Activity & { points: number }>> {
 	if (!locals.user) {
 		error(401, 'Unauthorized')
 	}
 
-	return db
+	const activities = await db
 		.select({
 			id: activity.id,
 			name: activity.name,
@@ -34,10 +35,16 @@ async function loadActivities(locals: App.Locals): Promise<Array<Activity>> {
 			movingTime: activity.movingTime,
 			sportType: activity.sportType,
 			polyline: activity.polyline,
-			startDate: activity.startDate
+			startDate: activity.startDate,
+			athleteCount: activity.athleteCount
 		})
 		.from(activity)
 		.where(and(eq(activity.userId, locals.user.id), eq(activity.isDraft, false)))
 		.orderBy(desc(activity.startDate))
 		.execute()
+
+	return activities.map((a) => ({
+		...a,
+		points: getPointsForActivity(a)
+	}))
 }

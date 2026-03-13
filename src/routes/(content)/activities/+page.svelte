@@ -37,6 +37,7 @@
 			<div class="col-std">{m.distance()}</div>
 			<div class="col-std">Moving time</div>
 			<div class="col-std">Type</div>
+			<div class="col-std">Points</div>
 			<div class="col-std">Date</div>
 			<div class="col-std">Map</div>
 		</div>
@@ -53,6 +54,7 @@
 						<div><Distance value={activity.distance} /></div>
 						<div><Duration value={activity.movingTime ?? 0} /></div>
 						<div>{activity.sportType}</div>
+						<div>{activity.points}</div>
 						<div>
 							{activity.startDate ? new Date(activity.startDate).toLocaleDateString() : '—'}
 						</div>
@@ -75,7 +77,7 @@
 <style>
 	.row {
 		display: grid;
-		grid-template-columns: repeat(6, minmax(0, 1fr));
+		grid-template-columns: repeat(7, minmax(0, 1fr));
 		align-items: center;
 
 		border-bottom: 2px solid var(--color-brown-300);
