@@ -5,7 +5,7 @@ import { activity, team, teamMember } from '$lib/server/db/schema'
 import type { Activity, Stats } from '$lib/types'
 import { fail, redirect, type Actions, type ServerLoad } from '@sveltejs/kit'
 import { APIError, type User } from 'better-auth'
-import { desc, eq, sql } from 'drizzle-orm'
+import { desc, eq, sql, and } from 'drizzle-orm'
 
 export const load: ServerLoad = async ({ request, locals }) => {
 	if (!locals.user) {
@@ -51,7 +51,7 @@ async function loadActivities(user: User, limit: number = 5): Promise<Array<Acti
 			type: activity.type
 		})
 		.from(activity)
-		.where(eq(activity.userId, user.id))
+		.where(and(eq(activity.userId, user.id), eq(activity.isDraft, false)))
 		.orderBy(desc(activity.startDate))
 		.limit(limit)
 		.execute()
@@ -75,7 +75,7 @@ async function summarizeActivities(user: User): Promise<Stats> {
 				longestTime: sql<number>`cast(max(${activity.movingTime}) as float)`
 			})
 			.from(activity)
-			.where(eq(activity.userId, user.id))
+			.where(and(eq(activity.userId, user.id), eq(activity.isDraft, false)))
 			.execute(),
 		db.execute(sql`
 			SELECT COALESCE(MAX(cnt), 0)::int AS longest_streak
