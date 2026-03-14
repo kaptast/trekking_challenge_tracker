@@ -1,23 +1,37 @@
 import { activity } from '$lib/server/db/schema'
 import type { PageServerLoad } from './$types'
 import { db } from '$lib/server/db'
-import { eq, sql } from 'drizzle-orm'
+import { and, eq, gte, lte, sql } from 'drizzle-orm'
 import { calculateMemberDistance, calculateMemberPoints } from '$lib/server/calculatePoints'
+import { getActiveOrNextChallenge, type ChallengeInfo } from '$lib/server/db/challenge'
 
 export const load: PageServerLoad = async () => {
+	const challengeInfo = await getActiveOrNextChallenge()
+
 	return {
-		teams: loadLeaderboard(),
-		stats: summarizeActivities()
+		challengeInfo,
+		teams: loadLeaderboard(challengeInfo),
+		stats: summarizeActivities(challengeInfo)
 	}
 }
 
-async function loadLeaderboard() {
+async function loadLeaderboard(challengeInfo: ChallengeInfo | null) {
+	if (!challengeInfo?.isActive) {
+		return []
+	}
+
+	const { startDate, endDate } = challengeInfo.challenge
+
 	const teams = await db.query.team.findMany({
 		with: {
 			members: {
 				with: {
 					activities: {
-						where: eq(activity.isDraft, false)
+						where: and(
+							eq(activity.isDraft, false),
+							gte(activity.startDate, startDate),
+							lte(sql`left(${activity.startDate}, 10)`, endDate)
+						)
 					}
 				}
 			}
@@ -50,7 +64,20 @@ async function loadLeaderboard() {
 	return teamsWithPoints.slice(0, 5)
 }
 
-async function summarizeActivities() {
+const zeroStats = {
+	distance: 0,
+	activityCount: 0,
+	averageDistance: 0,
+	averageActivityCountPerUser: 0
+}
+
+async function summarizeActivities(challengeInfo: ChallengeInfo | null) {
+	if (!challengeInfo?.isActive) {
+		return zeroStats
+	}
+
+	const { startDate, endDate } = challengeInfo.challenge
+
 	const activities = await db
 		.select({
 			distance: sql<number>`cast(sum(${activity.distance}) as float)`,
@@ -59,8 +86,14 @@ async function summarizeActivities() {
 			averageActivityCountPerUser: sql<number>`cast(count(*) / nullif(count(distinct ${activity.userId}), 0) as float)`
 		})
 		.from(activity)
-		.where(eq(activity.isDraft, false))
+		.where(
+			and(
+				eq(activity.isDraft, false),
+				gte(activity.startDate, startDate),
+				lte(sql`left(${activity.startDate}, 10)`, endDate)
+			)
+		)
 		.execute()
 
-	return activities[0]
+	return activities[0] ?? zeroStats
 }

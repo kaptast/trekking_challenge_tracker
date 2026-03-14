@@ -11,9 +11,11 @@
 	import type { PageProps } from './$types'
 
 	let { data }: PageProps = $props()
+
+	const challengeInfo = $derived(data.challengeInfo)
 </script>
 
-<Hero title={m.challengeTitle()}>
+<Hero title={challengeInfo?.isActive ? challengeInfo.challenge.name : m.challengeTitle()}>
 	<Button
 		label={m.joinTheAdventure()}
 		href={localizeHref('/auth')}
@@ -21,6 +23,50 @@
 		class="font-mono"
 	/>
 </Hero>
+
+<!-- Challenge info banner -->
+<div class="mt-4">
+	{#if challengeInfo?.isActive}
+		{@const c = challengeInfo.challenge}
+		<Card class="w-full">
+			<div class="p-4">
+				<div class="flex items-center justify-between gap-4 flex-wrap">
+					<div>
+						<h2 class="text-xl font-bold text-black uppercase">{c.name}</h2>
+						<p class="text-sm font-semibold text-gray-600">
+							{m.challengeDateRange({ startDate: c.startDate, endDate: c.endDate })}
+						</p>
+					</div>
+					<div class="text-right text-sm font-semibold text-gray-700">
+						<div>{m.challengeProgress({ percent: challengeInfo.progressPercent })}</div>
+						<div>{m.challengeDaysLeft({ days: challengeInfo.daysLeft })}</div>
+					</div>
+				</div>
+				<div class="mt-3 h-3 w-full rounded-full bg-gray-200 overflow-hidden">
+					<div
+						class="h-full rounded-full bg-black transition-all"
+						style="width: {challengeInfo.progressPercent}%"
+					></div>
+				</div>
+			</div>
+		</Card>
+	{:else if challengeInfo && !challengeInfo.isActive}
+		<Card class="w-full">
+			<div class="p-4 text-center">
+				<h2 class="text-lg font-bold text-black uppercase">{m.nextChallenge()}</h2>
+				<p class="text-sm font-semibold text-gray-600">
+					{challengeInfo.challenge.name} &mdash; {m.nextChallengeStarts({ date: challengeInfo.challenge.startDate })}
+				</p>
+			</div>
+		</Card>
+	{:else}
+		<Card class="w-full">
+			<div class="p-4 text-center">
+				<p class="text-sm font-semibold text-gray-500">{m.noChallengeActive()}</p>
+			</div>
+		</Card>
+	{/if}
+</div>
 
 <div class="grid grid-cols-12 gap-4 pt-4">
 	<Card class="col-span-4">

@@ -2,6 +2,15 @@ import { relations } from 'drizzle-orm'
 import { pgTable, text, integer, decimal, boolean } from 'drizzle-orm/pg-core'
 import { user } from './auth.schema'
 
+export const challenge = pgTable('challenge', {
+	id: text('id')
+		.primaryKey()
+		.$defaultFn(() => crypto.randomUUID()),
+	name: text('name').notNull(),
+	startDate: text('start_date').notNull(),
+	endDate: text('end_date').notNull()
+})
+
 export const team = pgTable('team', {
 	id: text('id')
 		.primaryKey()

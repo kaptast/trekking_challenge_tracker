@@ -112,5 +112,11 @@
 	"imgAltGpx": "GPX fájlformátum",
 	"imgAltStrava": "Strava szinkronizálás",
 	"imgAltTeam": "Csapat",
-	"imgAltXp": "XP"
+	"imgAltXp": "XP",
+	"challengeDateRange": "{startDate} – {endDate}",
+	"challengeProgress": "{percent}% eltelt",
+	"challengeDaysLeft": "{days} nap van hátra",
+	"nextChallenge": "Következő kihívás",
+	"nextChallengeStarts": "Kezdés: {date}",
+	"noChallengeActive": "Jelenleg nincs aktív kihívás."
 }
