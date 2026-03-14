@@ -19,5 +19,6 @@
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: center;
+		background-attachment: fixed;
 	}
 </style>
