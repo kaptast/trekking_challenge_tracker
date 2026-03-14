@@ -19,13 +19,13 @@
 		<div class="w-full px-1.5 py-1">
 			<!-- header row -->
 			<div class="row header px-2">
-				<div class="col-std">Select</div>
-				<div class="col-std">Id</div>
-				<div class="col-name">Name</div>
+				<div class="col-std">{m.select()}</div>
+				<div class="col-std">{m.id()}</div>
+				<div class="col-name">{m.name()}</div>
 				<div class="col-std">{m.distance()}</div>
-				<div class="col-std">Moving time</div>
-				<div class="col-std">Type</div>
-				<div class="col-std">Date</div>
+				<div class="col-std">{m.movingTime()}</div>
+				<div class="col-std">{m.type()}</div>
+				<div class="col-std">{m.date()}</div>
 			</div>
 
 			{#await data.activities}
@@ -67,13 +67,13 @@
 			{:catch error}
 				<div class="row">
 					<div class="col-full text-red-600 text-center">
-						Error loading activities: {error.message}
+						{m.errorLoadingActivities({ message: error.message })}
 					</div>
 				</div>
 			{/await}
 		</div>
 
-		<Button label="Submit selected" variant="strava" type="submit" />
+		<Button label={m.submitSelected()} variant="strava" type="submit" />
 	</form>
 </Card>
 

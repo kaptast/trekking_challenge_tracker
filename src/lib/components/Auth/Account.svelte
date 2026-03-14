@@ -48,12 +48,12 @@
 <Card class="account">
 	<div class="account-grid grid size-full gap-2 p-1">
 		<div class="avatar chipped-corners relative size-32 bg-brown-450">
-			<img src={avatar} alt="Avatar" class="size-32" />
+			<img src={avatar} alt={m.avatar()} class="size-32" />
 
 			<button
 				class="absolute inset-0 grid cursor-pointer place-items-center bg-black text-[#fff] opacity-0 transition-opacity hover:opacity-40"
 				onclick={randomizeAvatar}
-				title="Randomize Avatar"
+				title={m.randomizeAvatar()}
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +77,7 @@
 			{#if changedAvatar}
 				<button
 					onclick={saveAvatar}
-					title="Save avatar"
+					title={m.saveAvatar()}
 					class="chipped-corners absolute top-0 right-0 z-10 cursor-pointer bg-brown-200 p-0.5 text-brown-600 transition-colors hover:bg-brown-100"
 				>
 					<svg
@@ -104,7 +104,7 @@
 
 		<div class="email text-base font-medium text-brown-800">{user.email}</div>
 
-		<div class="team chipped-corners bg-brown-200 p-1">Team</div>
+		<div class="team chipped-corners bg-brown-200 p-1">{m.team()}</div>
 	</div>
 </Card>
 

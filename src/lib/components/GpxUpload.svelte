@@ -79,7 +79,7 @@
 			const draft: DraftActivity = await res.json()
 			draftActivities = [...draftActivities, draft]
 		} catch (err) {
-			errorMessage = err instanceof Error ? err.message : 'Upload failed'
+			errorMessage = err instanceof Error ? err.message : m.uploadFailed()
 		} finally {
 			isUploading = false
 		}
@@ -169,7 +169,7 @@
 						<button
 							class="hover:text-brown-700 text-brown-400"
 							onclick={() => handleRemove(draft.id)}
-							aria-label="{draft.name} törlése"
+							aria-label={m.removeItem({ name: draft.name })}
 						>
 							✕
 						</button>

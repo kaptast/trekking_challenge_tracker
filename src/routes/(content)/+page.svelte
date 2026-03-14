@@ -13,20 +13,25 @@
 	let { data }: PageProps = $props()
 </script>
 
-<Hero title="Túrakihívás 2026">
-	<Button label="Lépj be a kalandba!" href={localizeHref('/auth')} size="large" class="font-mono" />
+<Hero title={m.challengeTitle()}>
+	<Button
+		label={m.joinTheAdventure()}
+		href={localizeHref('/auth')}
+		size="large"
+		class="font-mono"
+	/>
 </Hero>
 
 <div class="grid grid-cols-12 gap-4 pt-4">
 	<Card class="col-span-4">
 		<div class="grid place-items-center p-4 text-center">
 			<div class="flex gap-2">
-				<img src="/gpx.png" alt="GPX file format" class="size-20 min-h-20 min-w-20" />
+				<img src="/gpx.png" alt={m.imgAltGpx()} class="size-20 min-h-20 min-w-20" />
 
 				<div class="chipped-corners bg-black p-0.5">
 					<img
 						src="/strava.png"
-						alt="Strava Sync"
+						alt={m.imgAltStrava()}
 						class="chipped-corners size-19 min-h-19 min-w-19"
 					/>
 				</div>
@@ -39,7 +44,7 @@
 
 	<Card class="col-span-4">
 		<div class="grid place-items-center p-4 text-center">
-			<img src="/team.png" alt="Team" class="w-50 min-w-50" />
+			<img src="/team.png" alt={m.imgAltTeam()} class="w-50 min-w-50" />
 
 			<h3 class="mt-4 text-2xl font-bold text-black uppercase">{m.createYourOwnTeam()}</h3>
 			<h4 class="text-base font-semibold text-black">{m.createOrJoinTeam()}</h4>
@@ -48,7 +53,7 @@
 
 	<Card class="col-span-4">
 		<div class="grid place-items-center p-4 text-center">
-			<img src="/xp.png" alt="XP" class="size-20 min-h-20 min-w-20" />
+			<img src="/xp.png" alt={m.imgAltXp()} class="size-20 min-h-20 min-w-20" />
 
 			<h3 class="mt-4 text-2xl font-bold text-black uppercase">{m.earnPoints()}</h3>
 			<h4 class="text-base font-semibold text-black">{m.earnPointsForTheLeaderboard()}</h4>
@@ -56,7 +61,7 @@
 	</Card>
 
 	<Card class="col-span-9">
-		<Table title="Top csapatok">
+		<Table title={m.topTeams()}>
 			{#await data.teams then teams}
 				{#each teams as team, index (index)}
 					<div class="grid grid-cols-[auto_1fr_auto_auto] gap-x-4 font-semibold">
@@ -76,12 +81,12 @@
 
 	<Card class="col-span-3">
 		<div class="grid place-items-center p-4 text-center">
-			<img src="/xp.png" alt="XP" class="size-20 min-h-20 min-w-20" />
+			<img src="/xp.png" alt={m.imgAltXp()} class="size-20 min-h-20 min-w-20" />
 
 			{#await data.stats then stats}
 				{@const distance = (stats.distance ?? 0) / 1000}
 				{@const averageDistance = (stats.averageDistance ?? 0) / 1000}
-				<h3 class="mt-4 text-xl font-bold text-black uppercase">Statisztika</h3>
+				<h3 class="mt-4 text-xl font-bold text-black uppercase">{m.statistics()}</h3>
 
 				<h4 class="text-lg font-semibold text-black">
 					{m.totalDistance({ distance: distance.toFixed(2) })}

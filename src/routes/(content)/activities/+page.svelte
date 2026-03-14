@@ -14,7 +14,7 @@
 	let { data }: PageProps = $props()
 
 	async function handleDelete(id: string) {
-		if (!confirm('Delete this activity?')) return
+		if (!confirm(m.deleteActivityConfirm())) return
 		await deleteActivity({ id })
 		invalidate('activities')
 	}
@@ -41,13 +41,13 @@
 	<div class="w-full px-1.5 py-1">
 		<!-- header row -->
 		<div class="row header px-2">
-			<div class="col-name">Name</div>
+			<div class="col-name">{m.name()}</div>
 			<div class="col-std">{m.distance()}</div>
-			<div class="col-std">Moving time</div>
-			<div class="col-std">Type</div>
-			<div class="col-std">Points</div>
-			<div class="col-std">Date</div>
-			<div class="col-std">Map</div>
+			<div class="col-std">{m.movingTime()}</div>
+			<div class="col-std">{m.type()}</div>
+			<div class="col-std">{m.points()}</div>
+			<div class="col-std">{m.date()}</div>
+			<div class="col-std">{m.map()}</div>
 			{#if data.user}<div class="col-std"></div>{/if}
 		</div>
 
@@ -75,7 +75,7 @@
 								<button
 									type="button"
 									class="text-red-600 hover:text-red-800 cursor-pointer"
-									aria-label="Delete activity"
+									aria-label={m.deleteActivity()}
 									onclick={() => handleDelete(activity.id)}>✕</button
 								>
 							</div>
@@ -86,7 +86,7 @@
 		{:catch error}
 			<div class="row">
 				<div class="col-span-5 py-5 text-center! text-brown-500">
-					Error loading activities: {error.message}
+					{m.errorLoadingActivities({ message: error.message })}
 				</div>
 			</div>
 		{/await}
