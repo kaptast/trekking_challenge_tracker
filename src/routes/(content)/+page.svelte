@@ -17,7 +17,7 @@
 	<Button label="Lépj be a kalandba!" href={localizeHref('/auth')} size="large" class="font-mono" />
 </Hero>
 
-<div class="grid grid-cols-12 grid-rows-2 gap-4 pt-4">
+<div class="grid grid-cols-12 gap-4 pt-4">
 	<Card class="col-span-4">
 		<div class="grid place-items-center p-4 text-center">
 			<div class="flex gap-2">
