@@ -25,6 +25,25 @@ export const finalizeActivities = command(
 	}
 )
 
+export const deleteActivity = command(
+	z.object({
+		id: z.string()
+	}),
+	async ({ id }) => {
+		const { locals } = getRequestEvent()
+		if (!locals.user) {
+			error(401, 'Unauthorized')
+		}
+
+		await db
+			.delete(activity)
+			.where(and(eq(activity.id, id), eq(activity.userId, locals.user.id)))
+			.execute()
+
+		return { success: true }
+	}
+)
+
 export const removeDraftActivity = command(
 	z.object({
 		id: z.string()

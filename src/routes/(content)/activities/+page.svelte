@@ -8,8 +8,16 @@
 	import Card from '$lib/components/Card.svelte'
 	import { localizeHref } from '$lib/paraglide/runtime'
 	import { m } from '$lib/paraglide/messages'
+	import { deleteActivity } from './activities.remote.js'
+	import { invalidate } from '$app/navigation'
 
 	let { data }: PageProps = $props()
+
+	async function handleDelete(id: string) {
+		if (!confirm('Delete this activity?')) return
+		await deleteActivity({ id })
+		invalidate('activities')
+	}
 </script>
 
 {#if data.user}
@@ -40,6 +48,7 @@
 			<div class="col-std">Points</div>
 			<div class="col-std">Date</div>
 			<div class="col-std">Map</div>
+			{#if data.user}<div class="col-std"></div>{/if}
 		</div>
 
 		{#await data.activities}
@@ -61,6 +70,16 @@
 						<div class="place-self-end">
 							<SummaryMap summaryPolyline={activity.polyline ?? ''} />
 						</div>
+						{#if data.user}
+							<div class="place-self-center">
+								<button
+									type="button"
+									class="text-red-600 hover:text-red-800 cursor-pointer"
+									aria-label="Delete activity"
+									onclick={() => handleDelete(activity.id)}>✕</button
+								>
+							</div>
+						{/if}
 					</div>
 				{/each}
 			{/if}
@@ -77,7 +96,7 @@
 <style>
 	.row {
 		display: grid;
-		grid-template-columns: repeat(7, minmax(0, 1fr));
+		grid-template-columns: repeat(7, minmax(0, 1fr)) 2rem;
 		align-items: center;
 
 		border-bottom: 2px solid var(--color-brown-300);
