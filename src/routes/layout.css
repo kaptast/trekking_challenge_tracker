@@ -15,6 +15,7 @@
 	--color-black: #000514;
 
 	--color-sand-100: #fffff7;
+	--color-sand-200: #e9dabd;
 	--color-sand-300: #cfc0a3;
 
 	--color-brown-100: #f2e6d0;
@@ -35,6 +36,10 @@
 
 	--color-olive-100: #cfd9b8;
 	--color-olive-500: #5f6a25;
+
+	--color-red-100: #cc7061;
+	--color-red-300: #b93b25;
+	--color-red-500: #892d20;
 }
 
 @layer utilities {
