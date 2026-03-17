@@ -33,11 +33,7 @@
 				<div class="col-std">{m.date()}</div>
 			</div>
 
-			<OverlayScrollbarsComponent
-				class="activity-scroll"
-				defer
-				options={{ scrollbars: { autoHide: 'scroll' } }}
-			>
+			<OverlayScrollbarsComponent defer class="max-h-[calc(100dvh-14rem)]">
 				{#if data.activities.length === 0}
 					<div class="row"><div class="col-full text-center italic">{m.noActivities()}</div></div>
 				{:else}
@@ -111,42 +107,5 @@
 		font-weight: 600;
 		font-size: 0.8rem;
 		letter-spacing: 0.05em;
-	}
-
-	:global(.activity-scroll) {
-		max-height: calc(100dvh - 20rem);
-	}
-
-	.pagination {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 1rem;
-		padding: 0.75rem 0;
-	}
-
-	.page-btn {
-		padding: 0.25rem 0.75rem;
-		border: 1px solid var(--color-brown-400);
-		border-radius: 0.25rem;
-		font-weight: 600;
-		color: var(--color-brown-800);
-		text-decoration: none;
-	}
-
-	.page-btn:not(.disabled):hover {
-		background-color: var(--color-brown-100);
-	}
-
-	.page-btn.disabled {
-		opacity: 0.4;
-		cursor: default;
-	}
-
-	.page-number {
-		font-weight: 700;
-		color: var(--color-brown-800);
-		min-width: 2rem;
-		text-align: center;
 	}
 </style>

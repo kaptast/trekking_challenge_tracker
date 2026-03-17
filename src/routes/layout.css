@@ -127,3 +127,86 @@
 body {
 	background-color: var(--color-black);
 }
+
+.os-scrollbar {
+	--os-size: 20px;
+	--os-padding-perpendicular: 0px;
+	--os-padding-axis: 0px;
+	--os-handle-border-radius: 0rem;
+	--os-track-border-radius: 0rem;
+
+	--os-track-bg: #7e6a51;
+	--os-track-bg-hover: #7e6a51 !important;
+	--os-track-bg-active: #7e6a51 !important;
+
+	--os-handle-bg: #bea684;
+	--os-handle-bg-hover: #bea684 !important;
+	--os-handle-bg-active: #bea684 !important;
+}
+
+.os-scrollbar-track {
+	border: 2px solid var(--color-black) !important;
+	clip-path: polygon(
+		0 2px,
+		2px 2px,
+		2px 0,
+		calc(100% - 2px) 0,
+		calc(100% - 2px) 2px,
+		100% 2px,
+		100% calc(100% - 2px),
+		calc(100% - 2px) calc(100% - 2px),
+		calc(100% - 2px) 100%,
+		2px 100%,
+		2px calc(100% - 2px),
+		0 calc(100% - 2px)
+	);
+}
+
+.os-scrollbar-handle {
+	border-top: 2px solid #fdf1db !important;
+	border-right: 2px solid #76685b !important;
+	border-bottom: 2px solid #76685b !important;
+	border-left: 2px solid #fdf1db !important;
+	clip-path: polygon(
+		0 2px,
+		2px 2px,
+		2px 0,
+		calc(100% - 2px) 0,
+		calc(100% - 2px) 2px,
+		100% 2px,
+		100% calc(100% - 2px),
+		calc(100% - 2px) calc(100% - 2px),
+		calc(100% - 2px) 100%,
+		2px 100%,
+		2px calc(100% - 2px),
+		0 calc(100% - 2px)
+	);
+}
+
+.os-scrollbar-vertical .os-scrollbar-handle:after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 8px;
+	height: 2px;
+	background-color: #76685b;
+	box-shadow:
+		0 -4px 0 0 #76685b,
+		0 4px 0 0 #76685b;
+}
+
+.os-scrollbar-horizontal .os-scrollbar-handle:after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 2px;
+	height: 8px;
+	background-color: #76685b;
+	box-shadow:
+		-4px 0 0 0 #76685b,
+		4px 0 0 0 #76685b;
+}
