@@ -109,6 +109,8 @@
 	"select": "Kiválasztás",
 	"id": "Azonosító",
 	"submitSelected": "Kiválasztottak beküldése",
+	"previousPage": "Előző",
+	"nextPage": "Következő",
 	"imgAltGpx": "GPX fájlformátum",
 	"imgAltStrava": "Strava szinkronizálás",
 	"imgAltTeam": "Csapat",

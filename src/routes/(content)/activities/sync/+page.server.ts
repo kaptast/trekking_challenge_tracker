@@ -4,14 +4,17 @@ import { db } from '$lib/server/db/index.js'
 import { activity } from '$lib/server/db/schema.js'
 import { inArray } from 'drizzle-orm'
 
-export const load: PageServerLoad = async ({ request, fetch, locals }) => {
+const PER_PAGE = 30
+
+export const load: PageServerLoad = async ({ request, fetch, locals, url }) => {
 	if (!locals.user) {
 		redirect(302, '/auth')
 	}
 
-	return {
-		activities: fetchActivities(request, fetch)
-	}
+	const page = Math.max(1, parseInt(url.searchParams.get('page') ?? '1', 10))
+	const { activities, hasMore } = await fetchActivities(request, fetch, page)
+
+	return { activities, hasMore, page }
 }
 
 export const actions = {
@@ -22,11 +25,15 @@ export const actions = {
 
 		const formData = await request.formData()
 		const activitiesToSync = formData.getAll('activityIds') as string[]
+		const page = Math.max(1, parseInt((formData.get('page') as string) ?? '1', 10))
 
-		const response = await fetch('https://www.strava.com/api/v3/athlete/activities', {
-			method: 'GET',
-			headers: request.headers
-		})
+		const response = await fetch(
+			`https://www.strava.com/api/v3/athlete/activities?page=${page}&per_page=${PER_PAGE}`,
+			{
+				method: 'GET',
+				headers: request.headers
+			}
+		)
 
 		if (!response.ok) {
 			error(response.status, `Failed to fetch activities: ${response.statusText}`)
@@ -69,25 +76,35 @@ export const actions = {
 
 async function fetchActivities(
 	request: Request,
-	fetch: typeof globalThis.fetch
-): Promise<SyncedActivity[]> {
-	const response = await fetch('https://www.strava.com/api/v3/athlete/activities', {
-		method: 'GET',
-		headers: request.headers
-	})
+	fetch: typeof globalThis.fetch,
+	page: number
+): Promise<{ activities: SyncedActivity[]; hasMore: boolean }> {
+	const response = await fetch(
+		`https://www.strava.com/api/v3/athlete/activities?page=${page}&per_page=${PER_PAGE + 1}`,
+		{
+			method: 'GET',
+			headers: request.headers
+		}
+	)
 
 	if (!response.ok) {
 		error(response.status, `Failed to fetch activities: ${response.statusText}`)
 	}
 
-	const activities = (await response.json()) as Activity[]
+	const raw = (await response.json()) as Activity[]
+	const hasMore = raw.length > PER_PAGE
+	const activities = hasMore ? raw.slice(0, PER_PAGE) : raw
+
 	const activityIds = activities.map((a) => a.id.toString())
 
-	const savedActivities = await db
-		.select({ id: activity.id })
-		.from(activity)
-		.where(inArray(activity.id, activityIds))
-		.execute()
+	const savedActivities =
+		activityIds.length > 0
+			? await db
+					.select({ id: activity.id })
+					.from(activity)
+					.where(inArray(activity.id, activityIds))
+					.execute()
+			: []
 	const savedActivityIds = new Set(savedActivities.map((a) => a.id))
 
 	const activitiesWithSyncStatus: SyncedActivity[] = activities.map((act) => ({
@@ -95,7 +112,7 @@ async function fetchActivities(
 		synced: savedActivityIds.has(act.id.toString())
 	}))
 
-	return activitiesWithSyncStatus
+	return { activities: activitiesWithSyncStatus, hasMore }
 }
 
 type SyncedActivity = Activity & {
