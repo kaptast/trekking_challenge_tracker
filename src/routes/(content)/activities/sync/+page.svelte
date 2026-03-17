@@ -5,6 +5,7 @@
 	import Card from '$lib/components/Card.svelte'
 	import { m } from '$lib/paraglide/messages'
 	import Button from '$lib/components/Button.svelte'
+	import { OverlayScrollbarsComponent } from 'overlayscrollbars-svelte'
 
 	let { data }: PageProps = $props()
 	let selectedActivityIds = $state<number[]>([])
@@ -32,39 +33,45 @@
 				<div class="col-std">{m.date()}</div>
 			</div>
 
-			{#if data.activities.length === 0}
-				<div class="row"><div class="col-full text-center italic">{m.noActivities()}</div></div>
-			{:else}
-				{#each data.activities as activity, index (index)}
-					<div class="row px-2 py-3.5">
-						<div>
-							{#if activity.synced}
-								<span>✓</span>
-							{:else}
-								<input
-									type="checkbox"
-									name="activityIds"
-									checked={selectedActivityIds.includes(activity.id)}
-									value={activity.id}
-									onchange={(e: any) => {
-										if (e.target.checked) {
-											selectedActivityIds = [...selectedActivityIds, activity.id]
-										} else {
-											selectedActivityIds = selectedActivityIds.filter((id) => id !== activity.id)
-										}
-									}}
-								/>
-							{/if}
+			<OverlayScrollbarsComponent
+				class="activity-scroll"
+				defer
+				options={{ scrollbars: { autoHide: 'scroll' } }}
+			>
+				{#if data.activities.length === 0}
+					<div class="row"><div class="col-full text-center italic">{m.noActivities()}</div></div>
+				{:else}
+					{#each data.activities as activity, index (index)}
+						<div class="row px-2 py-3.5">
+							<div>
+								{#if activity.synced}
+									<span>✓</span>
+								{:else}
+									<input
+										type="checkbox"
+										name="activityIds"
+										checked={selectedActivityIds.includes(activity.id)}
+										value={activity.id}
+										onchange={(e: unknown) => {
+											if (e.target.checked) {
+												selectedActivityIds = [...selectedActivityIds, activity.id]
+											} else {
+												selectedActivityIds = selectedActivityIds.filter((id) => id !== activity.id)
+											}
+										}}
+									/>
+								{/if}
+							</div>
+							<div>{activity.id}</div>
+							<div class="truncate">{activity.name}</div>
+							<div><Distance value={activity.distance} /></div>
+							<div><Duration value={activity.moving_time} /></div>
+							<div>{activity.sport_type}</div>
+							<div>{new Date(activity.start_date).toLocaleDateString()}</div>
 						</div>
-						<div>{activity.id}</div>
-						<div class="truncate">{activity.name}</div>
-						<div><Distance value={activity.distance} /></div>
-						<div><Duration value={activity.moving_time} /></div>
-						<div>{activity.sport_type}</div>
-						<div>{new Date(activity.start_date).toLocaleDateString()}</div>
-					</div>
-				{/each}
-			{/if}
+					{/each}
+				{/if}
+			</OverlayScrollbarsComponent>
 		</div>
 
 		<div class="pagination">
@@ -104,6 +111,10 @@
 		font-weight: 600;
 		font-size: 0.8rem;
 		letter-spacing: 0.05em;
+	}
+
+	:global(.activity-scroll) {
+		max-height: calc(100dvh - 20rem);
 	}
 
 	.pagination {

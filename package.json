@@ -57,6 +57,7 @@
 		"@mapbox/polyline": "^1.2.1",
 		"@types/mapbox__polyline": "^1.0.5",
 		"fast-xml-parser": "^5.5.3",
+		"overlayscrollbars-svelte": "^0.5.5",
 		"postgres": "^3.4.8",
 		"zod": "^4.3.6"
 	}
