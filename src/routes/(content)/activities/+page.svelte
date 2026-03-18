@@ -8,9 +8,10 @@
 	import Card from '$lib/components/Card.svelte'
 	import { localizeHref } from '$lib/paraglide/runtime'
 	import { m } from '$lib/paraglide/messages'
-	import { deleteActivity } from './activities.remote.js'
+	import { deleteActivity } from './activities.remote'
 	import { invalidate } from '$app/navigation'
 	import ActivityIcon from '$lib/components/ActivityIcon.svelte'
+	import type { SportType } from '$lib/types'
 
 	let { data }: PageProps = $props()
 
@@ -63,7 +64,7 @@
 						<div class="truncate">{activity.name}</div>
 						<div><Distance value={activity.distance} /></div>
 						<div><Duration value={activity.movingTime ?? 0} /></div>
-						<div><ActivityIcon type={activity.sportType} /></div>
+						<div><ActivityIcon type={activity.sportType as SportType} /></div>
 						<div>{activity.points}</div>
 						<div>
 							{activity.startDate ? new Date(activity.startDate).toLocaleDateString() : '—'}
