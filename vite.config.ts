@@ -8,7 +8,48 @@ export default defineConfig({
 	plugins: [
 		tailwindcss(),
 		sveltekit(),
-		paraglideVitePlugin({ project: './project.inlang', outdir: './src/lib/paraglide' })
+		paraglideVitePlugin({
+			project: './project.inlang',
+			outdir: './src/lib/paraglide',
+			strategy: ['url', 'cookie', 'baseLocale'],
+			urlPatterns: [
+				{
+					pattern: '/',
+					localized: [
+						['en', '/en'],
+						['hu', '/']
+					]
+				},
+				{
+					pattern: '/activities/sync',
+					localized: [
+						['en', '/activities/sync'],
+						['hu', '/tevekenysegek/szinkronizalas']
+					]
+				},
+				{
+					pattern: '/activities',
+					localized: [
+						['en', '/activities'],
+						['hu', '/tevekenysegek']
+					]
+				},
+				{
+					pattern: '/auth',
+					localized: [
+						['en', '/auth'],
+						['hu', '/azonositas']
+					]
+				},
+				{
+					pattern: '/teams',
+					localized: [
+						['en', '/teams'],
+						['hu', '/csapatok']
+					]
+				}
+			]
+		})
 	],
 	test: {
 		expect: { requireAssertions: true },
