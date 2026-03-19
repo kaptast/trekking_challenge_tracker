@@ -2,7 +2,8 @@
 	import { page } from '$app/state'
 	import UserInfo from './UserInfo.svelte'
 	import { m } from '$lib/paraglide/messages'
-	import { localizeHref, getLocale, setLocale, locales } from '$lib/paraglide/runtime'
+	import { localizeHref } from '$lib/paraglide/runtime'
+	import LanguageSwitcher from './LanguageSwitcher.svelte'
 
 	type Props = {
 		user:
@@ -14,8 +15,6 @@
 	}
 
 	let { user }: Props = $props()
-
-	const currentLocale = $derived(getLocale())
 </script>
 
 {#snippet link(href: string, label: string)}
@@ -45,22 +44,7 @@
 			</nav>
 
 			<div class=" absolute right-4 flex items-center gap-4">
-				<div class="flex items-center gap-1">
-					{#each locales as locale (locale)}
-						<button
-							onclick={() => setLocale(locale)}
-							class={[
-								'chipped-corners cursor-pointer border px-2 py-0.5 font-pixel text-sm tracking-wider uppercase',
-								currentLocale === locale
-									? 'border-brown-900 bg-brown-800 text-gold-500 text-shadow-gold-800'
-									: 'hover:bg-brown-700 border-brown-600 text-brown-100 text-shadow-black'
-							]}
-						>
-							{locale}
-						</button>
-					{/each}
-				</div>
-
+				<LanguageSwitcher />
 				<UserInfo {user} />
 			</div>
 		</div>
