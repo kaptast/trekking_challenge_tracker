@@ -14,7 +14,7 @@
 	let { user }: Props = $props()
 </script>
 
-<a href={localizeHref('/auth')} class="chipped-corners absolute right-4 bg-black p-0.5">
+<a href={localizeHref('/auth')} class="chipped-corners bg-black p-0.5">
 	<div class="chipped-corners bg-brown-400 p-0.5">
 		{#if user}
 			<div class="chipped-corners bg-brown-600">

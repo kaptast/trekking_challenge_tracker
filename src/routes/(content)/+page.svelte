@@ -30,19 +30,19 @@
 		{@const c = challengeInfo.challenge}
 		<Card class="w-full">
 			<div class="p-4">
-				<div class="flex items-center justify-between gap-4 flex-wrap">
+				<div class="flex flex-wrap items-center justify-between gap-4">
 					<div>
 						<h2 class="text-xl font-bold text-black uppercase">{c.name}</h2>
-						<p class="text-sm font-semibold text-gray-600">
+						<p class="text-gray-600 text-sm font-semibold">
 							{m.challengeDateRange({ startDate: c.startDate, endDate: c.endDate })}
 						</p>
 					</div>
-					<div class="text-right text-sm font-semibold text-gray-700">
+					<div class="text-gray-700 text-right text-sm font-semibold">
 						<div>{m.challengeProgress({ percent: challengeInfo.progressPercent })}</div>
 						<div>{m.challengeDaysLeft({ days: challengeInfo.daysLeft })}</div>
 					</div>
 				</div>
-				<div class="mt-3 h-3 w-full rounded-full bg-gray-200 overflow-hidden">
+				<div class="bg-gray-200 mt-3 h-3 w-full overflow-hidden rounded-full">
 					<div
 						class="h-full rounded-full bg-black transition-all"
 						style="width: {challengeInfo.progressPercent}%"
@@ -54,15 +54,17 @@
 		<Card class="w-full">
 			<div class="p-4 text-center">
 				<h2 class="text-lg font-bold text-black uppercase">{m.nextChallenge()}</h2>
-				<p class="text-sm font-semibold text-gray-600">
-					{challengeInfo.challenge.name} &mdash; {m.nextChallengeStarts({ date: challengeInfo.challenge.startDate })}
+				<p class="text-gray-600 text-sm font-semibold">
+					{challengeInfo.challenge.name} &mdash; {m.nextChallengeStarts({
+						date: challengeInfo.challenge.startDate
+					})}
 				</p>
 			</div>
 		</Card>
 	{:else}
 		<Card class="w-full">
 			<div class="p-4 text-center">
-				<p class="text-sm font-semibold text-gray-500">{m.noChallengeActive()}</p>
+				<p class="text-gray-500 text-sm font-semibold">{m.noChallengeActive()}</p>
 			</div>
 		</Card>
 	{/if}
@@ -120,7 +122,7 @@
 			{/await}
 		</Table>
 
-		<a href={localizeHref('/leaderboard')} class="ml-auto px-4 font-semibold uppercase">
+		<a href={localizeHref('/teams')} class="ml-auto px-4 font-semibold uppercase">
 			{m.viewLeaderboard()}
 		</a>
 	</Card>
