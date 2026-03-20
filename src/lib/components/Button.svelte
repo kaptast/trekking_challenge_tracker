@@ -1,9 +1,7 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte'
 	import type { ClassValue, HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements'
 
 	type Props = {
-		icon?: Snippet
 		label: string
 		onclick?: () => void
 		href?: string
@@ -14,7 +12,6 @@
 		HTMLAnchorAttributes
 
 	let {
-		icon,
 		label,
 		onclick,
 		href,
@@ -28,28 +25,18 @@
 </script>
 
 {#if isLink}
-	<a
-		class="chipped-corners inline-block cursor-pointer bg-black p-0.5 pb-1 hover:mb-0.5 hover:pb-0.5"
-		{href}
-		{...rest}
-	>
-		<span class="chipped-corners block bg-brown-200 p-1">
-			<span
-				class="{className} chipped-corners text-3d text-3d-thick block px-4 py-1 text-center font-pixel font-bold uppercase text-shadow-black {variant} {size}"
-			>
-				{label}
-			</span>
+	<a class="chipped-corners inline-block cursor-pointer bg-brown-900 p-1" {href} {...rest}>
+		<span
+			class="{className} chipped-corners block border-4 border-t-orange-300 border-r-orange-400 border-b-orange-700 border-l-orange-300 px-3 text-center font-pixel font-bold uppercase {variant} {size}"
+		>
+			{label}
 		</span>
 	</a>
 {:else}
-	<button
-		class="chipped-corners cursor-pointer bg-black p-0.5 pb-1 hover:mb-0.5 hover:pb-0.5"
-		{onclick}
-		{...rest}
-	>
-		<span class="chipped-corners block bg-brown-200 p-1">
+	<button class="chipped-corners cursor-pointer bg-brown-900 p-1" {onclick} {...rest}>
+		<span class="chipped-corners block p-1">
 			<span
-				class="{className} chipped-corners text-3d text-3d-thick block px-4 py-1 text-center font-pixel font-bold uppercase text-shadow-black {variant} {size}"
+				class="{className} chipped-corners block border-2 border-t-orange-300 border-r-orange-400 border-b-orange-700 border-l-orange-300 px-4 py-1 text-center font-pixel font-bold uppercase {variant} {size}"
 			>
 				{label}
 			</span>
@@ -59,7 +46,7 @@
 
 <style>
 	.primary {
-		color: var(--color-brown-100);
+		color: var(--color-brown-600);
 		background-color: var(--color-orange-500);
 	}
 
@@ -68,12 +55,11 @@
 	}
 
 	.primary:active {
-		background-color: #cc5a00;
+		background-color: var(--color-orange-400);
 	}
 
 	.secondary {
-		color: var(--color-brown-100);
-		background-color: var(--color-olive-500);
+		background-color: var(--color-olive-300);
 	}
 
 	.strava {
