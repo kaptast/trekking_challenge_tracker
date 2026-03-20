@@ -32,8 +32,8 @@
 	</a>
 {/snippet}
 
-<header class="border-y-2 border-black">
-	<div class="border-y-4 border-brown-400 bg-brown-600">
+<header class="fixed inset-x-0 top-0 z-50 border-y-2 border-black">
+	<div class="border-y-4 border-brown-400 bg-brown-500">
 		<div
 			class="relative mx-auto flex max-w-7xl items-center justify-between gap-x-4 px-4 py-1 font-bold text-brown-100"
 		>
@@ -43,7 +43,7 @@
 				{@render link(localizeHref('/teams'), m.teams())}
 			</nav>
 
-			<div class=" absolute right-4 flex items-center gap-4">
+			<div class="absolute right-4 flex items-center gap-4">
 				<LanguageSwitcher />
 				<UserInfo {user} />
 			</div>

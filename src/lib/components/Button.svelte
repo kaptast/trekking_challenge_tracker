@@ -60,7 +60,15 @@
 <style>
 	.primary {
 		color: var(--color-brown-100);
-		background-color: var(--color-brown-450);
+		background-color: var(--color-orange-500);
+	}
+
+	.primary:hover {
+		background-color: var(--color-orange-400);
+	}
+
+	.primary:active {
+		background-color: #cc5a00;
 	}
 
 	.secondary {
