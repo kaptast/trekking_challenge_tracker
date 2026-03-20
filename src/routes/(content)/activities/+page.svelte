@@ -61,7 +61,21 @@
 			{:else}
 				{#each activities as activity, index (index)}
 					<div class="row px-2 py-3.5">
-						<div class="truncate">{activity.name}</div>
+						<div class="min-w-0">
+							<div class="truncate">{activity.name}</div>
+							{#if activity.source === 'strava'}
+								<a
+									href="https://www.strava.com/activities/{activity.id}"
+									target="_blank"
+									rel="noopener noreferrer"
+									class="text-xs font-semibold"
+									style="color: #FC5200">View on Strava</a
+								>
+							{/if}
+							{#if activity.deviceName}
+								<div class="text-xs font-normal text-brown-600">{activity.deviceName}</div>
+							{/if}
+						</div>
 						<div><Distance value={activity.distance} /></div>
 						<div><Duration value={activity.movingTime ?? 0} /></div>
 						<div><ActivityIcon type={activity.sportType as SportType} /></div>
