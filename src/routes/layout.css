@@ -105,7 +105,7 @@
 	}
 
 	.text-3d-thickest {
-		--text-3d-depth: 6px;
+		--text-3d-depth: 5px;
 	}
 }
 
