@@ -4,6 +4,7 @@
 	import { m } from '$lib/paraglide/messages'
 	import { localizeHref } from '$lib/paraglide/runtime'
 	import LanguageSwitcher from './LanguageSwitcher.svelte'
+	import Button from './Button.svelte'
 
 	type Props = {
 		user:
@@ -17,35 +18,37 @@
 	let { user }: Props = $props()
 </script>
 
-{#snippet link(href: string, label: string)}
-	{@const active = page.url.pathname === href}
-	<a
-		{href}
-		class={[
-			'chipped-corners text-3d border px-2 py-0.5 font-pixel tracking-wider uppercase',
-			active
-				? ' border-brown-900 bg-brown-800 text-gold-500 text-shadow-gold-800'
-				: 'border-brown-600 text-brown-100 text-shadow-black'
-		]}
-	>
-		{label}
-	</a>
-{/snippet}
-
-<header class="fixed inset-x-0 top-0 z-50 border-y-2 border-black">
-	<div class="border-y-4 border-brown-400 bg-brown-500">
+<header class="fixed inset-x-0 top-0 z-50 border-y-2 border-brown-900">
+	<div class="border-b-4 border-brown-300 bg-brown-600">
 		<div
-			class="relative mx-auto flex max-w-7xl items-center justify-between gap-x-4 px-4 py-1 font-bold text-brown-100"
+			class="text-brown-100 relative mx-auto flex max-w-7xl items-center justify-between gap-x-4 px-4 py-0.5 font-bold"
 		>
-			<nav class="flex items-center gap-3">
-				{@render link(localizeHref('/'), m.home())}
-				{@render link(localizeHref('/activities'), m.activities())}
-				{@render link(localizeHref('/teams'), m.teams())}
+			<nav class="flex items-center">
+				<Button
+					href={localizeHref('/')}
+					label={m.home()}
+					class={[page.route.id === '/(content)' && 'active']}
+				/>
+				<Button
+					href={localizeHref('/activities')}
+					label={m.activities()}
+					class={[page.route.id === '/(content)/activities' && 'active']}
+				/>
+				<Button
+					href={localizeHref('/teams')}
+					label={m.teams()}
+					class={[page.route.id === '/(content)/teams' && 'active']}
+				/>
 			</nav>
 
-			<div class="absolute right-4 flex items-center gap-4">
-				<LanguageSwitcher />
-				<UserInfo {user} />
+			<div class="chipped-corners flex items-center gap-x-1 bg-brown-300 p-1">
+				<div class="chipped-corners bg-sand p-1">
+					<LanguageSwitcher />
+				</div>
+
+				<div class="chipped-corners bg-sand p-1">
+					<UserInfo {user} />
+				</div>
 			</div>
 		</div>
 	</div>
