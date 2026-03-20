@@ -59,7 +59,19 @@
 								{/if}
 							</div>
 							<div>{activity.id}</div>
-							<div class="truncate">{activity.name}</div>
+							<div class="min-w-0">
+								<div class="truncate">{activity.name}</div>
+								<a
+									href="https://www.strava.com/activities/{activity.id}"
+									target="_blank"
+									rel="noopener noreferrer"
+									class="text-xs font-semibold"
+									style="color: #FC5200">View on Strava</a
+								>
+								{#if activity.device_name}
+									<div class="text-xs font-normal text-brown-600">{activity.device_name}</div>
+								{/if}
+							</div>
 							<div><Distance value={activity.distance} /></div>
 							<div><Duration value={activity.moving_time} /></div>
 							<div>{activity.sport_type}</div>
