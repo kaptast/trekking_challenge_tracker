@@ -117,7 +117,7 @@
 		<p class="text-xl">(.gpx)</p>
 
 		{#if errorMessage}
-			<p class="mt-3 text-sm text-gold-600">{errorMessage}</p>
+			<p class="mt-3 text-sm text-brown-600">{errorMessage}</p>
 		{/if}
 
 		<div class="border-t-2 border-brown-300"></div>
@@ -141,13 +141,13 @@
 
 	{#if draftActivities.length > 0}
 		<div class="w-full p-2">
-			<div class="py-2 text-xs font-semibold tracking-wider text-brown-500 uppercase">
+			<div class="py-2 text-xs font-semibold tracking-wider text-brown-600 uppercase">
 				{m.pendingUploads()}
 			</div>
 			<div>
 				{#each draftActivities as draft (draft.id)}
 					<div
-						class="flex w-full items-center justify-between border-b-2 border-solid border-brown-300 py-2 font-bold text-brown-800 last:border-b-0"
+						class="text-brown-800 flex w-full items-center justify-between border-b-2 border-solid border-brown-300 py-2 font-bold last:border-b-0"
 					>
 						<div>
 							<Distance value={draft.distance} />

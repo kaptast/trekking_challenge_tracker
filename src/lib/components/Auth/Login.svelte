@@ -12,7 +12,7 @@
 
 <form method="POST" action="?/signIn" use:enhance class="space-y-3">
 	<div>
-		<label class="text-sm font-semibold tracking-wider text-brown-500 uppercase" for="email"
+		<label class="text-sm font-semibold tracking-wider text-brown-600 uppercase" for="email"
 			>{m.email()}</label
 		>
 		<input
@@ -21,12 +21,12 @@
 			type="email"
 			required
 			autocomplete="email"
-			class="chipped-corners block w-full bg-brown-300 px-4 py-2 text-brown-500 focus:outline-none"
+			class="chipped-corners block w-full bg-brown-300 px-4 py-2 text-brown-600 focus:outline-none"
 		/>
 	</div>
 
 	<div>
-		<label class="text-sm font-semibold tracking-wider text-brown-500 uppercase" for="password"
+		<label class="text-sm font-semibold tracking-wider text-brown-600 uppercase" for="password"
 			>{m.password()}</label
 		>
 		<input
@@ -35,7 +35,7 @@
 			type="password"
 			required
 			autocomplete="current-password"
-			class="chipped-corners block w-full bg-brown-300 px-4 py-2 text-brown-500 focus:outline-none"
+			class="chipped-corners block w-full bg-brown-300 px-4 py-2 text-brown-600 focus:outline-none"
 		/>
 	</div>
 

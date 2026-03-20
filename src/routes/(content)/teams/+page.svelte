@@ -125,16 +125,16 @@
 					{@const isMember = team.members.some((member) => member.id === data.user?.id)}
 					{#if isMember}
 						<div class="relative">
-							<div class="chipped-corners absolute -top-0.75 left-13 z-10 bg-gold-800 p-0.5">
+							<div class="chipped-corners absolute -top-0.75 left-13 z-10 bg-brown-900 p-0.5">
 								<div
-									class="chipped-corners bg-gold-500 px-1 py-0.5 text-sm leading-3.5 font-semibold text-gold-800 uppercase"
+									class="chipped-corners bg-brown-600 px-1 py-0.5 text-sm leading-3.5 font-semibold text-brown-900 uppercase"
 								>
 									{m.yourTeam()}
 								</div>
 							</div>
-							<div class="chipped-corners bg-gold-700 p-0.5">
-								<div class="chipped-corners bg-gold-100 p-0.5">
-									<div class="chipped-corners bg-gold-600 p-0.5">
+							<div class="chipped-corners bg-brown-600 p-0.5">
+								<div class="chipped-corners bg-sand p-0.5">
+									<div class="chipped-corners bg-brown-600 p-0.5">
 										<div class="chipped-corners row bg-brown-300 p-1">
 											{@render row(index, team, isMember, memberOfAnyTeam)}
 										</div>
@@ -151,7 +151,7 @@
 			{/if}
 		{:catch error}
 			<div class="row">
-				<div class="col-full text-red-600 text-center">Error loading teams: {error.message}</div>
+				<div class="col-full text-center">Error loading teams: {error.message}</div>
 			</div>
 		{/await}
 	</div>

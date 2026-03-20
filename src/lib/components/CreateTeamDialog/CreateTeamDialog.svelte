@@ -30,14 +30,14 @@
 			class="flex w-full flex-col gap-6 px-6 py-6"
 		>
 			<div class="flex flex-col gap-2">
-				<label for="name" class="text-sm font-semibold tracking-wider text-brown-500 uppercase">
+				<label for="name" class="text-sm font-semibold tracking-wider text-brown-600 uppercase">
 					{m.teamName()}
 				</label>
 
 				<div class="chipped-corners bg-sand/10 p-px">
 					<input
 						{...createTeam.fields.name.as('text')}
-						class="chipped-corners block w-full bg-brown-300 px-4 py-2 text-brown-500 focus:outline-none"
+						class="chipped-corners block w-full bg-brown-300 px-4 py-2 text-brown-600 focus:outline-none"
 					/>
 				</div>
 			</div>

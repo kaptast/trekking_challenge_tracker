@@ -56,5 +56,5 @@
 </script>
 
 <svg class={classes} viewBox="0 0 600 400">
-	<polyline points={svgPath} fill="none" stroke="var(--color-brown-500)" stroke-width="15" />
+	<polyline points={svgPath} fill="none" stroke="var(--color-brown-600)" stroke-width="15" />
 </svg>

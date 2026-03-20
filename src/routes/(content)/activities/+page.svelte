@@ -86,7 +86,7 @@
 						<div class="chipped-corners bg-black p-0.5">
 							<div class="chipped-corners bg-brown-400 p-0.5">
 								<div class="chipped-corners bg-black p-0.5">
-									<div class="chipped-corners grid place-content-center bg-sand-200 p-0.5">
+									<div class="chipped-corners grid place-content-center bg-sand p-0.5">
 										<SummaryMap summaryPolyline={activity.polyline ?? ''} />
 									</div>
 								</div>
@@ -94,29 +94,26 @@
 						</div>
 						{#if data.user}
 							<div class="place-self-center pl-4">
-								<button
+								<Button
 									type="button"
-									class="chipped-corners cursor-pointer bg-black p-0.5"
+									variant="delete"
+									class="px-0!"
 									aria-label={m.deleteActivity()}
 									onclick={() => handleDelete(activity.id)}
 								>
-									<div
-										class="chipped-corners grid size-6 place-content-center border-2 border-t-red-100 border-r-red-500 border-b-red-500 border-l-red-100 bg-red-300 text-sand-100"
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										xmlns:xlink="http://www.w3.org/1999/xlink"
+										class="size-3"
+										viewBox="0 0 20 20"
+										><g fill="none"
+											><path
+												d="M3.897 4.054l.073-.084a.75.75 0 0 1 .976-.073l.084.073L10 8.939l4.97-4.97a.75.75 0 0 1 .976-.072l.084.073a.75.75 0 0 1 .073.976l-.073.084L11.061 10l4.97 4.97a.75.75 0 0 1 .072.976l-.073.084a.75.75 0 0 1-.976.073l-.084-.073L10 11.061l-4.97 4.97a.75.75 0 0 1-.976.072l-.084-.073a.75.75 0 0 1-.073-.976l.073-.084L8.939 10l-4.97-4.97a.75.75 0 0 1-.072-.976l.073-.084l-.073.084z"
+												fill="currentColor"
+											></path></g
+										></svg
 									>
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											xmlns:xlink="http://www.w3.org/1999/xlink"
-											class="size-3"
-											viewBox="0 0 20 20"
-											><g fill="none"
-												><path
-													d="M3.897 4.054l.073-.084a.75.75 0 0 1 .976-.073l.084.073L10 8.939l4.97-4.97a.75.75 0 0 1 .976-.072l.084.073a.75.75 0 0 1 .073.976l-.073.084L11.061 10l4.97 4.97a.75.75 0 0 1 .072.976l-.073.084a.75.75 0 0 1-.976.073l-.084-.073L10 11.061l-4.97 4.97a.75.75 0 0 1-.976.072l-.084-.073a.75.75 0 0 1-.073-.976l.073-.084L8.939 10l-4.97-4.97a.75.75 0 0 1-.072-.976l.073-.084l-.073.084z"
-													fill="currentColor"
-												></path></g
-											></svg
-										>
-									</div>
-								</button>
+								</Button>
 							</div>
 						{/if}
 					</div>
@@ -124,7 +121,7 @@
 			{/if}
 		{:catch error}
 			<div class="row">
-				<div class="col-span-5 py-5 text-center! text-brown-500">
+				<div class="col-span-5 py-5 text-center! text-brown-600">
 					{m.errorLoadingActivities({ message: error.message })}
 				</div>
 			</div>
