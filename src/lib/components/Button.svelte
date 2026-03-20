@@ -1,18 +1,21 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte'
 	import type { ClassValue, HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements'
 
 	type Props = {
-		label: string
+		label?: string
+		children?: Snippet
 		onclick?: () => void
 		href?: string
 		class?: ClassValue
-		variant?: 'primary' | 'secondary' | 'strava'
+		variant?: 'primary' | 'secondary' | 'strava' | 'delete'
 		size?: 'small' | 'medium' | 'large'
 	} & HTMLButtonAttributes &
 		HTMLAnchorAttributes
 
 	let {
 		label,
+		children,
 		onclick,
 		href,
 		class: className,
@@ -27,19 +30,25 @@
 {#if isLink}
 	<a class="chipped-corners inline-block cursor-pointer bg-brown-900 p-1" {href} {...rest}>
 		<span
-			class="{className} chipped-corners block border-4 border-t-orange-300 border-r-orange-400 border-b-orange-700 border-l-orange-300 px-3 text-center font-pixel font-bold uppercase {variant} {size}"
+			class="{className} chipped-corners block border-4 px-3 text-center font-pixel uppercase transition-colors {variant} {size}"
 		>
-			{label}
+			{#if label}
+				{label}
+			{:else}
+				{@render children?.()}
+			{/if}
 		</span>
 	</a>
 {:else}
 	<button class="chipped-corners cursor-pointer bg-brown-900 p-1" {onclick} {...rest}>
-		<span class="chipped-corners block p-1">
-			<span
-				class="{className} chipped-corners block border-2 border-t-orange-300 border-r-orange-400 border-b-orange-700 border-l-orange-300 px-4 py-1 text-center font-pixel font-bold uppercase {variant} {size}"
-			>
+		<span
+			class="{className} chipped-corners block border-4 px-3 text-center font-pixel uppercase transition-colors {variant} {size}"
+		>
+			{#if label}
 				{label}
-			</span>
+			{:else}
+				{@render children?.()}
+			{/if}
 		</span>
 	</button>
 {/if}
@@ -48,34 +57,71 @@
 	.primary {
 		color: var(--color-brown-600);
 		background-color: var(--color-orange-500);
+		border-top-color: oklch(from var(--color-orange-500) calc(l + 0.1) c h);
+		border-right-color: oklch(from var(--color-orange-500) calc(l - 0.05) c h);
+		border-bottom-color: oklch(from var(--color-orange-500) calc(l - 0.1) c h);
+		border-left-color: oklch(from var(--color-orange-500) calc(l + 0.1) c h);
+	}
+
+	.primary.active {
+		background-color: var(--color-brown-900);
+		border: none;
+		color: var(--color-sand);
 	}
 
 	.primary:hover {
-		background-color: var(--color-orange-400);
+		background-color: oklch(from var(--color-orange-500) calc(l + 0.05) c h);
 	}
 
-	.primary:active {
-		background-color: var(--color-orange-400);
+	.primary.active:hover {
+		background-color: var(--color-brown-600);
 	}
 
 	.secondary {
+		border-top-color: oklch(from var(--color-olive-300) calc(l + 0.1) c h);
+		border-right-color: oklch(from var(--color-olive-300) calc(l - 0.05) c h);
+		border-bottom-color: oklch(from var(--color-olive-300) calc(l - 0.1) c h);
+		border-left-color: oklch(from var(--color-olive-300) calc(l + 0.1) c h);
 		background-color: var(--color-olive-300);
+	}
+
+	.secondary:hover {
+		background-color: oklch(from var(--color-olive-300) calc(l + 0.05) c h);
+	}
+
+	.delete {
+		color: #fff;
+		border-top-color: oklch(from red calc(l + 0.1) c h);
+		border-right-color: oklch(from red calc(l - 0.1) c h);
+		border-bottom-color: oklch(from red calc(l - 0.1) c h);
+		border-left-color: oklch(from red calc(l + 0.1) c h);
+		background-color: red;
 	}
 
 	.strava {
 		color: #fff;
+		border-top-color: oklch(from #fc5200 calc(l + 0.1) c h);
+		border-right-color: oklch(from #fc5200 calc(l - 0.1) c h);
+		border-bottom-color: oklch(from #fc5200 calc(l - 0.1) c h);
+		border-left-color: oklch(from #fc5200 calc(l + 0.1) c h);
 		background-color: #fc5200;
 	}
 
 	.medium {
-		font-size: 1rem;
+		font-weight: normal;
+		font-size: 1.5rem;
+		line-height: 2rem;
 	}
 
 	.small {
-		font-size: 0.875rem;
+		font-weight: normal;
+		font-size: 1.25rem;
+		line-height: 1.25rem;
 	}
 
 	.large {
-		font-size: 2rem;
+		font-weight: bold;
+		font-size: 2.5rem;
+		line-height: 3rem;
 	}
 </style>
