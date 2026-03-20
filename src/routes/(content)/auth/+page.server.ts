@@ -45,11 +45,14 @@ async function loadTeam(user: User) {
 async function loadActivities(user: User, limit: number = 5): Promise<Array<Activity>> {
 	const activities = await db
 		.select({
+			id: activity.id,
 			name: activity.name,
 			distance: activity.distance,
 			startDate: activity.startDate,
 			sportType: activity.sportType,
-			polyline: activity.polyline
+			polyline: activity.polyline,
+			source: activity.source,
+			deviceName: activity.deviceName
 		})
 		.from(activity)
 		.where(and(eq(activity.userId, user.id), eq(activity.isDraft, false)))
