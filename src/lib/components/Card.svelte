@@ -10,10 +10,12 @@
 	let { children, class: className }: Props = $props()
 </script>
 
-<div class="chipped-corners bg-black p-0.5 {className}">
-	<div
-		class="chipped-corners grid size-full place-items-center border-2 border-t-sand-100 border-r-sand-300 border-b-sand-300 border-l-sand-100 bg-brown-100"
-	>
-		{@render children?.()}
+<div class="chipped-corners bg-brown-900 p-0.75 {className}">
+	<div class="chipped-corners size-full bg-brown-300 p-1">
+		<div class="chipped-corners size-full bg-brown-900 p-px">
+			<div class="chipped-corners grid size-full place-items-center border bg-sand">
+				{@render children?.()}
+			</div>
+		</div>
 	</div>
 </div>
