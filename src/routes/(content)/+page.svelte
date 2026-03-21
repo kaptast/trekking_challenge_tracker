@@ -127,33 +127,45 @@
 	</Card>
 
 	<Card class="col-span-6">
-		<div class="grid grid-cols-3 grid-rows-6 place-items-center p-2">
+		<div class="grid size-full grid-cols-3 grid-rows-7 place-items-center p-2">
 			<h3 class="text-brown-800 col-span-3 text-2xl font-bold uppercase">{m.statistics()}</h3>
 
-			<img src="/xp.png" alt={m.imgAltXp()} class="row-span-5 size-30 min-h-30 min-w-30" />
+			<img
+				src="/statistics.png"
+				alt={m.imgAltStatistics()}
+				class="row-span-6 size-20 min-h-20 min-w-20 place-self-center"
+			/>
 
 			{#await data.stats then stats}
 				{@const distance = (stats.distance ?? 0) / 1000}
 				{@const averageDistance = (stats.averageDistance ?? 0) / 1000}
 
-				<h4 class="col-start-2 text-lg font-semibold text-brown-600">Összesen</h4>
-				<h4 class="col-start-3 text-lg font-semibold text-brown-600">
-					{m.totalDistance({ distance: distance.toFixed(2) })}
+				<h4 class="col-start-2 justify-self-start text-lg font-semibold text-brown-600">
+					{m.total()}
+				</h4>
+				<h4 class="col-start-3 justify-self-end text-lg font-semibold text-brown-600">
+					{m.distanceValue({ distance: distance.toFixed(2) })}
 				</h4>
 
-				<h4 class="col-start-2 text-lg font-semibold text-brown-600">Összesen</h4>
-				<h4 class="col-start-3 text-lg font-semibold text-brown-600">
-					{m.totalActivities({ count: stats.activityCount })}
+				<h4 class="col-start-2 justify-self-start text-lg font-semibold text-brown-600">
+					{m.total()}
+				</h4>
+				<h4 class="col-start-3 justify-self-end text-lg font-semibold text-brown-600">
+					{m.activitiesValue({ count: stats.activityCount })}
 				</h4>
 
-				<h4 class="col-start-2 text-lg font-semibold text-brown-600">Átlagosan</h4>
-				<h4 class="col-start-3 text-lg font-semibold text-brown-600">
-					{m.averageDistance({ distance: averageDistance.toFixed(2) })}
+				<h4 class="col-start-2 row-start-5 justify-self-start text-lg font-semibold text-brown-600">
+					{m.average()}
+				</h4>
+				<h4 class="col-start-3 row-start-5 justify-self-end text-lg font-semibold text-brown-600">
+					{m.distanceValue({ distance: averageDistance.toFixed(2) })}
 				</h4>
 
-				<h4 class="col-start-2 text-lg font-semibold text-brown-600">Átlagosan</h4>
-				<h4 class="col-start-3 text-lg font-semibold text-brown-600">
-					{m.averageActivities({ count: stats.averageActivityCountPerUser })}
+				<h4 class="col-start-2 row-start-6 justify-self-start text-lg font-semibold text-brown-600">
+					{m.average()}
+				</h4>
+				<h4 class="col-start-3 row-start-6 justify-self-end text-lg font-semibold text-brown-600">
+					{m.activitiesValue({ count: stats.averageActivityCountPerUser })}
 				</h4>
 			{/await}
 		</div>
