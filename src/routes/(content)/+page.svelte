@@ -72,45 +72,42 @@
 
 <div class="grid grid-cols-12 gap-4 pt-4">
 	<Card class="col-span-4">
-		<div class="grid place-items-center p-4 text-center">
+		<div class="flex h-full flex-col items-center gap-y-2 p-2 text-center">
+			<h3 class="text-brown-800 font-sans text-2xl font-bold uppercase">
+				{m.uploadAndSync()}
+			</h3>
+
 			<div class="flex gap-2">
 				<img src="/gpx.png" alt={m.imgAltGpx()} class="size-20 min-h-20 min-w-20" />
 
-				<div class="chipped-corners bg-black p-0.5">
-					<img
-						src="/strava.png"
-						alt={m.imgAltStrava()}
-						class="chipped-corners size-19 min-h-19 min-w-19"
-					/>
-				</div>
+				<img src="/strava.png" alt={m.imgAltStrava()} class="size-19 min-h-19 min-w-19" />
 			</div>
 
-			<h3 class="text-brown-800 mt-4 font-sans text-2xl font-bold uppercase">
-				{m.uploadAndSync()}
-			</h3>
 			<h4 class="text-base font-semibold text-brown-600">{m.uploadAGpxFileOrSnycFromStrava()}</h4>
 		</div>
 	</Card>
 
 	<Card class="col-span-4">
-		<div class="grid place-items-center p-4 text-center">
+		<div class="flex h-full flex-col items-center gap-y-2 p-2 text-center">
+			<h3 class="text-brown-800 text-2xl font-bold uppercase">{m.createYourOwnTeam()}</h3>
+
 			<img src="/team.png" alt={m.imgAltTeam()} class="w-50 min-w-50" />
 
-			<h3 class="text-brown-800 mt-4 text-2xl font-bold uppercase">{m.createYourOwnTeam()}</h3>
 			<h4 class="text-base font-semibold text-brown-600">{m.createOrJoinTeam()}</h4>
 		</div>
 	</Card>
 
 	<Card class="col-span-4">
-		<div class="grid place-items-center p-4 text-center">
+		<div class="flex h-full flex-col items-center gap-y-2 p-2 text-center">
+			<h3 class="text-brown-800 text-2xl font-bold uppercase">{m.earnPoints()}</h3>
+
 			<img src="/xp.png" alt={m.imgAltXp()} class="size-20 min-h-20 min-w-20" />
 
-			<h3 class="text-brown-800 mt-4 text-2xl font-bold uppercase">{m.earnPoints()}</h3>
 			<h4 class="text-base font-semibold text-brown-600">{m.earnPointsForTheLeaderboard()}</h4>
 		</div>
 	</Card>
 
-	<Card class="col-span-9">
+	<Card class="col-span-6">
 		<Table title={m.topTeams()}>
 			{#await data.teams then teams}
 				{#each teams as team, index (index)}
@@ -129,25 +126,33 @@
 		</div>
 	</Card>
 
-	<Card class="col-span-3">
-		<div class="grid place-items-center p-4 text-center">
-			<img src="/xp.png" alt={m.imgAltXp()} class="size-20 min-h-20 min-w-20" />
+	<Card class="col-span-6">
+		<div class="grid grid-cols-3 grid-rows-6 place-items-center p-2">
+			<h3 class="text-brown-800 col-span-3 text-2xl font-bold uppercase">{m.statistics()}</h3>
+
+			<img src="/xp.png" alt={m.imgAltXp()} class="row-span-5 size-30 min-h-30 min-w-30" />
 
 			{#await data.stats then stats}
 				{@const distance = (stats.distance ?? 0) / 1000}
 				{@const averageDistance = (stats.averageDistance ?? 0) / 1000}
-				<h3 class="text-brown-800 mt-4 text-xl font-bold uppercase">{m.statistics()}</h3>
 
-				<h4 class="text-lg font-semibold text-brown-600">
+				<h4 class="col-start-2 text-lg font-semibold text-brown-600">Összesen</h4>
+				<h4 class="col-start-3 text-lg font-semibold text-brown-600">
 					{m.totalDistance({ distance: distance.toFixed(2) })}
 				</h4>
-				<h4 class="text-lg font-semibold text-brown-600">
+
+				<h4 class="col-start-2 text-lg font-semibold text-brown-600">Összesen</h4>
+				<h4 class="col-start-3 text-lg font-semibold text-brown-600">
 					{m.totalActivities({ count: stats.activityCount })}
 				</h4>
-				<h4 class="text-lg font-semibold text-brown-600">
+
+				<h4 class="col-start-2 text-lg font-semibold text-brown-600">Átlagosan</h4>
+				<h4 class="col-start-3 text-lg font-semibold text-brown-600">
 					{m.averageDistance({ distance: averageDistance.toFixed(2) })}
 				</h4>
-				<h4 class="text-lg font-semibold text-brown-600">
+
+				<h4 class="col-start-2 text-lg font-semibold text-brown-600">Átlagosan</h4>
+				<h4 class="col-start-3 text-lg font-semibold text-brown-600">
 					{m.averageActivities({ count: stats.averageActivityCountPerUser })}
 				</h4>
 			{/await}
