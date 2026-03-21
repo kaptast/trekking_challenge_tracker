@@ -73,6 +73,16 @@
 		background-color: oklch(from var(--color-orange-500) calc(l + 0.05) c h);
 	}
 
+	button[disabled='true'] .primary,
+	a[disabled='true'] .primary {
+		cursor: not-allowed;
+		background-color: oklch(from var(--color-orange-500) l calc(c - 0.125) h) !important;
+		border-top-color: oklch(from var(--color-orange-500) calc(l + 0.1) calc(c - 0.125) h);
+		border-right-color: oklch(from var(--color-orange-500) calc(l - 0.05) calc(c - 0.125) h);
+		border-bottom-color: oklch(from var(--color-orange-500) calc(l - 0.1) calc(c - 0.125) h);
+		border-left-color: oklch(from var(--color-orange-500) calc(l + 0.1) calc(c - 0.125) h);
+	}
+
 	.primary.active:hover {
 		background-color: var(--color-brown-600);
 	}

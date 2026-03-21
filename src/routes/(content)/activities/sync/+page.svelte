@@ -6,6 +6,8 @@
 	import { m } from '$lib/paraglide/messages'
 	import Button from '$lib/components/Button.svelte'
 	import { OverlayScrollbarsComponent } from 'overlayscrollbars-svelte'
+	import ActivityIcon from '$lib/components/ActivityIcon.svelte'
+	import type { SportType } from '$lib/types'
 
 	let { data }: PageProps = $props()
 	let selectedActivityIds = $state<number[]>([])
@@ -14,26 +16,76 @@
 	const nextPage = $derived(data.page + 1)
 </script>
 
-<Card>
-	<form method="POST" action="?/sync">
+<form method="POST" action="?/sync">
+	<div class="mb-4 flex w-full items-center justify-between">
+		<div class="flex items-center gap-x-2">
+			<Button
+				href="?page={prevPage}"
+				disabled={data.page <= 1}
+				class="flex items-center gap-x-1 pl-1!"
+			>
+				<svg
+					width="16"
+					height="16"
+					viewBox="0 0 16 16"
+					shape-rendering="crispEdges"
+					fill="currentColor"
+					class="rotate-180"
+				>
+					<path d="M4 2 H6 V4 H8 V6 H10 V8 H8 V10 H6 V12 H4 V10 H6 V8 H8 V6 H6 V4 H4 Z" />
+				</svg>
+
+				{m.previousPage()}
+			</Button>
+
+			<div class="chipped-corners inline-block bg-brown-900 p-1">
+				<span
+					class="chipped-corners page-number block w-12 border-4 px-3 text-center font-pixel text-2xl"
+				>
+					{data.page}
+				</span>
+			</div>
+
+			<Button
+				href="?page={nextPage}"
+				disabled={!data.hasMore}
+				class="flex items-center gap-x-1 pr-1!"
+			>
+				{m.nextPage()}
+
+				<svg
+					width="16"
+					height="16"
+					viewBox="0 0 16 16"
+					shape-rendering="crispEdges"
+					fill="currentColor"
+				>
+					<path d="M4 2 H6 V4 H8 V6 H10 V8 H8 V10 H6 V12 H4 V10 H6 V8 H8 V6 H6 V4 H4 Z" />
+				</svg>
+			</Button>
+		</div>
+
+		<Button label={m.submitSelected()} variant="strava" type="submit" />
+	</div>
+
+	<Card>
 		<input type="hidden" name="page" value={data.page} />
 		{#each selectedActivityIds as activityId (activityId)}
 			<input type="hidden" name="activityIds" value={activityId} />
 		{/each}
 
-		<div class="w-full px-1.5 py-1">
-			<!-- header row -->
+		<div class="w-full">
 			<div class="row header px-2">
-				<div class="col-std">{m.select()}</div>
-				<div class="col-std">{m.id()}</div>
-				<div class="col-name">{m.name()}</div>
-				<div class="col-std">{m.distance()}</div>
-				<div class="col-std">{m.movingTime()}</div>
-				<div class="col-std">{m.type()}</div>
-				<div class="col-std">{m.date()}</div>
+				<div></div>
+				<div>{m.id()}</div>
+				<div>{m.name()}</div>
+				<div>{m.distance()}</div>
+				<div>{m.movingTime()}</div>
+				<div>{m.type()}</div>
+				<div>{m.date()}</div>
 			</div>
 
-			<OverlayScrollbarsComponent defer class="max-h-[calc(100dvh-14rem)]">
+			<OverlayScrollbarsComponent defer class="max-h-[calc(100dvh-13.375rem)]">
 				{#if data.activities.length === 0}
 					<div class="row"><div class="col-full text-center italic">{m.noActivities()}</div></div>
 				{:else}
@@ -74,41 +126,35 @@
 							</div>
 							<div><Distance value={activity.distance} /></div>
 							<div><Duration value={activity.moving_time} /></div>
-							<div>{activity.sport_type}</div>
+							<div><ActivityIcon type={activity.sport_type as SportType} /></div>
 							<div>{new Date(activity.start_date).toLocaleDateString()}</div>
 						</div>
 					{/each}
 				{/if}
 			</OverlayScrollbarsComponent>
 		</div>
-
-		<div class="pagination">
-			{#if data.page > 1}
-				<a href="?page={prevPage}" class="page-btn">{m.previousPage()}</a>
-			{:else}
-				<span class="page-btn disabled">{m.previousPage()}</span>
-			{/if}
-			<span class="page-number">{data.page}</span>
-			{#if data.hasMore}
-				<a href="?page={nextPage}" class="page-btn">{m.nextPage()}</a>
-			{:else}
-				<span class="page-btn disabled">{m.nextPage()}</span>
-			{/if}
-		</div>
-
-		<Button label={m.submitSelected()} variant="strava" type="submit" />
-	</form>
-</Card>
+	</Card>
+</form>
 
 <style>
+	.page-number {
+		background-color: var(--color-orange-500);
+		border-top-color: oklch(from var(--color-orange-500) calc(l + 0.1) c h);
+		border-right-color: oklch(from var(--color-orange-500) calc(l - 0.05) c h);
+		border-bottom-color: oklch(from var(--color-orange-500) calc(l - 0.1) c h);
+		border-left-color: oklch(from var(--color-orange-500) calc(l + 0.1) c h);
+	}
+
 	.row {
 		display: grid;
-		grid-template-columns: repeat(7, minmax(0, 1fr));
+		grid-template-columns: 0.75rem 2fr 3.5fr 1fr 2.5fr 1fr 2.5fr;
 		align-items: center;
+		justify-items: center;
 
-		border-bottom: 1px solid var(--color-brown-200);
-		font-weight: 700;
-		color: var(--color-brown-800);
+		border-bottom: 2px solid var(--color-brown-600);
+		font-weight: 600;
+		font-size: 0.875rem;
+		color: var(--color-brown-900);
 	}
 
 	.row:last-child {
@@ -116,8 +162,21 @@
 	}
 
 	.row.header {
-		font-weight: 600;
-		font-size: 0.8rem;
+		font-weight: 900;
+		font-size: 1rem;
 		letter-spacing: 0.05em;
+		background-color: oklch(from var(--color-sand) calc(l - 0.05) c h);
+	}
+
+	.row:nth-child(even):not(.header) {
+		background-color: oklch(from var(--color-sand) calc(l - 0.05) c h);
+	}
+
+	.row > *:first-child {
+		justify-self: start;
+	}
+
+	.row > *:last-child {
+		text-align: right;
 	}
 </style>
