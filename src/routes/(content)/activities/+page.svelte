@@ -24,7 +24,7 @@
 
 {#if data.user}
 	<Card class="mb-4">
-		<div class="grid grid-cols-1 gap-4 p-4 md:grid-cols-2">
+		<div class="grid size-full grid-cols-1 gap-4 p-4 md:grid-cols-2">
 			<GpxUpload />
 
 			<div class="place-self-center">
@@ -40,7 +40,7 @@
 {/if}
 
 <Card>
-	<div class="w-full px-1.5 py-1">
+	<div class="size-full">
 		<!-- header row -->
 		<div class="row header px-2">
 			<div class="col-name">{m.name()}</div>
@@ -63,6 +63,7 @@
 					<div class="row px-2 py-3.5">
 						<div class="min-w-0">
 							<div class="truncate">{activity.name}</div>
+
 							{#if activity.source === 'strava'}
 								<a
 									href="https://www.strava.com/activities/{activity.id}"
@@ -72,22 +73,30 @@
 									style="color: #FC5200">View on Strava</a
 								>
 							{/if}
+
 							{#if activity.deviceName}
 								<div class="text-xs font-normal text-brown-600">{activity.deviceName}</div>
 							{/if}
 						</div>
+
 						<div><Distance value={activity.distance} /></div>
+
 						<div><Duration value={activity.movingTime ?? 0} /></div>
+
 						<div><ActivityIcon type={activity.sportType as SportType} /></div>
+
 						<div>{activity.points}</div>
+
 						<div>
 							{activity.startDate ? new Date(activity.startDate).toLocaleDateString() : '—'}
 						</div>
+
 						<Card class="size-full">
-							<div class="grid size-full place-items-center bg-olive-300">
+							<div class="grid size-full place-items-center bg-olive-300 p-1">
 								<SummaryMap summaryPolyline={activity.polyline ?? ''} />
 							</div>
 						</Card>
+
 						{#if data.user}
 							<div class="place-self-center pl-4">
 								<Button
@@ -102,13 +111,12 @@
 										xmlns:xlink="http://www.w3.org/1999/xlink"
 										class="size-3"
 										viewBox="0 0 20 20"
-										><g fill="none"
-											><path
-												d="M3.897 4.054l.073-.084a.75.75 0 0 1 .976-.073l.084.073L10 8.939l4.97-4.97a.75.75 0 0 1 .976-.072l.084.073a.75.75 0 0 1 .073.976l-.073.084L11.061 10l4.97 4.97a.75.75 0 0 1 .072.976l-.073.084a.75.75 0 0 1-.976.073l-.084-.073L10 11.061l-4.97 4.97a.75.75 0 0 1-.976.072l-.084-.073a.75.75 0 0 1-.073-.976l.073-.084L8.939 10l-4.97-4.97a.75.75 0 0 1-.072-.976l.073-.084l-.073.084z"
-												fill="currentColor"
-											></path></g
-										></svg
 									>
+										<path
+											d="M3.897 4.054l.073-.084a.75.75 0 0 1 .976-.073l.084.073L10 8.939l4.97-4.97a.75.75 0 0 1 .976-.072l.084.073a.75.75 0 0 1 .073.976l-.073.084L11.061 10l4.97 4.97a.75.75 0 0 1 .072.976l-.073.084a.75.75 0 0 1-.976.073l-.084-.073L10 11.061l-4.97 4.97a.75.75 0 0 1-.976.072l-.084-.073a.75.75 0 0 1-.073-.976l.073-.084L8.939 10l-4.97-4.97a.75.75 0 0 1-.072-.976l.073-.084l-.073.084z"
+											fill="currentColor"
+										></path>
+									</svg>
 								</Button>
 							</div>
 						{/if}
@@ -128,12 +136,14 @@
 <style>
 	.row {
 		display: grid;
-		grid-template-columns: repeat(7, minmax(0, 1fr)) 2rem;
+		grid-template-columns: 3fr 2fr 3fr 4rem 4rem 2fr 2fr 2rem;
 		align-items: center;
+		justify-items: center;
 
-		border-bottom: 2px solid var(--color-brown-300);
-		font-weight: 700;
-		color: var(--color-brown-800);
+		border-bottom: 2px solid var(--color-brown-600);
+		font-weight: 600;
+		font-size: 0.875rem;
+		color: var(--color-brown-900);
 	}
 
 	.row:last-child {
@@ -141,9 +151,18 @@
 	}
 
 	.row.header {
-		font-weight: 600;
-		font-size: 0.8rem;
+		font-weight: 900;
+		font-size: 1rem;
 		letter-spacing: 0.05em;
+		background-color: oklch(from var(--color-sand) calc(l - 0.05) c h);
+	}
+
+	.row:nth-child(odd):not(.header) {
+		background-color: oklch(from var(--color-sand) calc(l - 0.05) c h);
+	}
+
+	.row > *:first-child {
+		justify-self: start;
 	}
 
 	.row > *:last-child {
