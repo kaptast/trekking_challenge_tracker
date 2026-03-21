@@ -3,7 +3,6 @@
 	import Card from '$lib/components/Card.svelte'
 	import Distance from '$lib/components/Distance.svelte'
 	import Hero from '$lib/components/Hero.svelte'
-	import Table from '$lib/components/Table.svelte'
 
 	import { m } from '$lib/paraglide/messages'
 	import { localizeHref } from '$lib/paraglide/runtime'
@@ -108,10 +107,14 @@
 	</Card>
 
 	<Card class="col-span-6">
-		<Table title={m.topTeams()}>
+		<div class="flex w-full flex-col items-center gap-y-2 p-2">
+			<h3 class="text-brown-800 font-sans text-2xl font-bold uppercase">
+				{m.topTeams()}
+			</h3>
+
 			{#await data.teams then teams}
 				{#each teams as team, index (index)}
-					<div class="grid grid-cols-[auto_1fr_auto_auto] gap-x-4 font-semibold">
+					<div class="grid w-full grid-cols-[auto_1fr_auto_auto] gap-x-4 font-semibold">
 						<div>{index + 1}.</div>
 						<div>{team.name}</div>
 						<div>{m.pointsValue({ count: team.points })}</div>
@@ -119,10 +122,10 @@
 					</div>
 				{/each}
 			{/await}
-		</Table>
 
-		<div class="flex justify-end px-4 pb-2">
-			<Button href={localizeHref('/teams')} label={m.viewLeaderboard()} />
+			<div class="flex justify-end px-4 pb-2">
+				<Button href={localizeHref('/teams')} label={m.viewLeaderboard()} />
+			</div>
 		</div>
 	</Card>
 
