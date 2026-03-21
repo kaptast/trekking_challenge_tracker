@@ -23,11 +23,11 @@
 </script>
 
 {#if data.user}
-	<div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-		<GpxUpload />
+	<Card class="mb-4">
+		<div class="grid grid-cols-1 gap-4 p-4 md:grid-cols-2">
+			<GpxUpload />
 
-		<Card>
-			<div class="p-4">
+			<div class="place-self-center">
 				<Button
 					variant="strava"
 					size="large"
@@ -35,8 +35,8 @@
 					label={m.importFromStrava()}
 				/>
 			</div>
-		</Card>
-	</div>
+		</div>
+	</Card>
 {/if}
 
 <Card>
@@ -83,15 +83,11 @@
 						<div>
 							{activity.startDate ? new Date(activity.startDate).toLocaleDateString() : '—'}
 						</div>
-						<div class="chipped-corners bg-black p-0.5">
-							<div class="chipped-corners bg-brown-400 p-0.5">
-								<div class="chipped-corners bg-black p-0.5">
-									<div class="chipped-corners grid place-content-center bg-sand p-0.5">
-										<SummaryMap summaryPolyline={activity.polyline ?? ''} />
-									</div>
-								</div>
+						<Card class="size-full">
+							<div class="grid size-full place-items-center bg-olive-300">
+								<SummaryMap summaryPolyline={activity.polyline ?? ''} />
 							</div>
-						</div>
+						</Card>
 						{#if data.user}
 							<div class="place-self-center pl-4">
 								<Button
