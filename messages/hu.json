@@ -121,5 +121,6 @@
 	"challengeDaysLeft": "{days} nap van hátra",
 	"nextChallenge": "Következő kihívás",
 	"nextChallengeStarts": "Kezdés: {date}",
-	"noChallengeActive": "Jelenleg nincs aktív kihívás."
+	"noChallengeActive": "Jelenleg nincs aktív kihívás.",
+	"synced": "Szinkronizálva"
 }

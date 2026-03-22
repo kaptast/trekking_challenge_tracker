@@ -121,5 +121,6 @@
 	"challengeDaysLeft": "{days} days left",
 	"nextChallenge": "Next challenge",
 	"nextChallengeStarts": "Starts: {date}",
-	"noChallengeActive": "There is currently no active challenge."
+	"noChallengeActive": "There is currently no active challenge.",
+	"synced": "Synced"
 }

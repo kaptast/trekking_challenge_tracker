@@ -8,6 +8,7 @@
 	import { OverlayScrollbarsComponent } from 'overlayscrollbars-svelte'
 	import ActivityIcon from '$lib/components/ActivityIcon.svelte'
 	import type { SportType } from '$lib/types'
+	import Checkbox from '$lib/components/Checkbox.svelte'
 
 	let { data }: PageProps = $props()
 	let selectedActivityIds = $state<number[]>([])
@@ -93,15 +94,14 @@
 						<div class="row px-2 py-3.5">
 							<div>
 								{#if activity.synced}
-									<span>✓</span>
+									<span class="text-olive-300">{m.synced()}</span>
 								{:else}
-									<input
-										type="checkbox"
+									<Checkbox
 										name="activityIds"
 										checked={selectedActivityIds.includes(activity.id)}
 										value={activity.id}
-										onchange={(e: unknown) => {
-											if (e.target.checked) {
+										onchange={(checked) => {
+											if (checked) {
 												selectedActivityIds = [...selectedActivityIds, activity.id]
 											} else {
 												selectedActivityIds = selectedActivityIds.filter((id) => id !== activity.id)
