@@ -53,7 +53,7 @@
 		/>
 	</div>
 
-	<Button label={m.createAccount()} type="submit" class="w-full" />
+	<Button label={m.createAccount()} type="submit" wrapperClass="w-full" />
 </form>
 
 <p class="text-center text-sm text-brown-600">

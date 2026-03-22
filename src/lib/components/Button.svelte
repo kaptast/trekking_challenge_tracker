@@ -8,6 +8,7 @@
 		onclick?: () => void
 		href?: string
 		class?: ClassValue
+		wrapperClass?: ClassValue
 		variant?: 'primary' | 'secondary' | 'strava' | 'delete'
 		size?: 'small' | 'medium' | 'large'
 	} & HTMLButtonAttributes &
@@ -19,6 +20,7 @@
 		onclick,
 		href,
 		class: className,
+		wrapperClass,
 		variant = 'primary',
 		size = 'medium',
 		...rest
@@ -28,7 +30,11 @@
 </script>
 
 {#if isLink}
-	<a class="chipped-corners inline-block cursor-pointer bg-brown-900 p-1" {href} {...rest}>
+	<a
+		class="{wrapperClass} chipped-corners inline-block cursor-pointer bg-brown-900 p-1"
+		{href}
+		{...rest}
+	>
 		<span
 			class="{className} chipped-corners block border-4 px-3 text-center font-pixel uppercase transition-colors {variant} {size}"
 		>
@@ -40,7 +46,11 @@
 		</span>
 	</a>
 {:else}
-	<button class="chipped-corners cursor-pointer bg-brown-900 p-1" {onclick} {...rest}>
+	<button
+		class="{wrapperClass} chipped-corners cursor-pointer bg-brown-900 p-1"
+		{onclick}
+		{...rest}
+	>
 		<span
 			class="{className} chipped-corners block border-4 px-3 text-center font-pixel uppercase transition-colors {variant} {size}"
 		>
