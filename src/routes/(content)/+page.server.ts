@@ -8,6 +8,8 @@ import { getActiveOrNextChallenge, type ChallengeInfo } from '$lib/server/db/cha
 export const load: PageServerLoad = async () => {
 	const challengeInfo = await getActiveOrNextChallenge()
 
+	console.info('Loaded challenge info:', challengeInfo)
+
 	return {
 		challengeInfo,
 		teams: loadLeaderboard(challengeInfo),
