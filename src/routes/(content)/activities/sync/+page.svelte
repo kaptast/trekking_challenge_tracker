@@ -94,7 +94,26 @@
 						<div class="row px-2 py-3.5">
 							<div>
 								{#if activity.synced}
-									<span class="text-olive-300">{m.synced()}</span>
+									<span
+										title={m.synced()}
+										class="chipped-corners inline-flex size-7 place-content-center items-center justify-center bg-brown-900 p-0.75 transition-colors"
+									>
+										<span
+											class="synced chipped-corners flex size-full items-center justify-center border-3 bg-olive-300 pt-0.5"
+										>
+											<svg
+												width="10"
+												height="10"
+												viewBox="0 0 10 10"
+												shape-rendering="crispEdges"
+												fill="currentColor"
+											>
+												<path
+													d="M9 0 H10 V1 H9 Z M8 1 H10 V2 H8 Z M7 2 H9 V3 H7 Z M1 3 H2 V4 H1 Z M6 3 H8 V4 H6 Z M1 4 H3 V5 H1 Z M5 4 H7 V5 H5 Z M2 5 H6 V6 H2 Z M3 6 H5 V7 H3 Z"
+												/>
+											</svg>
+										</span>
+									</span>
 								{:else}
 									<Checkbox
 										name="activityIds"
@@ -178,5 +197,12 @@
 
 	.row > *:last-child {
 		text-align: right;
+	}
+
+	.synced {
+		border-top-color: oklch(from var(--color-olive-300) calc(l + 0.05) c h);
+		border-right-color: oklch(from var(--color-olive-300) calc(l - 0.07) c h);
+		border-bottom-color: oklch(from var(--color-olive-300) calc(l - 0.1) c h);
+		border-left-color: oklch(from var(--color-olive-300) calc(l + 0.05) c h);
 	}
 </style>
