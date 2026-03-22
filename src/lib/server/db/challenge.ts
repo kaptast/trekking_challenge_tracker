@@ -18,6 +18,8 @@ export async function getActiveOrNextChallenge(): Promise<ChallengeInfo | null> 
 		.limit(1)
 		.execute()
 
+	console.info('Queried active challenges:', active)
+
 	if (active.length > 0) {
 		const c = active[0]
 		const start = new Date(c.startDate).getTime()
@@ -25,7 +27,8 @@ export async function getActiveOrNextChallenge(): Promise<ChallengeInfo | null> 
 		const now = new Date(today).getTime()
 		const total = end - start
 		const elapsed = now - start
-		const progressPercent = total > 0 ? Math.min(100, Math.max(0, Math.round((elapsed / total) * 100))) : 0
+		const progressPercent =
+			total > 0 ? Math.min(100, Math.max(0, Math.round((elapsed / total) * 100))) : 0
 		const msLeft = end - now
 		const daysLeft = Math.max(0, Math.ceil(msLeft / (1000 * 60 * 60 * 24)))
 		return { challenge: c, isActive: true, progressPercent, daysLeft }
