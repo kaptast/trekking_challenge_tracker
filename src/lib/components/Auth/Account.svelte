@@ -13,9 +13,13 @@
 	type Props = {
 		user: User
 		avatarSeed: string | null | undefined
+		team: Promise<{
+			id: string
+			name: string
+		}> | null
 	}
 
-	let { user, avatarSeed }: Props = $props()
+	let { user, avatarSeed, team }: Props = $props()
 
 	let seed = $state(untrack(() => avatarSeed ?? user.name ?? user.id))
 	let changedAvatar = $state(false)
@@ -46,7 +50,7 @@
 </script>
 
 <Card class="account">
-	<div class="account-grid grid size-full gap-1 p-1">
+	<div class={['account-grid grid size-full gap-1 p-1', Boolean(team) && 'has-team']}>
 		<div class="avatar chipped-corners relative size-32 bg-brown-300">
 			<img src={avatar} alt={m.avatar()} class="size-32" />
 
@@ -104,7 +108,15 @@
 
 		<div class="email text-brown-800 text-base font-medium">{user.email}</div>
 
-		<div class="team chipped-corners bg-brown-300/50 p-1">{m.team()}</div>
+		{#await team then teamData}
+			{#if teamData}
+				<div
+					class="team chipped-corners bg-brown-300/50 p-1 font-pixel text-xl font-bold text-brown-900"
+				>
+					{teamData.name}
+				</div>
+			{/if}
+		{/await}
 	</div>
 </Card>
 
@@ -114,6 +126,14 @@
 	}
 
 	.account-grid {
+		grid-template-columns: 8rem 1fr;
+		grid-template-rows: auto auto auto;
+		grid-template-areas:
+			'avatar user-name'
+			'avatar sign-out'
+			'avatar email';
+	}
+	.account-grid.has-team {
 		grid-template-columns: 8rem 1fr;
 		grid-template-rows: auto auto auto 1fr;
 		grid-template-areas:

@@ -17,6 +17,7 @@
 		activities={data.activities}
 		latestActivity={data.latestActivity}
 		stats={data.stats}
+		team={data.team}
 	/>
 {:else}
 	<Card class="mx-auto w-fit">

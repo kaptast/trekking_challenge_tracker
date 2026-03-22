@@ -14,13 +14,17 @@
 		activities: Promise<Array<Activity>> | never[]
 		latestActivity: Promise<Array<Activity>> | null
 		stats: Promise<Stats> | null
+		team: Promise<{
+			id: string
+			name: string
+		}> | null
 	}
 
-	let { user, avatarSeed, accounts, activities, latestActivity, stats }: Props = $props()
+	let { user, avatarSeed, accounts, activities, latestActivity, stats, team }: Props = $props()
 </script>
 
 <div class="profile-grid grid gap-4">
-	<AccountComponent {user} {avatarSeed} />
+	<AccountComponent {user} {avatarSeed} {team} />
 
 	{#await accounts then account}
 		<Strava accounts={account} />
