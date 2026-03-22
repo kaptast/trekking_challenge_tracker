@@ -18,7 +18,9 @@ export async function getActiveOrNextChallenge(): Promise<ChallengeInfo | null> 
 		.limit(1)
 		.execute()
 
+	console.log("Today's date:", today)
 	console.info('Queried active challenges:', active)
+	console.log('SQL WHERE clause:', `startDate <= ${today} AND endDate >= ${today}`)
 
 	if (active.length > 0) {
 		const c = active[0]
