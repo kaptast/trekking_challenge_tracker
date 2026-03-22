@@ -1,5 +1,5 @@
 import { relations } from 'drizzle-orm'
-import { pgTable, text, integer, decimal, boolean } from 'drizzle-orm/pg-core'
+import { pgTable, text, integer, decimal, boolean, date } from 'drizzle-orm/pg-core'
 import { user } from './auth.schema'
 
 export const challenge = pgTable('challenge', {
@@ -7,8 +7,8 @@ export const challenge = pgTable('challenge', {
 		.primaryKey()
 		.$defaultFn(() => crypto.randomUUID()),
 	name: text('name').notNull(),
-	startDate: text('start_date').notNull(),
-	endDate: text('end_date').notNull()
+	startDate: date('start_date').notNull(),
+	endDate: date('end_date').notNull()
 })
 
 export const team = pgTable('team', {
