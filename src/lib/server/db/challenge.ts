@@ -9,7 +9,7 @@ export type ChallengeInfo =
 	| { challenge: Challenge; isActive: false; progressPercent: 0; daysLeft: 0 }
 
 export async function getActiveOrNextChallenge(): Promise<ChallengeInfo | null> {
-	const today = new Date().toISOString().split('T')[0]
+	const today = new Date()
 
 	const active = await db
 		.select()

@@ -28,7 +28,7 @@ async function loadTeams(challengeInfo: ChallengeInfo | null) {
 					activities: {
 						where: and(
 							eq(activity.isDraft, false),
-							gte(activity.startDate, startDate),
+							gte(sql`left(${activity.startDate}, 10)`, startDate),
 							lte(sql`left(${activity.startDate}, 10)`, endDate)
 						)
 					},
