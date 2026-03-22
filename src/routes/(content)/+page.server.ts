@@ -31,7 +31,7 @@ async function loadLeaderboard(challengeInfo: ChallengeInfo | null) {
 					activities: {
 						where: and(
 							eq(activity.isDraft, false),
-							gte(activity.startDate, startDate),
+							gte(sql`left(${activity.startDate}, 10)`, startDate),
 							lte(sql`left(${activity.startDate}, 10)`, endDate)
 						)
 					}
@@ -91,7 +91,7 @@ async function summarizeActivities(challengeInfo: ChallengeInfo | null) {
 		.where(
 			and(
 				eq(activity.isDraft, false),
-				gte(activity.startDate, startDate),
+				gte(sql`left(${activity.startDate}, 10)`, startDate),
 				lte(sql`left(${activity.startDate}, 10)`, endDate)
 			)
 		)
