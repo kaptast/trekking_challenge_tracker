@@ -38,6 +38,8 @@ async function loadTeams(challengeInfo: ChallengeInfo | null) {
 		}
 	})
 
+	console.info('Loaded teams:', teams)
+
 	const teamsWithPoints = teams.map((team) => {
 		const points = team.members.reduce((sum, member) => {
 			return sum + calculateMemberPoints(member.activities)
@@ -62,6 +64,8 @@ async function loadTeams(challengeInfo: ChallengeInfo | null) {
 		}
 		return b.points - a.points
 	})
+
+	console.info('Teams with points:', teamsWithPoints)
 
 	return teamsWithPoints
 }
