@@ -108,6 +108,10 @@
 		background-color: red;
 	}
 
+	.delete:hover {
+		background-color: oklch(from red calc(l + 0.1) c h);
+	}
+
 	.strava {
 		color: #fff;
 		border-top-color: oklch(from #fc5200 calc(l + 0.1) c h);
@@ -115,6 +119,10 @@
 		border-bottom-color: oklch(from #fc5200 calc(l - 0.1) c h);
 		border-left-color: oklch(from #fc5200 calc(l + 0.1) c h);
 		background-color: #fc5200;
+	}
+
+	.strava:hover {
+		background-color: oklch(from #fc5200 calc(l + 0.05) c h);
 	}
 
 	.medium {
