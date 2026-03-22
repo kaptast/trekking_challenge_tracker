@@ -55,10 +55,10 @@
 	"earnPointsForTheLeaderboard": "Earn points with every activity and help your team reach the top of the leaderboard!",
 	"viewLeaderboard": "View leaderboard",
 	"statistics": "Statistics",
-	"totalDistance": "Total {distance} km",
-	"averageDistance": "Average {distance} km",
-	"totalActivities": "Total {count} activities",
-	"averageActivities": "Average {count} activities",
+	"total": "Total",
+	"average": "Average",
+	"distanceValue": "{distance} km",
+	"activitiesValue": "{count} activities",
 	"stats_totalActivities": "Total activities",
 	"stats_totalDistance": "Total distance",
 	"stats_averageDistance": "Average distance",
@@ -115,10 +115,12 @@
 	"imgAltStrava": "Strava sync",
 	"imgAltTeam": "Team",
 	"imgAltXp": "XP",
+	"imgAltStatistics": "Statistics",
 	"challengeDateRange": "{startDate} - {endDate}",
 	"challengeProgress": "{percent}% elapsed",
 	"challengeDaysLeft": "{days} days left",
 	"nextChallenge": "Next challenge",
 	"nextChallengeStarts": "Starts: {date}",
-	"noChallengeActive": "There is currently no active challenge."
+	"noChallengeActive": "There is currently no active challenge.",
+	"synced": "Synced"
 }

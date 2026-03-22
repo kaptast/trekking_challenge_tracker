@@ -12,34 +12,16 @@
 
 	--color-*: initial;
 
-	--color-black: #000514;
+	--color-brown-300: #a57257;
+	--color-brown-600: #2a100f;
+	--color-brown-900: #211008;
 
-	--color-sand-100: #fffff7;
-	--color-sand-200: #e9dabd;
-	--color-sand-300: #cfc0a3;
+	--color-orange-400: #f9ba50;
+	--color-orange-500: #f8931f;
 
-	--color-brown-100: #f2e6d0;
-	--color-brown-200: #d3c2a4;
-	--color-brown-300: #e2ccb4;
-	--color-brown-400: #987f6b;
-	--color-brown-450: #7f5a40;
-	--color-brown-500: #362219;
-	--color-brown-600: #3c2d2a;
-	--color-brown-800: #231917;
-	--color-brown-900: #201614;
+	--color-olive-300: #a5b36c;
 
-	--color-gold-100: #f5e284;
-	--color-gold-500: #ddbc6f;
-	--color-gold-600: #ad802b;
-	--color-gold-700: #7f6824;
-	--color-gold-800: #200f00;
-
-	--color-olive-100: #cfd9b8;
-	--color-olive-500: #5f6a25;
-
-	--color-red-100: #cc7061;
-	--color-red-300: #b93b25;
-	--color-red-500: #892d20;
+	--color-sand: #f3eac9;
 }
 
 @layer utilities {
@@ -120,7 +102,7 @@
 	}
 
 	.text-3d-thickest {
-		--text-3d-depth: 6px;
+		--text-3d-depth: 5px;
 	}
 }
 
@@ -135,13 +117,13 @@ body {
 	--os-handle-border-radius: 0rem;
 	--os-track-border-radius: 0rem;
 
-	--os-track-bg: #7e6a51;
-	--os-track-bg-hover: #7e6a51 !important;
-	--os-track-bg-active: #7e6a51 !important;
+	--os-track-bg: oklch(from var(--color-sand) calc(l - 0.055) c h);
+	--os-track-bg-hover: oklch(from var(--color-sand) calc(l - 0.075) c h);
+	--os-track-bg-active: oklch(from var(--color-sand) calc(l - 0.075) c h);
 
-	--os-handle-bg: #bea684;
-	--os-handle-bg-hover: #bea684 !important;
-	--os-handle-bg-active: #bea684 !important;
+	--os-handle-bg: oklch(from var(--color-sand) calc(l - 0.025) c h);
+	--os-handle-bg-hover: oklch(from var(--color-sand) calc(l - 0.05) c h);
+	--os-handle-bg-active: oklch(from var(--color-sand) calc(l - 0.05) c h);
 }
 
 .os-scrollbar-track {
@@ -163,10 +145,10 @@ body {
 }
 
 .os-scrollbar-handle {
-	border-top: 2px solid #fdf1db !important;
-	border-right: 2px solid #76685b !important;
-	border-bottom: 2px solid #76685b !important;
-	border-left: 2px solid #fdf1db !important;
+	border-top: 2px solid oklch(from var(--color-sand) calc(l + 0.05) c h) !important;
+	border-right: 2px solid oklch(from var(--color-sand) calc(l - 0.1) c h) !important;
+	border-bottom: 2px solid oklch(from var(--color-sand) calc(l - 0.1) c h) !important;
+	border-left: 2px solid oklch(from var(--color-sand) calc(l + 0.05) c h) !important;
 	clip-path: polygon(
 		0 2px,
 		2px 2px,
@@ -191,10 +173,10 @@ body {
 	transform: translate(-50%, -50%);
 	width: 8px;
 	height: 2px;
-	background-color: #76685b;
+	background-color: oklch(from var(--color-sand) calc(l - 0.1) c h);
 	box-shadow:
-		0 -4px 0 0 #76685b,
-		0 4px 0 0 #76685b;
+		0 -4px 0 0 oklch(from var(--color-sand) calc(l - 0.1) c h),
+		0 4px 0 0 oklch(from var(--color-sand) calc(l - 0.1) c h);
 }
 
 .os-scrollbar-horizontal .os-scrollbar-handle:after {
@@ -205,8 +187,8 @@ body {
 	transform: translate(-50%, -50%);
 	width: 2px;
 	height: 8px;
-	background-color: #76685b;
+	background-color: oklch(from var(--color-sand) calc(l - 0.1) c h);
 	box-shadow:
-		-4px 0 0 0 #76685b,
-		4px 0 0 0 #76685b;
+		-4px 0 0 0 oklch(from var(--color-sand) calc(l - 0.1) c h),
+		4px 0 0 0 oklch(from var(--color-sand) calc(l - 0.1) c h);
 }

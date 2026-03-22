@@ -55,10 +55,10 @@
 	"earnPointsForTheLeaderboard": "Szerezz pontokat minden tevékenyéségeddel, és segíts a csapatodnak a ranglista élére kerülni!",
 	"viewLeaderboard": "Ranglista megtekintése",
 	"statistics": "Statisztika",
-	"totalDistance": "Összesen {distance} km",
-	"averageDistance": "Átlagosan {distance} km",
-	"totalActivities": "Összesen {count} tevékenység",
-	"averageActivities": "Átlagosan {count} tevékenység",
+	"total": "Összesen",
+	"average": "Átlagosan",
+	"distanceValue": "{distance} km",
+	"activitiesValue": "{count} tevékenység",
 	"stats_totalActivities": "Összes tevékenység",
 	"stats_totalDistance": "Összes távolság",
 	"stats_averageDistance": "Átlagos távolság",
@@ -115,10 +115,12 @@
 	"imgAltStrava": "Strava szinkronizálás",
 	"imgAltTeam": "Csapat",
 	"imgAltXp": "XP",
+	"imgAltStatistics": "Statisztika",
 	"challengeDateRange": "{startDate} – {endDate}",
 	"challengeProgress": "{percent}% eltelt",
 	"challengeDaysLeft": "{days} nap van hátra",
 	"nextChallenge": "Következő kihívás",
 	"nextChallengeStarts": "Kezdés: {date}",
-	"noChallengeActive": "Jelenleg nincs aktív kihívás."
+	"noChallengeActive": "Jelenleg nincs aktív kihívás.",
+	"synced": "Szinkronizálva"
 }

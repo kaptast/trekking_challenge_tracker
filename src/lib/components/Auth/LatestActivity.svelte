@@ -14,18 +14,16 @@
 
 {#if activity}
 	<Card class="latest-activity">
-		<div class="w-full p-1 pt-4">
-			<h2 class="text-center text-xl leading-none font-bold text-black uppercase">
+		<div class="w-full pt-2 pb-1">
+			<h2 class="text-black text-center text-2xl leading-none font-bold uppercase">
 				{m.latestActivity()}
 			</h2>
 
-			<div class="my-2 w-full border-b-2 border-brown-200"></div>
-
-			<div class="chipped-corners bg-black p-0.5">
-				<div class="chipped-corners bg-brown-400 p-0.5">
-					<div class="chipped-corners bg-black p-0.5">
+			<div class="chipped-corners mx-1 mt-2 bg-brown-900 p-0.5">
+				<div class="chipped-corners bg-brown-300 p-0.5">
+					<div class="chipped-corners bg-brown-900 p-0.5">
 						<div
-							class="chipped-corners text-3d grid w-full grid-cols-3 place-content-center gap-2 border-brown-600 bg-sand-200 p-0.5 text-center font-pixel text-3xl font-bold tracking-wider text-brown-100 uppercase text-shadow-2xs text-shadow-black"
+							class="chipped-corners text-3d grid w-full grid-cols-3 place-content-center gap-2 border-brown-600 bg-olive-300 p-0.5 text-center font-pixel text-3xl font-bold tracking-wider text-sand uppercase text-shadow-2xs text-shadow-brown-600"
 						>
 							<SummaryMap
 								class="col-span-3 h-auto w-full"

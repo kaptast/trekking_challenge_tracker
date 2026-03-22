@@ -12,7 +12,7 @@
 
 <form method="POST" action="?/signUp" use:enhance class="space-y-3">
 	<div>
-		<label class="text-sm font-semibold tracking-wider text-brown-500 uppercase" for="name">
+		<label class="text-sm font-semibold tracking-wider text-brown-600 uppercase" for="name">
 			{m.name()}
 		</label>
 		<input
@@ -21,12 +21,12 @@
 			type="text"
 			required
 			autocomplete="name"
-			class="chipped-corners block w-full bg-brown-300 px-4 py-2 text-brown-500 focus:outline-none"
+			class="chipped-corners block w-full bg-brown-300 px-4 py-2 text-brown-600 focus:outline-none"
 		/>
 	</div>
 
 	<div>
-		<label class="text-sm font-semibold tracking-wider text-brown-500 uppercase" for="email">
+		<label class="text-sm font-semibold tracking-wider text-brown-600 uppercase" for="email">
 			{m.email()}
 		</label>
 		<input
@@ -35,12 +35,12 @@
 			type="email"
 			required
 			autocomplete="email"
-			class="chipped-corners block w-full bg-brown-300 px-4 py-2 text-brown-500 focus:outline-none"
+			class="chipped-corners block w-full bg-brown-300 px-4 py-2 text-brown-600 focus:outline-none"
 		/>
 	</div>
 
 	<div>
-		<label class="text-sm font-semibold tracking-wider text-brown-500 uppercase" for="password">
+		<label class="text-sm font-semibold tracking-wider text-brown-600 uppercase" for="password">
 			{m.password()}
 		</label>
 		<input
@@ -49,19 +49,19 @@
 			type="password"
 			required
 			autocomplete="new-password"
-			class="chipped-corners block w-full bg-brown-300 px-4 py-2 text-brown-500 focus:outline-none"
+			class="chipped-corners block w-full bg-brown-300 px-4 py-2 text-brown-600 focus:outline-none"
 		/>
 	</div>
 
-	<Button label={m.createAccount()} type="submit" class="w-full" />
+	<Button label={m.createAccount()} type="submit" wrapperClass="w-full" />
 </form>
 
-<p class="text-center text-sm text-brown-500">
+<p class="text-center text-sm text-brown-600">
 	{m.alreadyHaveAnAccount()}
 
 	<button
 		onclick={onSignInClick}
-		class="cursor-pointer text-brown-800 underline hover:no-underline"
+		class="text-brown-800 cursor-pointer underline hover:no-underline"
 	>
 		{m.login()}
 	</button>

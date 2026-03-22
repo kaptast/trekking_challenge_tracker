@@ -14,16 +14,14 @@
 	let { user }: Props = $props()
 </script>
 
-<a href={localizeHref('/auth')} class="chipped-corners bg-black p-0.5">
-	<div class="chipped-corners bg-brown-400 p-0.5">
-		{#if user}
-			<div class="chipped-corners bg-brown-600">
-				<img src={user?.image || '/avatar.png'} alt={user.name} class="size-12 object-cover" />
-			</div>
-		{:else}
-			<div class="chipped-corners bg-brown-600 px-1">
-				{m.login()}
-			</div>
-		{/if}
-	</div>
+<a href={localizeHref('/auth')}>
+	{#if user}
+		<img
+			src={user?.image || '/avatar.png'}
+			alt={user.name}
+			class="chipped-corners size-7 object-cover"
+		/>
+	{:else}
+		{m.login()}
+	{/if}
 </a>

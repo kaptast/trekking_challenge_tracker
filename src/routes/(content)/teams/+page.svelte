@@ -63,7 +63,19 @@
 
 {#snippet row(index: number, team: Team, isMember: boolean, memberOfAnyTeam: boolean)}
 	<div class="col-rank">{index + 1}</div>
-	<div>{team.name}</div>
+	<div class="relative">
+		{team.name}
+
+		{#if isMember}
+			<div class="chipped-corners absolute -top-4 left-7.5 z-10 bg-brown-900 p-0.5">
+				<div
+					class="chipped-corners bg-brown-600 px-1 py-0.5 text-sm leading-3.5 font-semibold text-nowrap text-sand uppercase"
+				>
+					{m.yourTeam()}
+				</div>
+			</div>
+		{/if}
+	</div>
 	<div>{team.points}</div>
 	<div class="flex items-center gap-1">
 		{#each team.members as member (member.id)}
@@ -76,9 +88,11 @@
 			</div>
 		{/each}
 	</div>
+
 	<div>
 		<Distance value={team.totalDistance} />
 	</div>
+
 	<div>
 		{#if data.user}
 			{#if isMember}
@@ -101,7 +115,7 @@
 {/if}
 
 <Card>
-	<div class="w-full px-1.5 py-1">
+	<div class="w-full">
 		<!-- header row -->
 		<div class="row header px-2">
 			<div class="col-rank">#</div>
@@ -123,35 +137,16 @@
 				)}
 				{#each teams as team, index (index)}
 					{@const isMember = team.members.some((member) => member.id === data.user?.id)}
-					{#if isMember}
-						<div class="relative">
-							<div class="chipped-corners absolute -top-0.75 left-13 z-10 bg-gold-800 p-0.5">
-								<div
-									class="chipped-corners bg-gold-500 px-1 py-0.5 text-sm leading-3.5 font-semibold text-gold-800 uppercase"
-								>
-									{m.yourTeam()}
-								</div>
-							</div>
-							<div class="chipped-corners bg-gold-700 p-0.5">
-								<div class="chipped-corners bg-gold-100 p-0.5">
-									<div class="chipped-corners bg-gold-600 p-0.5">
-										<div class="chipped-corners row bg-brown-300 p-1">
-											{@render row(index, team, isMember, memberOfAnyTeam)}
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					{:else}
-						<div class="row px-2 py-3.5">
-							{@render row(index, team, isMember, memberOfAnyTeam)}
-						</div>
-					{/if}
+					{@const displayButtons = data.user && (isMember || !memberOfAnyTeam)}
+
+					<div class={['row px-2', displayButtons ? 'py-2' : 'py-3.5']}>
+						{@render row(index, team, isMember, memberOfAnyTeam)}
+					</div>
 				{/each}
 			{/if}
 		{:catch error}
 			<div class="row">
-				<div class="col-full text-red-600 text-center">Error loading teams: {error.message}</div>
+				<div class="col-full text-center">Error loading teams: {error.message}</div>
 			</div>
 		{/await}
 	</div>
@@ -162,12 +157,14 @@
 <style>
 	.row {
 		display: grid;
-		grid-template-columns: 2.5rem 1fr 4rem 4rem 6rem 1fr;
+		grid-template-columns: 1rem 1fr 4rem 12rem 4rem 1fr;
 		align-items: center;
+		justify-items: center;
 
-		border-bottom: 1px solid var(--color-brown-200);
-		font-weight: 700;
-		color: var(--color-brown-800);
+		border-bottom: 2px solid var(--color-brown-600);
+		font-weight: 600;
+		font-size: 0.875rem;
+		color: var(--color-brown-900);
 	}
 
 	.row:last-child {
@@ -175,9 +172,10 @@
 	}
 
 	.row.header {
-		font-weight: 600;
-		font-size: 0.8rem;
+		font-weight: 900;
+		font-size: 1rem;
 		letter-spacing: 0.05em;
+		background-color: oklch(from var(--color-sand) calc(l - 0.05) c h);
 	}
 
 	.col-rank {
@@ -188,7 +186,15 @@
 		font-size: 1.5rem;
 	}
 
+	.row:nth-child(odd):not(.header) {
+		background-color: oklch(from var(--color-sand) calc(l - 0.05) c h);
+	}
+
+	.row > *:first-child {
+		justify-self: start;
+	}
+
 	.row > *:last-child {
-		text-align: right;
+		justify-self: end;
 	}
 </style>
