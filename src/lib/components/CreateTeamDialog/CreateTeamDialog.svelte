@@ -34,10 +34,10 @@
 					{m.teamName()}
 				</label>
 
-				<div class="chipped-corners bg-sand/10 p-px">
+				<div class="chipped-corners bg-brown-900 p-0.75">
 					<input
 						{...createTeam.fields.name.as('text')}
-						class="chipped-corners block w-full bg-brown-300 px-4 py-2 text-brown-600 focus:outline-none"
+						class="chipped-corners block w-full bg-sand px-4 py-2 text-brown-600 focus:outline-none"
 					/>
 				</div>
 			</div>
