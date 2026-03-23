@@ -1,5 +1,5 @@
 import { betterAuth } from 'better-auth'
-import { genericOAuth } from 'better-auth/plugins'
+import { genericOAuth, oAuthProxy } from 'better-auth/plugins'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { sveltekitCookies } from 'better-auth/svelte-kit'
 import { env } from '$env/dynamic/private'
@@ -30,6 +30,9 @@ export const auth = betterAuth({
 		}
 	},
 	plugins: [
+		oAuthProxy({
+			productionURL: env.ORIGIN
+		}),
 		genericOAuth({
 			config: [
 				{
