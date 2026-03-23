@@ -11,6 +11,7 @@ import { user } from './db/auth.schema'
 export const auth = betterAuth({
 	baseURL: env.ORIGIN,
 	secret: env.BETTER_AUTH_SECRET,
+	trustedOrigins: [env.ORIGIN, 'https://*.vercel.app'],
 	database: drizzleAdapter(db, { provider: 'pg' }),
 	emailAndPassword: {
 		enabled: true
