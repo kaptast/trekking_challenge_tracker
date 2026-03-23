@@ -9,7 +9,7 @@ export type ChallengeInfo =
 	| { challenge: Challenge; isActive: false; progressPercent: 0; daysLeft: 0 }
 
 export async function getActiveOrNextChallenge(): Promise<ChallengeInfo | null> {
-	const today = new Date()
+	const today = new Date().toISOString().split('T')[0] // Get current date in YYYY-MM-DD format
 
 	const active = await db
 		.select()
@@ -17,10 +17,6 @@ export async function getActiveOrNextChallenge(): Promise<ChallengeInfo | null> 
 		.where(and(lte(challenge.startDate, today), gte(challenge.endDate, today)))
 		.limit(1)
 		.execute()
-
-	console.log("Today's date:", today)
-	console.info('Queried active challenges:', active)
-	console.log('SQL WHERE clause:', `startDate <= ${today} AND endDate >= ${today}`)
 
 	if (active.length > 0) {
 		const c = active[0]

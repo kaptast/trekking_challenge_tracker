@@ -7,8 +7,8 @@ export const challenge = pgTable('challenge', {
 		.primaryKey()
 		.$defaultFn(() => crypto.randomUUID()),
 	name: text('name').notNull(),
-	startDate: date('start_date', { mode: 'date' }).notNull(),
-	endDate: date('end_date', { mode: 'date' }).notNull()
+	startDate: date('start_date', { mode: 'string' }).notNull(),
+	endDate: date('end_date', { mode: 'string' }).notNull()
 })
 
 export const team = pgTable('team', {
