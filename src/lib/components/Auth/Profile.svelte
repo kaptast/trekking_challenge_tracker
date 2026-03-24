@@ -51,4 +51,15 @@
 			'strava stats stats'
 			'activities activities latest-activity';
 	}
+
+	@media (max-width: 768px) {
+		.profile-grid {
+			grid-template-areas:
+				'account'
+				'strava'
+				'stats'
+				'activities'
+				'latest-activity';
+		}
+	}
 </style>
