@@ -32,6 +32,7 @@ export type SportType =
 	| 'Badminton'
 	| 'Canoeing'
 	| 'Crossfit'
+	| 'cycling'
 	| 'EBikeRide'
 	| 'Elliptical'
 	| 'EMountainBikeRide'
