@@ -25,10 +25,28 @@
 						<div
 							class="chipped-corners text-3d grid w-full grid-cols-3 place-content-center gap-2 border-brown-600 bg-olive-300 p-0.5 text-center font-pixel text-3xl font-bold tracking-wider text-sand uppercase text-shadow-2xs text-shadow-brown-600"
 						>
-							<SummaryMap
-								class="col-span-3 h-auto w-full"
-								summaryPolyline={activity.polyline ?? ''}
-							/>
+							<div class="relative col-span-3 w-full">
+								<SummaryMap
+									class="h-auto w-full"
+									summaryPolyline={activity.polyline ?? ''}
+								/>
+								<div class="absolute top-1 right-1 font-sans text-right text-xs leading-tight font-semibold normal-case">
+									{#if activity.source === 'strava'}
+										<a
+											href="https://www.strava.com/activities/{activity.id}"
+											target="_blank"
+											rel="noopener noreferrer"
+											style="color: #FC5200"
+										>
+											View on Strava
+										</a>
+										<br />
+									{/if}
+									{#if activity.deviceName}
+										<span class="text-sand">{activity.deviceName}</span>
+									{/if}
+								</div>
+							</div>
 							<div>{activity.name}</div>
 							<div>{m.pointsValue({ count: activity.points ?? 0 })}</div>
 							<div><Distance value={activity.distance} /></div>
