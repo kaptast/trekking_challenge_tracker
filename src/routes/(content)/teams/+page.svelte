@@ -103,7 +103,7 @@
 							height="32"
 							fill="none"
 							viewBox="0 0 24 24"
-							class="lg:hidden"
+							class="md:hidden"
 							xmlns="http://www.w3.org/2000/svg"
 						>
 							<path
@@ -112,7 +112,7 @@
 							/>
 						</svg>
 
-						<span class="max-lg:hidden">{m.leaveTeam()}</span>
+						<span class="max-md:hidden">{m.leaveTeam()}</span>
 					</div>
 				</Button>
 			{/if}
@@ -125,7 +125,7 @@
 							height="32"
 							fill="none"
 							viewBox="0 0 24 24"
-							class="lg:hidden"
+							class="md:hidden"
 							xmlns="http://www.w3.org/2000/svg"
 						>
 							<path
@@ -137,7 +137,7 @@
 							/>
 						</svg>
 
-						<span class="max-lg:hidden">{m.joinTeam()}</span>
+						<span class="max-md:hidden">{m.joinTeam()}</span>
 					</div>
 				</Button>
 			{/if}
