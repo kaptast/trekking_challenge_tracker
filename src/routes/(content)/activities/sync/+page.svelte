@@ -23,20 +23,22 @@
 			<Button
 				href="?page={prevPage}"
 				disabled={data.page <= 1}
-				class="flex items-center gap-x-1 pl-1!"
+				class="flex items-center gap-x-1 max-sm:pr-1! max-sm:pl-0! sm:pl-1!"
 			>
 				<svg
-					width="16"
-					height="16"
+					width="32"
+					height="32"
 					viewBox="0 0 16 16"
 					shape-rendering="crispEdges"
 					fill="currentColor"
-					class="rotate-180"
+					class="scale-x-[-1]"
 				>
 					<path d="M4 2 H6 V4 H8 V6 H10 V8 H8 V10 H6 V12 H4 V10 H6 V8 H8 V6 H6 V4 H4 Z" />
 				</svg>
 
-				{m.previousPage()}
+				<span class="max-sm:hidden">
+					{m.previousPage()}
+				</span>
 			</Button>
 
 			<div class="chipped-corners inline-block bg-brown-900 p-1">
@@ -50,13 +52,13 @@
 			<Button
 				href="?page={nextPage}"
 				disabled={!data.hasMore}
-				class="flex items-center gap-x-1 pr-1!"
+				class="flex items-center gap-x-1 max-sm:pr-0! max-sm:pl-1 sm:pr-1!"
 			>
-				{m.nextPage()}
+				<span class="max-sm:hidden">{m.nextPage()}</span>
 
 				<svg
-					width="16"
-					height="16"
+					width="32"
+					height="32"
 					viewBox="0 0 16 16"
 					shape-rendering="crispEdges"
 					fill="currentColor"
@@ -66,7 +68,7 @@
 			</Button>
 		</div>
 
-		<Button label={m.submitSelected()} variant="strava" type="submit" />
+		<Button label={m.sync()} variant="strava" type="submit" />
 	</div>
 
 	<Card>
@@ -78,11 +80,11 @@
 		<div class="w-full">
 			<div class="row header px-2">
 				<div></div>
-				<div>{m.id()}</div>
+				<div class="max-sm:hidden">{m.id()}</div>
 				<div>{m.name()}</div>
 				<div>{m.distance()}</div>
-				<div>{m.movingTime()}</div>
-				<div>{m.type()}</div>
+				<div class="max-sm:hidden">{m.movingTime()}</div>
+				<div class="max-sm:hidden">{m.type()}</div>
 				<div>{m.date()}</div>
 			</div>
 
@@ -129,8 +131,8 @@
 									/>
 								{/if}
 							</div>
-							<div>{activity.id}</div>
-							<div class="min-w-0">
+							<div class="max-sm:hidden">{activity.id}</div>
+							<div class="w-full min-w-0">
 								<div class="truncate">{activity.name}</div>
 								<a
 									href="https://www.strava.com/activities/{activity.id}"
@@ -144,8 +146,10 @@
 								{/if}
 							</div>
 							<div><Distance value={activity.distance} /></div>
-							<div><Duration value={activity.moving_time} /></div>
-							<div><ActivityIcon type={activity.sport_type as SportType} /></div>
+							<div class="max-sm:hidden"><Duration value={activity.moving_time} /></div>
+							<div class="max-sm:hidden">
+								<ActivityIcon type={activity.sport_type as SportType} />
+							</div>
 							<div>{new Date(activity.start_date).toLocaleDateString()}</div>
 						</div>
 					{/each}
@@ -166,7 +170,7 @@
 
 	.row {
 		display: grid;
-		grid-template-columns: 0.75rem 2fr 3.5fr 1fr 2.5fr 1fr 2.5fr;
+		grid-template-columns: 2rem 2fr 3.5fr 1fr 2.5fr 1fr 2.5fr;
 		align-items: center;
 		justify-items: center;
 
@@ -174,6 +178,12 @@
 		font-weight: 600;
 		font-size: 0.875rem;
 		color: var(--color-brown-900);
+	}
+
+	@media (max-width: 640px) {
+		.row {
+			grid-template-columns: 2rem repeat(3, 1fr);
+		}
 	}
 
 	.row:last-child {

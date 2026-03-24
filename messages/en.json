@@ -110,7 +110,7 @@
 	"connectWithStrava": "Connect with Strava",
 	"select": "Select",
 	"id": "ID",
-	"submitSelected": "Submit selected",
+	"sync": "Sync",
 	"previousPage": "Previous",
 	"nextPage": "Next",
 	"imgAltGpx": "GPX file format",

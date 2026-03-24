@@ -110,7 +110,7 @@
 	"connectWithStrava": "Csatlakozás Stravához",
 	"select": "Kiválasztás",
 	"id": "Azonosító",
-	"submitSelected": "Kiválasztottak beküldése",
+	"sync": "Szinkronizálás",
 	"previousPage": "Előző",
 	"nextPage": "Következő",
 	"imgAltGpx": "GPX fájlformátum",
