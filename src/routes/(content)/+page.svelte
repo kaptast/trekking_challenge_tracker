@@ -69,8 +69,8 @@
 	{/if}
 </div>
 
-<div class="grid grid-cols-1 gap-4 pt-4 lg:grid-cols-12">
-	<Card class="max-lg:order-4 lg:col-span-4">
+<div class="grid grid-cols-1 gap-4 pt-4 md:grid-cols-12">
+	<Card class="max-md:order-4 md:col-span-4">
 		<div class="flex h-full flex-col items-center gap-y-2 p-2 text-center">
 			<h3 class="text-brown-800 font-sans text-2xl font-bold uppercase">
 				{m.uploadAndSync()}
@@ -86,7 +86,7 @@
 		</div>
 	</Card>
 
-	<Card class="max-lg:order-5 lg:col-span-4">
+	<Card class="max-md:order-5 md:col-span-4">
 		<div class="flex h-full flex-col items-center gap-y-2 p-2 text-center">
 			<h3 class="text-brown-800 text-2xl font-bold uppercase">{m.createYourOwnTeam()}</h3>
 
@@ -96,7 +96,7 @@
 		</div>
 	</Card>
 
-	<Card class="max-lg:order-4 lg:col-span-4">
+	<Card class="max-md:order-4 md:col-span-4">
 		<a
 			href={localizeHref('/rules')}
 			class="flex h-full flex-col items-center gap-y-2 p-2 text-center transition-opacity hover:opacity-80"
@@ -109,7 +109,7 @@
 		</a>
 	</Card>
 
-	<Card class="max-lg:order-1 lg:col-span-6">
+	<Card class="max-md:order-1 md:col-span-6">
 		<div class="flex size-full flex-col items-center gap-y-2 p-2">
 			<h3 class="text-brown-800 font-sans text-2xl font-bold uppercase">
 				{m.topTeams()}
@@ -132,7 +132,7 @@
 		</div>
 	</Card>
 
-	<Card class="max-lg:order-2 lg:col-span-6">
+	<Card class="max-md:order-2 md:col-span-6">
 		<div class="grid size-full grid-cols-3 grid-rows-7 place-items-center p-2">
 			<h3 class="text-brown-800 col-span-3 text-2xl font-bold uppercase">{m.statistics()}</h3>
 
