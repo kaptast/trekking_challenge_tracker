@@ -97,13 +97,16 @@
 	</Card>
 
 	<Card class="col-span-4">
-		<div class="flex h-full flex-col items-center gap-y-2 p-2 text-center">
+		<a
+			href={localizeHref('/rules')}
+			class="flex h-full flex-col items-center gap-y-2 p-2 text-center transition-opacity hover:opacity-80"
+		>
 			<h3 class="text-brown-800 text-2xl font-bold uppercase">{m.earnPoints()}</h3>
 
 			<img src="/xp.png" alt={m.imgAltXp()} class="size-20 min-h-20 min-w-20" />
 
 			<h4 class="text-base font-semibold text-brown-600">{m.earnPointsForTheLeaderboard()}</h4>
-		</div>
+		</a>
 	</Card>
 
 	<Card class="col-span-6">
