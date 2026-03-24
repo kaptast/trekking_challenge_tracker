@@ -6,6 +6,6 @@
 
 <Header user={data.user} />
 
-<main class="mx-auto max-w-7xl px-4 pb-4 pt-16">
+<main class="mx-auto max-w-7xl px-2 pt-16 pb-4 lg:px-4">
 	{@render children()}
 </main>

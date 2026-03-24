@@ -22,6 +22,6 @@
 			class="chipped-corners size-7 object-cover"
 		/>
 	{:else}
-		{m.login()}
+		<span class="font-pixel text-xl leading-7.5 text-brown-900 uppercase">{m.login()}</span>
 	{/if}
 </a>

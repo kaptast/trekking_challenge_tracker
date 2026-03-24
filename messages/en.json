@@ -110,7 +110,7 @@
 	"connectWithStrava": "Connect with Strava",
 	"select": "Select",
 	"id": "ID",
-	"submitSelected": "Submit selected",
+	"sync": "Sync",
 	"previousPage": "Previous",
 	"nextPage": "Next",
 	"imgAltGpx": "GPX file format",
@@ -126,7 +126,7 @@
 	"noChallengeActive": "There is currently no active challenge.",
 	"synced": "Synced",
 	"rules": "Rules",
-	"rulesTitle": "Game Rules",
+	"rulesTitle": "Rules",
 	"rulesIntro": "Earn points with every activity and help your team reach the top of the leaderboard!",
 	"rulesUploadTitle": "Upload your activities",
 	"rulesUploadDescription": "You can upload your activities via GPX files or import them directly from Strava. To import from Strava, you first need to link your Strava account on the profile page.",
@@ -138,5 +138,7 @@
 	"rulesAthleteMultiplierTitle": "Strava athlete multiplier",
 	"rulesAthleteMultiplierDescription": "For activities imported from Strava, the number of athletes participating in the activity multiplies the earned points. This means group activities are worth more!",
 	"rulesExampleTitle": "Example",
-	"rulesExampleDescription": "2 people cycling 8 km each would earn: 8 km × 0.25 × 2 athletes = 4 points each (8 points total for their team)."
+	"rulesExampleDescription": "2 people cycling 8 km each would earn: 8 km × 0.25 × 2 athletes = 4 points each (8 points total for their team).",
+	"openMenu": "Open menu",
+	"closeMenu": "Close menu"
 }
