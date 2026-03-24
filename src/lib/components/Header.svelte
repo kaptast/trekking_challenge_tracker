@@ -23,7 +23,13 @@
 		<div
 			class="text-brown-100 relative mx-auto flex max-w-7xl items-center justify-between gap-x-4 px-4 py-0.5 font-bold"
 		>
-			<nav class="flex items-center">
+			<button class="flex w-5 cursor-pointer flex-col gap-y-1 lg:hidden" aria-label="Open menu">
+				<span class="h-0.5 w-full bg-sand"></span>
+				<span class="h-0.5 w-full bg-sand"></span>
+				<span class="h-0.5 w-full bg-sand"></span>
+			</button>
+
+			<nav class="hidden items-center lg:flex">
 				<Button
 					href={localizeHref('/')}
 					label={m.home()}
