@@ -23,15 +23,49 @@
 				<div class="chipped-corners bg-brown-300 p-0.5">
 					<div class="chipped-corners bg-brown-900 p-0.5">
 						<div
-							class="chipped-corners text-3d grid w-full grid-cols-3 place-content-center gap-2 border-brown-600 bg-olive-300 p-0.5 text-center font-pixel text-3xl font-bold tracking-wider text-sand uppercase text-shadow-2xs text-shadow-brown-600"
+							class="chipped-corners grid w-full grid-cols-3 place-content-center gap-2 border-brown-600 bg-olive-300 p-0.5 text-center"
 						>
 							<SummaryMap
 								class="col-span-3 h-auto w-full"
 								summaryPolyline={activity.polyline ?? ''}
 							/>
-							<div>{activity.name}</div>
-							<div>{m.pointsValue({ count: activity.points ?? 0 })}</div>
-							<div><Distance value={activity.distance} /></div>
+
+							<div>
+								<div
+									class="text-3d font-pixel text-3xl font-bold tracking-wider text-sand uppercase text-shadow-2xs text-shadow-brown-600"
+								>
+									{activity.name}
+								</div>
+
+								{#if activity.source === 'strava'}
+									<a
+										href="https://www.strava.com/activities/{activity.id}"
+										target="_blank"
+										rel="noopener noreferrer"
+										class="font-sans text-xs font-semibold normal-case"
+										style="color: #FC5200"
+									>
+										View on Strava
+									</a>
+								{/if}
+								{#if activity.deviceName}
+									<div class="font-sans text-xs font-normal normal-case opacity-70">
+										{activity.deviceName}
+									</div>
+								{/if}
+							</div>
+
+							<div
+								class="text-3d font-pixel text-3xl font-bold tracking-wider text-sand uppercase text-shadow-2xs text-shadow-brown-600"
+							>
+								{m.pointsValue({ count: activity.points ?? 0 })}
+							</div>
+
+							<div
+								class="text-3d font-pixel text-3xl font-bold tracking-wider text-sand uppercase text-shadow-2xs text-shadow-brown-600"
+							>
+								<Distance value={activity.distance} />
+							</div>
 						</div>
 					</div>
 				</div>
