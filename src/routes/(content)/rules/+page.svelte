@@ -8,20 +8,20 @@
 
 <div class="flex flex-col gap-4 pt-4">
 	<Card>
-		<div class="flex flex-col gap-4 p-4">
+		<div class="flex w-full flex-col gap-4 p-4">
 			<p class="text-base font-semibold text-brown-600">{m.rulesIntro()}</p>
 		</div>
 	</Card>
 
 	<Card>
-		<div class="flex flex-col gap-3 p-4">
+		<div class="flex w-full flex-col gap-3 p-4">
 			<h2 class="text-brown-800 text-xl font-bold uppercase">{m.rulesUploadTitle()}</h2>
 			<p class="text-base text-brown-600">{m.rulesUploadDescription()}</p>
 		</div>
 	</Card>
 
 	<Card>
-		<div class="flex flex-col gap-3 p-4">
+		<div class="flex w-full flex-col gap-3 p-4">
 			<h2 class="text-brown-800 text-xl font-bold uppercase">{m.rulesPointsTitle()}</h2>
 			<p class="text-base text-brown-600">{m.rulesPointsDescription()}</p>
 			<ul class="flex flex-col gap-2 pl-4">
@@ -42,7 +42,7 @@
 	</Card>
 
 	<Card>
-		<div class="flex flex-col gap-3 p-4">
+		<div class="flex w-full flex-col gap-3 p-4">
 			<h2 class="text-brown-800 text-xl font-bold uppercase">{m.rulesAthleteMultiplierTitle()}</h2>
 			<p class="text-base text-brown-600">{m.rulesAthleteMultiplierDescription()}</p>
 

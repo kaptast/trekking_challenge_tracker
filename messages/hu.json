@@ -135,8 +135,8 @@
 	"rulesWalkHike": "Séta vagy túra: 1 pont per km",
 	"rulesRun": "Futás: 1 pont per 2 km (0,5 pont/km)",
 	"rulesOther": "Minden egyéb tevékenység (pl. kerékpározás): 1 pont per 4 km (0,25 pont/km)",
-	"rulesAthleteMultiplierTitle": "Strava résztvevő szorzó",
-	"rulesAthleteMultiplierDescription": "A Stravából importált tevékenységeknél a tevékenységben részt vevő sportolók száma megsokszorozza a megszerzett pontokat. Ez azt jelenti, hogy a csoportos tevékenységek többet érnek!",
+	"rulesAthleteMultiplierTitle": "A csoportos tevékenységek többet érnek",
+	"rulesAthleteMultiplierDescription": "A Stravából importált tevékenységeknél a tevékenységben részt vevő sportolók száma szorozza a megszerzett pontokat. Így megéri közös tevékenységeket szervezni, és minél több csapattársaddal együtt sportolni!",
 	"rulesExampleTitle": "Példa",
-	"rulesExampleDescription": "2 kerékpáros, mindkettő 8 km-t tekert: 8 km × 0,25 × 2 sportoló = 4 pont fejenként (összesen 8 pont a csapatnak)."
+	"rulesExampleDescription": "2 kerékpáros, közösen 8 km-t tekernek: 8 km × 0,25 × 2 sportoló = 4 pont fejenként (összesen 8 pont a csapatnak)."
 }
