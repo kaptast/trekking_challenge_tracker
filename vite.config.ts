@@ -47,6 +47,13 @@ export default defineConfig({
 						['en', '/teams'],
 						['hu', '/csapatok']
 					]
+				},
+				{
+					pattern: '/rules',
+					localized: [
+						['en', '/rules'],
+						['hu', '/szabalyok']
+					]
 				}
 			]
 		})
