@@ -18,10 +18,10 @@
 	let { user }: Props = $props()
 </script>
 
-<header class="fixed inset-x-0 top-0 z-50 border-y-2 border-brown-900">
+<header class="fixed inset-x-0 top-0 z-50 w-screen border-y-2 border-brown-900">
 	<div class="border-b-4 border-brown-300 bg-brown-600">
 		<div
-			class="text-brown-100 relative mx-auto flex max-w-7xl items-center justify-between gap-x-4 px-4 py-0.5 font-bold"
+			class="text-brown-100 flex items-center justify-between gap-x-4 px-2 py-0.5 font-bold lg:mx-auto lg:px-4"
 		>
 			<button class="flex w-5 cursor-pointer flex-col gap-y-1 lg:hidden" aria-label="Open menu">
 				<span class="h-0.5 w-full bg-sand"></span>
