@@ -7,6 +7,7 @@
 	import Button from './Button.svelte'
 	import { onNavigate } from '$app/navigation'
 	import { MediaQuery } from 'svelte/reactivity'
+	import { slide } from 'svelte/transition'
 
 	type Props = {
 		user:
@@ -103,7 +104,31 @@
 </header>
 
 {#if menuOpen}
-	<div
-		class="text-brown-100 fixed inset-0 z-40 flex flex-col items-start gap-y-4 bg-brown-600/95 px-6 py-8 font-bold"
-	></div>
+	<div transition:slide class="fixed inset-0 z-40 bg-brown-600/99">
+		<nav class="flex flex-col items-start gap-y-4 px-2 pt-18.5 pb-8">
+			<Button
+				href={localizeHref('/')}
+				label={m.home()}
+				size="large"
+				wrapperClass="w-full"
+				class={[page.route.id === '/(content)' && 'active']}
+			/>
+
+			<Button
+				href={localizeHref('/activities')}
+				label={m.activities()}
+				size="large"
+				wrapperClass="w-full"
+				class={[page.route.id === '/(content)/activities' && 'active']}
+			/>
+
+			<Button
+				href={localizeHref('/teams')}
+				label={m.teams()}
+				size="large"
+				wrapperClass="w-full"
+				class={[page.route.id === '/(content)/teams' && 'active']}
+			/>
+		</nav>
+	</div>
 {/if}
