@@ -49,7 +49,7 @@
 			<div class="col-std">{m.type()}</div>
 			<div class="col-std">{m.points()}</div>
 			<div class="col-std">{m.date()}</div>
-			<div class="col-std">{m.map()}</div>
+			<div class="col-std max-md:hidden">{m.map()}</div>
 			{#if data.user}<div class="col-std"></div>{/if}
 		</div>
 
@@ -91,7 +91,7 @@
 							{activity.startDate ? new Date(activity.startDate).toLocaleDateString() : '—'}
 						</div>
 
-						<Card class="size-full">
+						<Card class="size-full max-md:hidden">
 							<div class="grid size-full place-items-center bg-olive-300 p-1">
 								<SummaryMap summaryPolyline={activity.polyline ?? ''} />
 							</div>
@@ -144,6 +144,12 @@
 		font-weight: 600;
 		font-size: 0.875rem;
 		color: var(--color-brown-900);
+	}
+
+	@media screen and (max-width: 768px) {
+		.row {
+			grid-template-columns: repeat(7, 1fr);
+		}
 	}
 
 	.row:last-child {
