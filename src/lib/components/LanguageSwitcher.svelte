@@ -9,7 +9,7 @@
 	}
 </script>
 
-<div class="flex items-center gap-1">
+<div class="flex h-7.5 items-center gap-1">
 	{#each locales as locale (locale)}
 		<button
 			disabled={currentLocale === locale}
