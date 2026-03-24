@@ -138,5 +138,7 @@
 	"rulesAthleteMultiplierTitle": "Strava athlete multiplier",
 	"rulesAthleteMultiplierDescription": "For activities imported from Strava, the number of athletes participating in the activity multiplies the earned points. This means group activities are worth more!",
 	"rulesExampleTitle": "Example",
-	"rulesExampleDescription": "2 people cycling 8 km each would earn: 8 km × 0.25 × 2 athletes = 4 points each (8 points total for their team)."
+	"rulesExampleDescription": "2 people cycling 8 km each would earn: 8 km × 0.25 × 2 athletes = 4 points each (8 points total for their team).",
+	"openMenu": "Open menu",
+	"closeMenu": "Close menu"
 }

@@ -138,5 +138,7 @@
 	"rulesAthleteMultiplierTitle": "A csoportos tevékenységek többet érnek",
 	"rulesAthleteMultiplierDescription": "A Stravából importált tevékenységeknél a tevékenységben részt vevő sportolók száma szorozza a megszerzett pontokat. Így megéri közös tevékenységeket szervezni, és minél több csapattársaddal együtt sportolni!",
 	"rulesExampleTitle": "Példa",
-	"rulesExampleDescription": "2 kerékpáros, közösen 8 km-t tekernek: 8 km × 0,25 × 2 sportoló = 4 pont fejenként (összesen 8 pont a csapatnak)."
+	"rulesExampleDescription": "2 kerékpáros, közösen 8 km-t tekernek: 8 km × 0,25 × 2 sportoló = 4 pont fejenként (összesen 8 pont a csapatnak).",
+	"openMenu": "Menü megnyitása",
+	"closeMenu": "Menü bezárása"
 }

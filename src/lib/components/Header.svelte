@@ -40,13 +40,35 @@
 			class="text-brown-100 flex h-full max-w-7xl items-center justify-between gap-x-4 px-2 py-0.5 font-bold sm:mx-auto sm:px-4"
 		>
 			<button
-				class="flex w-5 cursor-pointer flex-col gap-y-1 sm:hidden"
-				aria-label="Open menu"
+				title={menuOpen ? m.closeMenu() : m.openMenu()}
 				onclick={toggleMenu}
+				aria-pressed={menuOpen}
+				class="relative size-6 cursor-pointer sm:hidden"
 			>
-				<span class="h-0.5 w-full bg-sand"></span>
-				<span class="h-0.5 w-full bg-sand"></span>
-				<span class="h-0.5 w-full bg-sand"></span>
+				<span
+					class={[
+						'absolute block h-1 bg-sand transition-all duration-300',
+						menuOpen ? 'top-2.5 left-1/2 w-0' : 'top-0 left-0 w-full'
+					]}
+				></span>
+				<span
+					class={[
+						'absolute top-2.5 left-0 block h-1 w-full bg-sand transition-transform duration-300',
+						menuOpen && 'rotate-45'
+					]}
+				></span>
+				<span
+					class={[
+						'absolute top-2.5 left-0 block h-1 w-full bg-sand transition-transform duration-300',
+						menuOpen && '-rotate-45'
+					]}
+				></span>
+				<span
+					class={[
+						'absolute block h-1 bg-sand transition-all duration-300',
+						menuOpen ? 'top-2.5 left-1/2 w-0' : 'top-5 left-0 w-full'
+					]}
+				></span>
 			</button>
 
 			<nav class="hidden items-center sm:flex">
