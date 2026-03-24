@@ -44,7 +44,7 @@
 
 <div class="bg fixed inset-0 z-0 bg-cover bg-no-repeat"></div>
 
-<div class="content relative z-2 min-h-lvh pt-4">
+<div class="content relative z-2 min-h-dvh pt-4">
 	{@render children()}
 </div>
 
