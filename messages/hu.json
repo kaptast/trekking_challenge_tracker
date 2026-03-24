@@ -40,14 +40,16 @@
 	"error": "Hiba történt. Kérlek, próbáld újra.",
 	"loading": "Betöltés...",
 	"noData": "Nincs megjeleníthető adat",
-	"activityType": [{
-		"match": {
-			"type=run": "Futás",
-			"type=ride": "Kerékpározás",
-			"type=hike": "Túra",
-			"type=*": "Egyéb"
+	"activityType": [
+		{
+			"match": {
+				"type=run": "Futás",
+				"type=ride": "Kerékpározás",
+				"type=hike": "Túra",
+				"type=*": "Egyéb"
+			}
 		}
-	}],
+	],
 	"details": "Részletek",
 	"uploadAndSync": "Feltöltés és szinkronizálás",
 	"uploadAGpxFileOrSnycFromStrava": "GPX fájl feltöltése vagy aktivitások szinkronizálása Straváról.",
@@ -122,5 +124,19 @@
 	"nextChallenge": "Következő kihívás",
 	"nextChallengeStarts": "Kezdés: {date}",
 	"noChallengeActive": "Jelenleg nincs aktív kihívás.",
-	"synced": "Szinkronizálva"
+	"synced": "Szinkronizálva",
+	"rules": "Szabályok",
+	"rulesTitle": "Játékszabályok",
+	"rulesIntro": "Szerezz pontokat minden tevékenységeddel, és segíts a csapatodnak a ranglista élére kerülni!",
+	"rulesUploadTitle": "Tevékenységek feltöltése",
+	"rulesUploadDescription": "Tevékenységeidet GPX fájlok feltöltésével vagy közvetlenül a Straváról importálhatod. A Stravából való importáláshoz először össze kell kapcsolnod a Strava fiókodat a profil oldalon.",
+	"rulesPointsTitle": "Pontszámítás",
+	"rulesPointsDescription": "A pontok a tevékenység típusa és távolsága alapján kerülnek kiszámításra:",
+	"rulesWalkHike": "Séta vagy túra: 1 pont per km",
+	"rulesRun": "Futás: 1 pont per 2 km (0,5 pont/km)",
+	"rulesOther": "Minden egyéb tevékenység (pl. kerékpározás): 1 pont per 4 km (0,25 pont/km)",
+	"rulesAthleteMultiplierTitle": "Strava résztvevő szorzó",
+	"rulesAthleteMultiplierDescription": "A Stravából importált tevékenységeknél a tevékenységben részt vevő sportolók száma megsokszorozza a megszerzett pontokat. Ez azt jelenti, hogy a csoportos tevékenységek többet érnek!",
+	"rulesExampleTitle": "Példa",
+	"rulesExampleDescription": "2 kerékpáros, mindkettő 8 km-t tekert: 8 km × 0,25 × 2 sportoló = 4 pont fejenként (összesen 8 pont a csapatnak)."
 }
