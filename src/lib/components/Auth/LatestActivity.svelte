@@ -23,7 +23,7 @@
 				<div class="chipped-corners bg-brown-300 p-0.5">
 					<div class="chipped-corners bg-brown-900 p-0.5">
 						<div
-							class="chipped-corners text-3d grid w-full grid-cols-3 place-content-center gap-2 border-brown-600 bg-olive-300 p-0.5 text-center font-pixel text-3xl font-bold tracking-wider text-sand uppercase text-shadow-2xs text-shadow-brown-600"
+							class="chipped-corners grid w-full grid-cols-3 place-content-center gap-2 border-brown-600 bg-olive-300 p-0.5 text-center"
 						>
 							<div class="relative col-span-3 w-full">
 								<SummaryMap

@@ -40,6 +40,7 @@
 		VirtualRide: 'Bike',
 		Velomobile: 'Bike',
 		Handcycle: 'Bike',
+		cycling: 'Bike',
 
 		Run: 'Run',
 		TrailRun: 'Run',

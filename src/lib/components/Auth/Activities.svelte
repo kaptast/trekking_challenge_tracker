@@ -60,8 +60,8 @@
 		display: grid;
 		grid-template-columns: 2fr 2fr 1fr 2fr;
 		align-items: center;
-		justify-items: center;
 		column-gap: 1rem;
+		height: 5rem;
 
 		border-bottom: 2px solid var(--color-brown-600);
 		font-weight: 600;
@@ -76,6 +76,7 @@
 	.row.header {
 		font-weight: 900;
 		font-size: 1rem;
+		height: 2rem;
 		letter-spacing: 0.05em;
 		background-color: oklch(from var(--color-sand) calc(l - 0.05) c h);
 	}
