@@ -19,7 +19,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	try {
 		body = await request.json()
 	} catch {
-		return new Response(null, { status: 200 })
+		error(400, 'Invalid JSON body')
 	}
 	console.log('Strava webhook event received:', JSON.stringify(body))
 	return new Response(null, { status: 200 })
