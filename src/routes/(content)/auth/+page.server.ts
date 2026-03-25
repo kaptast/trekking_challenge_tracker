@@ -52,7 +52,8 @@ async function loadActivities(user: User, limit: number = 5): Promise<Array<Acti
 			sportType: activity.sportType,
 			polyline: activity.polyline,
 			source: activity.source,
-			deviceName: activity.deviceName
+			deviceName: activity.deviceName,
+			athleteCount: activity.athleteCount
 		})
 		.from(activity)
 		.where(and(eq(activity.userId, user.id), eq(activity.isDraft, false)))
