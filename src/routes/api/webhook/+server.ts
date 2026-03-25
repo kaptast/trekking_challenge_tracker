@@ -1,6 +1,7 @@
 import { json, error } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
 import { env } from '$env/dynamic/private'
+import { auth } from '$lib/server/auth'
 
 export const GET: RequestHandler = async ({ url }) => {
 	const mode = url.searchParams.get('hub.mode')
@@ -14,13 +15,75 @@ export const GET: RequestHandler = async ({ url }) => {
 	error(403, 'Forbidden')
 }
 
+type StravaWebhookEvent = {
+	object_type: 'activity' | 'athlete'
+	object_id: number
+	aspect_type: 'create' | 'update' | 'delete'
+	event_time: number
+	subscription_id: number
+	owner_id: number
+}
+
 export const POST: RequestHandler = async ({ request }) => {
-	let body: unknown
+	let body: StravaWebhookEvent
 	try {
 		body = await request.json()
 	} catch {
 		error(400, 'Invalid JSON body')
 	}
-	console.log('Strava webhook event received:', JSON.stringify(body))
+
+	switch (body.object_type) {
+		case 'activity':
+			handleActivityEvent(body)
+			break
+		case 'athlete':
+			handleAthleteEvent(body)
+			break
+		default:
+			error(400, 'Unknown object type')
+	}
+
 	return new Response(null, { status: 200 })
+}
+
+// TODO: Decide whether activities should be synced automatically or not and implement these handlers if so.
+// If not, we can just ignore these events and let the user trigger syncs manually from the UI when they want to update their activities.
+function handleActivityEvent(event: StravaWebhookEvent) {
+	console.info(
+		`Received Strava activity event: ${event.aspect_type} for activity ID ${event.object_id}`
+	)
+
+	switch (event.aspect_type) {
+		case 'create':
+			// Handle activity creation logic
+			break
+		case 'update':
+			// Handle activity update logic
+			break
+		case 'delete':
+			// Handle activity deletion logic
+			break
+	}
+}
+
+// Disconnects an athlete's Strava account when they deauthorize the app.
+async function handleAthleteEvent(event: StravaWebhookEvent) {
+	console.info(
+		`Received Strava athlete event: ${event.aspect_type} for athlete ID ${event.object_id}`
+	)
+
+	switch (event.aspect_type) {
+		case 'delete':
+			await unlinkStravaAccount(event.owner_id)
+			break
+	}
+}
+
+async function unlinkStravaAccount(accountId: number) {
+	await auth.api.unlinkAccount({
+		body: {
+			providerId: 'strava',
+			accountId: accountId.toString()
+		}
+	})
 }
