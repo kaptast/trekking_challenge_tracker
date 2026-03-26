@@ -6,6 +6,47 @@ import { db } from '$lib/server/db'
 import { activity, account } from '$lib/server/db/schema'
 import { and, eq } from 'drizzle-orm'
 
+type EmptyUpdates = Record<string, never>
+
+type StravaActivityUpdatePayload = Partial<{
+	title: string
+	type: string
+	private: 'true' | 'false'
+}>
+
+type StravaWebhookEventBase = {
+	object_id: number
+	event_time: number
+	subscription_id: number
+	owner_id: number
+}
+
+type StravaActivityWebhookEvent =
+	| (StravaWebhookEventBase & {
+			object_type: 'activity'
+			aspect_type: 'create' | 'delete'
+			updates: EmptyUpdates
+	  })
+	| (StravaWebhookEventBase & {
+			object_type: 'activity'
+			aspect_type: 'update'
+			updates: StravaActivityUpdatePayload
+	  })
+
+type StravaAthleteWebhookEvent =
+	| (StravaWebhookEventBase & {
+			object_type: 'athlete'
+			aspect_type: 'delete'
+			updates: EmptyUpdates
+	  })
+	| (StravaWebhookEventBase & {
+			object_type: 'athlete'
+			aspect_type: 'update'
+			updates: {
+				authorized: 'false'
+			}
+	  })
+
 export const GET: RequestHandler = async ({ url }) => {
 	const mode = url.searchParams.get('hub.mode')
 	const challenge = url.searchParams.get('hub.challenge')
@@ -18,14 +59,7 @@ export const GET: RequestHandler = async ({ url }) => {
 	error(403, 'Forbidden')
 }
 
-type StravaWebhookEvent = {
-	object_type: 'activity' | 'athlete'
-	object_id: number
-	aspect_type: 'create' | 'update' | 'delete'
-	event_time: number
-	subscription_id: number
-	owner_id: number
-}
+type StravaWebhookEvent = StravaActivityWebhookEvent | StravaAthleteWebhookEvent
 
 export const POST: RequestHandler = async ({ request }) => {
 	let body: StravaWebhookEvent
@@ -35,12 +69,14 @@ export const POST: RequestHandler = async ({ request }) => {
 		error(400, 'Invalid JSON body')
 	}
 
+	console.log('Received Strava webhook event:', body)
+
 	switch (body.object_type) {
 		case 'activity':
 			handleActivityEvent(body)
 			break
 		case 'athlete':
-			handleAthleteEvent(body)
+			await handleAthleteEvent(body)
 			break
 		default:
 			error(400, 'Unknown object type')
@@ -51,7 +87,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 // TODO: Decide whether activities should be synced automatically or not and implement these handlers if so.
 // If not, we can just ignore these events and let the user trigger syncs manually from the UI when they want to update their activities.
-function handleActivityEvent(event: StravaWebhookEvent) {
+function handleActivityEvent(event: StravaActivityWebhookEvent) {
 	console.info(
 		`Received Strava activity event: ${event.aspect_type} for activity ID ${event.object_id}`
 	)
@@ -70,7 +106,7 @@ function handleActivityEvent(event: StravaWebhookEvent) {
 }
 
 // Disconnects an athlete's Strava account when they deauthorize the app.
-async function handleAthleteEvent(event: StravaWebhookEvent) {
+async function handleAthleteEvent(event: StravaAthleteWebhookEvent) {
 	console.info(
 		`Received Strava athlete event: ${event.aspect_type} for athlete ID ${event.object_id}`
 	)
@@ -78,6 +114,11 @@ async function handleAthleteEvent(event: StravaWebhookEvent) {
 	switch (event.aspect_type) {
 		case 'delete':
 			await unlinkStravaAccount(event.owner_id)
+			break
+		case 'update':
+			if (event.updates.authorized === 'false') {
+				await unlinkStravaAccount(event.owner_id)
+			}
 			break
 	}
 }
