@@ -5,7 +5,11 @@
 
 	let { value }: Props = $props()
 
-	function formatDistance(meters: number): string {
+	function formatDistance(meters: number | null): string {
+		if (meters === null) {
+			return '0'
+		}
+
 		if (meters < 1000) {
 			return `${meters.toFixed(0)} m`
 		} else {
