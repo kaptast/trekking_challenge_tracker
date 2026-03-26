@@ -41,16 +41,15 @@
 
 <Card>
 	<div class="size-full">
-		<!-- header row -->
 		<div class="row header px-2">
-			<div class="col-name">{m.name()}</div>
-			<div class="col-std">{m.distance()}</div>
-			<div class="col-std">{m.movingTime()}</div>
-			<div class="col-std">{m.type()}</div>
-			<div class="col-std">{m.points()}</div>
-			<div class="col-std">{m.date()}</div>
-			<div class="col-std max-md:hidden">{m.map()}</div>
-			{#if data.user}<div class="col-std"></div>{/if}
+			<div>{m.name()}</div>
+			<div>{m.distance()}</div>
+			<div class="max-md:hidden">{m.movingTime()}</div>
+			<div class="max-md:hidden">{m.type()}</div>
+			<div>{m.points()}</div>
+			<div>{m.date()}</div>
+			<div class="max-md:hidden">{m.map()}</div>
+			{#if data.user}<div></div>{/if}
 		</div>
 
 		{#await data.activities}
@@ -81,9 +80,9 @@
 
 						<div><Distance value={activity.distance} /></div>
 
-						<div><Duration value={activity.movingTime ?? 0} /></div>
+						<div class="max-md:hidden"><Duration value={activity.movingTime ?? 0} /></div>
 
-						<div><ActivityIcon type={activity.sportType as SportType} /></div>
+						<div class="max-md:hidden"><ActivityIcon type={activity.sportType as SportType} /></div>
 
 						<div>{activity.points}</div>
 
@@ -148,7 +147,7 @@
 
 	@media screen and (max-width: 768px) {
 		.row {
-			grid-template-columns: repeat(7, 1fr);
+			grid-template-columns: repeat(5, 1fr);
 		}
 	}
 
