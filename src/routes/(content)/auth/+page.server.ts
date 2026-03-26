@@ -52,7 +52,8 @@ async function loadActivities(user: User, limit: number = 5): Promise<Array<Acti
 			sportType: activity.sportType,
 			polyline: activity.polyline,
 			source: activity.source,
-			deviceName: activity.deviceName
+			deviceName: activity.deviceName,
+			athleteCount: activity.athleteCount
 		})
 		.from(activity)
 		.where(and(eq(activity.userId, user.id), eq(activity.isDraft, false)))
@@ -189,6 +190,11 @@ export const actions: Actions = {
 		if (!event.locals.user) {
 			return fail(401, { message: 'You must be signed in' })
 		}
+
+		await db
+			.delete(activity)
+			.where(and(eq(activity.userId, event.locals.user.id), eq(activity.source, 'strava')))
+			.execute()
 
 		await auth.api.unlinkAccount({
 			body: { providerId: 'strava' },
