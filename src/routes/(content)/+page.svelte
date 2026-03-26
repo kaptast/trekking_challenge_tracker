@@ -71,7 +71,10 @@
 	</div>
 
 	<Card class="max-md:order-4 md:col-span-4 md:row-start-2">
-		<div class="flex h-full flex-col items-center gap-y-2 p-2 text-center">
+		<a
+			href={localizeHref('/activities')}
+			class="flex h-full flex-col items-center gap-y-2 p-2 text-center transition-opacity hover:opacity-80"
+		>
 			<h3 class="text-brown-800 font-sans text-2xl font-bold uppercase">
 				{m.uploadAndSync()}
 			</h3>
@@ -83,17 +86,20 @@
 			</div>
 
 			<h4 class="text-base font-semibold text-brown-600">{m.uploadAGpxFileOrSnycFromStrava()}</h4>
-		</div>
+		</a>
 	</Card>
 
 	<Card class="max-md:order-5 md:col-span-4 md:row-start-2">
-		<div class="flex h-full flex-col items-center gap-y-2 p-2 text-center">
+		<a
+			href={localizeHref('/teams')}
+			class="flex h-full flex-col items-center gap-y-2 p-2 text-center transition-opacity hover:opacity-80"
+		>
 			<h3 class="text-brown-800 text-2xl font-bold uppercase">{m.createYourOwnTeam()}</h3>
 
 			<img src="/team.png" alt={m.imgAltTeam()} class="w-50 min-w-50" />
 
 			<h4 class="text-base font-semibold text-brown-600">{m.createOrJoinTeam()}</h4>
-		</div>
+		</a>
 	</Card>
 
 	<Card class="max-md:order-4 md:col-span-4 md:row-start-2">
