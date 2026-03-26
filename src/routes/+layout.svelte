@@ -60,6 +60,7 @@
 <style>
 	.bg {
 		background-image: url('/background.png');
+		background-position: top center;
 	}
 
 	.eagle {
