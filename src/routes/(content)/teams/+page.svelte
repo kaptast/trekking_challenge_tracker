@@ -63,11 +63,11 @@
 
 {#snippet row(index: number, team: Team, isMember: boolean, memberOfAnyTeam: boolean)}
 	<div class="col-rank">{index + 1}</div>
-	<div class="relative">
+	<div class="relative flex h-full items-center">
 		{team.name}
 
 		{#if isMember}
-			<div class="chipped-corners absolute -top-4 left-7.5 z-10 bg-brown-900 p-0.5">
+			<div class="chipped-corners absolute -top-1 left-7.5 z-10 bg-brown-900 p-0.5">
 				<div
 					class="chipped-corners bg-brown-600 px-1 py-0.5 text-sm leading-3.5 font-semibold text-nowrap text-sand uppercase"
 				>
@@ -77,13 +77,13 @@
 		{/if}
 	</div>
 	<div>{team.points}</div>
-	<div class="flex items-center gap-1">
+	<div class="flex flex-wrap items-center gap-0.5">
 		{#each team.members as member (member.id)}
 			{@const avatar = createAvatar(pixelArt, {
-				seed: member.user.avatarSeed ?? '',
+				seed: member.user.avatarSeed ?? member.user.name ?? member.id,
 				size: 32
 			}).toDataUri()}
-			<div class="chipped-corners bg-brown-450" title={member.user.name}>
+			<div class="chipped-corners bg-brown-300" title={member.user.name}>
 				<img src={avatar} alt="Avatar" class="size-8" />
 			</div>
 		{/each}
@@ -158,7 +158,7 @@
 		<!-- header row -->
 		<div class="row header px-2">
 			<div class="col-rank">#</div>
-			<div class="col-name">{m.teamName()}</div>
+			<div class="col-name">{m.name()}</div>
 			<div class="col-std">{m.points()}</div>
 			<div class="col-std">{m.members()}</div>
 			<div class="col-std">{m.distance()}</div>
@@ -196,7 +196,7 @@
 <style>
 	.row {
 		display: grid;
-		grid-template-columns: 1rem 1fr 4rem 12rem 4rem 1fr;
+		grid-template-columns: 1rem 1fr 4rem 1fr 4rem 1fr;
 		align-items: center;
 		justify-items: center;
 
@@ -208,7 +208,7 @@
 
 	@media screen and (max-width: 640px) {
 		.row {
-			grid-template-columns: repeat(6, 1fr);
+			grid-template-columns: 2rem repeat(5, 1fr);
 		}
 	}
 
