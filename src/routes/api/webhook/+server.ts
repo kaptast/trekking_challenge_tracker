@@ -100,6 +100,7 @@ async function unlinkStravaAccount(stravaAthleteId: number) {
 		await db
 			.delete(activity)
 			.where(and(eq(activity.userId, stravaAccount.userId), eq(activity.source, 'strava')))
+			.execute()
 	} catch (err) {
 		console.error(
 			`Failed to delete Strava activities for user ${stravaAccount.userId}: ${err}. Aborting account unlink.`

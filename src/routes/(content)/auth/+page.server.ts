@@ -191,6 +191,11 @@ export const actions: Actions = {
 			return fail(401, { message: 'You must be signed in' })
 		}
 
+		await db
+			.delete(activity)
+			.where(and(eq(activity.userId, event.locals.user.id), eq(activity.source, 'strava')))
+			.execute()
+
 		await auth.api.unlinkAccount({
 			body: { providerId: 'strava' },
 			headers: event.request.headers
