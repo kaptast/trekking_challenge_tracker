@@ -15,63 +15,68 @@
 </script>
 
 <Hero title={m.challengeTitle()}>
-	<Button
-		label={m.joinTheAdventure()}
-		href={localizeHref('/auth')}
-		size="large"
-		class="font-mono"
-	/>
+	{#if !data.user}
+		<Button
+			label={m.joinTheAdventure()}
+			href={localizeHref('/auth')}
+			size="large"
+			class="font-mono"
+		/>
+	{/if}
 </Hero>
 
-<!-- Challenge info banner -->
-<div class="mt-4">
-	{#if challengeInfo?.isActive}
-		{@const c = challengeInfo.challenge}
-		<Card class="w-full">
-			<div class="p-4">
-				<div class="flex flex-wrap items-center justify-between gap-4">
-					<div>
-						<h2 class="text-brown-800 text-xl font-bold uppercase">{c.name}</h2>
-						<p class="text-sm font-semibold text-brown-600">
-							{m.challengeDateRange({ startDate: c.startDate, endDate: c.endDate })}
-						</p>
-					</div>
-					<div class="text-right text-sm font-semibold text-brown-600">
+<div class="grid grid-cols-1 gap-4 pt-4 md:grid-cols-12">
+	<div class="md:col-start-4 md:col-end-10">
+		{#if challengeInfo?.isActive}
+			{@const c = challengeInfo.challenge}
+			<Card>
+				<div class="size-full p-2">
+					<h2 class="font-pixel text-4xl leading-5 font-bold text-brown-600 uppercase">{c.name}</h2>
+
+					<p class="text-lg font-bold text-brown-600">
+						{m.challengeDateRange({ startDate: c.startDate, endDate: c.endDate })}
+					</p>
+
+					<div class="mb-0.5 flex w-full justify-between text-sm font-bold text-brown-600">
 						<div>{m.challengeProgress({ percent: challengeInfo.progressPercent })}</div>
 						<div>{m.challengeDaysLeft({ days: challengeInfo.daysLeft })}</div>
 					</div>
-				</div>
-				<div class="bg-gray-200 mt-3 h-3 w-full overflow-hidden rounded-full">
-					<div
-						class="bg-black h-full rounded-full transition-all"
-						style="width: {challengeInfo.progressPercent}%"
-					></div>
-				</div>
-			</div>
-		</Card>
-	{:else if challengeInfo && !challengeInfo.isActive}
-		<Card class="w-full">
-			<div class="p-4 text-center">
-				<h2 class="text-brown-800 text-lg font-bold uppercase">{m.nextChallenge()}</h2>
-				<p class="text-sm font-semibold text-brown-600">
-					{challengeInfo.challenge.name} &mdash; {m.nextChallengeStarts({
-						date: challengeInfo.challenge.startDate
-					})}
-				</p>
-			</div>
-		</Card>
-	{:else}
-		<Card class="w-full">
-			<div class="p-4 text-center">
-				<p class="text-sm font-semibold text-brown-600">{m.noChallengeActive()}</p>
-			</div>
-		</Card>
-	{/if}
-</div>
 
-<div class="grid grid-cols-1 gap-4 pt-4 md:grid-cols-12">
-	<Card class="max-md:order-4 md:col-span-4">
-		<div class="flex h-full flex-col items-center gap-y-2 p-2 text-center">
+					<div class="chipped-corners bg-brown-600 p-0.5">
+						<div class="chipped-corners bg-sand p-0.5">
+							<div
+								class="chipped-corners h-4 bg-orange-500"
+								style="width: {challengeInfo.progressPercent}%"
+							></div>
+						</div>
+					</div>
+				</div></Card
+			>
+		{:else if challengeInfo && !challengeInfo.isActive}
+			<Card class="w-full">
+				<div class="p-4 text-center">
+					<h2 class="text-brown-800 text-lg font-bold uppercase">{m.nextChallenge()}</h2>
+					<p class="text-sm font-semibold text-brown-600">
+						{challengeInfo.challenge.name} &mdash; {m.nextChallengeStarts({
+							date: challengeInfo.challenge.startDate
+						})}
+					</p>
+				</div>
+			</Card>
+		{:else}
+			<Card class="w-full">
+				<div class="p-4 text-center">
+					<p class="text-sm font-semibold text-brown-600">{m.noChallengeActive()}</p>
+				</div>
+			</Card>
+		{/if}
+	</div>
+
+	<Card class="max-md:order-4 md:col-span-4 md:row-start-2">
+		<a
+			href={localizeHref('/activities')}
+			class="flex h-full flex-col items-center gap-y-2 p-2 text-center transition-opacity hover:opacity-80"
+		>
 			<h3 class="text-brown-800 font-sans text-2xl font-bold uppercase">
 				{m.uploadAndSync()}
 			</h3>
@@ -83,20 +88,23 @@
 			</div>
 
 			<h4 class="text-base font-semibold text-brown-600">{m.uploadAGpxFileOrSnycFromStrava()}</h4>
-		</div>
+		</a>
 	</Card>
 
-	<Card class="max-md:order-5 md:col-span-4">
-		<div class="flex h-full flex-col items-center gap-y-2 p-2 text-center">
+	<Card class="max-md:order-5 md:col-span-4 md:row-start-2">
+		<a
+			href={localizeHref('/teams')}
+			class="flex h-full flex-col items-center gap-y-2 p-2 text-center transition-opacity hover:opacity-80"
+		>
 			<h3 class="text-brown-800 text-2xl font-bold uppercase">{m.createYourOwnTeam()}</h3>
 
 			<img src="/team.png" alt={m.imgAltTeam()} class="w-50 min-w-50" />
 
 			<h4 class="text-base font-semibold text-brown-600">{m.createOrJoinTeam()}</h4>
-		</div>
+		</a>
 	</Card>
 
-	<Card class="max-md:order-4 md:col-span-4">
+	<Card class="max-md:order-4 md:col-span-4 md:row-start-2">
 		<a
 			href={localizeHref('/rules')}
 			class="flex h-full flex-col items-center gap-y-2 p-2 text-center transition-opacity hover:opacity-80"

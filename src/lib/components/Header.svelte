@@ -14,6 +14,7 @@
 			| {
 					name?: string | null | undefined
 					image?: string | null | undefined
+					avatarSeed?: string | null | undefined
 			  }
 			| undefined
 	}

@@ -6,7 +6,6 @@
 	import { enhance } from '$app/forms'
 	import Button from '$lib/components/Button.svelte'
 	import { m } from '$lib/paraglide/messages'
-	import { untrack } from 'svelte'
 	import { invalidateAll } from '$app/navigation'
 	import { saveAvatarSeed } from './account.remote'
 
@@ -21,7 +20,7 @@
 
 	let { user, avatarSeed, team }: Props = $props()
 
-	let seed = $state(untrack(() => avatarSeed ?? user.name ?? user.id))
+	let seed = $derived(avatarSeed ?? user.name ?? user.id)
 	let changedAvatar = $state(false)
 
 	$effect(() => {

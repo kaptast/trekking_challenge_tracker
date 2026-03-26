@@ -2,6 +2,7 @@
 	import 'overlayscrollbars/overlayscrollbars.css'
 	import './layout.css'
 	import favicon from '$lib/assets/favicon.svg'
+	import { m } from '$lib/paraglide/messages'
 
 	let { children } = $props()
 
@@ -40,6 +41,7 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<title>{m.title()}</title>
 </svelte:head>
 
 <div class="bg fixed inset-0 z-0 bg-cover bg-no-repeat"></div>
@@ -60,6 +62,7 @@
 <style>
 	.bg {
 		background-image: url('/background.png');
+		background-position: top center;
 	}
 
 	.eagle {

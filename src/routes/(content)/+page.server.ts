@@ -78,7 +78,7 @@ async function summarizeActivities(challengeInfo: ChallengeInfo | null) {
 
 	const { startDate, endDate } = challengeInfo.challenge
 
-	const activities = await db
+	const stats = await db
 		.select({
 			distance: sql<number>`cast(sum(${activity.distance}) as float)`,
 			activityCount: sql<number>`count(*)`,
@@ -95,5 +95,14 @@ async function summarizeActivities(challengeInfo: ChallengeInfo | null) {
 		)
 		.execute()
 
-	return activities[0] ?? zeroStats
+	if (stats.length > 0) {
+		return {
+			distance: stats[0].distance ?? 0,
+			activityCount: stats[0].activityCount ?? 0,
+			averageDistance: stats[0].averageDistance ?? 0,
+			averageActivityCountPerUser: stats[0].averageActivityCountPerUser ?? 0
+		}
+	}
+
+	return zeroStats
 }
