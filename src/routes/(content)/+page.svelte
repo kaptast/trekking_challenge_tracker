@@ -15,12 +15,14 @@
 </script>
 
 <Hero title={m.challengeTitle()}>
-	<Button
-		label={m.joinTheAdventure()}
-		href={localizeHref('/auth')}
-		size="large"
-		class="font-mono"
-	/>
+	{#if !data.user}
+		<Button
+			label={m.joinTheAdventure()}
+			href={localizeHref('/auth')}
+			size="large"
+			class="font-mono"
+		/>
+	{/if}
 </Hero>
 
 <div class="grid grid-cols-1 gap-4 pt-4 md:grid-cols-12">
