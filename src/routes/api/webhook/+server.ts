@@ -2,6 +2,9 @@ import { json, error } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
 import { env } from '$env/dynamic/private'
 import { auth } from '$lib/server/auth'
+import { db } from '$lib/server/db'
+import { activity, account } from '$lib/server/db/schema'
+import { and, eq } from 'drizzle-orm'
 
 export const GET: RequestHandler = async ({ url }) => {
 	const mode = url.searchParams.get('hub.mode')
@@ -79,11 +82,35 @@ async function handleAthleteEvent(event: StravaWebhookEvent) {
 	}
 }
 
-async function unlinkStravaAccount(accountId: number) {
+async function unlinkStravaAccount(stravaAthleteId: number) {
+	const stravaAccountId = stravaAthleteId.toString()
+
+	const [stravaAccount] = await db
+		.select({ userId: account.userId })
+		.from(account)
+		.where(and(eq(account.providerId, 'strava'), eq(account.accountId, stravaAccountId)))
+		.limit(1)
+
+	if (!stravaAccount) {
+		console.warn(`Strava deauthorization received for unknown account ID ${stravaAccountId}`)
+		return
+	}
+
+	try {
+		await db
+			.delete(activity)
+			.where(and(eq(activity.userId, stravaAccount.userId), eq(activity.source, 'strava')))
+	} catch (err) {
+		console.error(
+			`Failed to delete Strava activities for user ${stravaAccount.userId}: ${err}. Aborting account unlink.`
+		)
+		return
+	}
+
 	await auth.api.unlinkAccount({
 		body: {
 			providerId: 'strava',
-			accountId: accountId.toString()
+			accountId: stravaAccountId
 		}
 	})
 }
