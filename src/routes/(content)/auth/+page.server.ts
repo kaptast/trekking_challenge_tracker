@@ -213,6 +213,8 @@ export const actions: Actions = {
 
 		await db.delete(activity).where(eq(activity.userId, userId)).execute()
 
+		await auth.api.signOut({ headers: event.request.headers })
+
 		await db.delete(user).where(eq(user.id, userId)).execute()
 
 		redirect(302, '/')
