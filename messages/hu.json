@@ -141,5 +141,8 @@
 	"rulesExampleTitle": "Példa",
 	"rulesExampleDescription": "2 kerékpáros, közösen 8 km-t tekernek: 8 km × 0,25 × 2 sportoló = 4 pont fejenként (összesen 8 pont a csapatnak).",
 	"openMenu": "Menü megnyitása",
-	"closeMenu": "Menü bezárása"
+	"closeMenu": "Menü bezárása",
+	"deleteAccount": "Fiók törlése",
+	"deleteAccountWarning": "A fiók törlése visszavonhatatlan. Minden tevékenységed és adatod véglegesen törlődik.",
+	"deleteAccountConfirm": "Biztosan törölni akarod a fiókodat? Ez a művelet nem vonható vissza."
 }

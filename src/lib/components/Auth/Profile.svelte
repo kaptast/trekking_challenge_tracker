@@ -6,6 +6,7 @@
 	import type { Activity, Stats } from '$lib/types'
 	import LatestActivity from './LatestActivity.svelte'
 	import UserStats from './UserStats.svelte'
+	import DeleteAccount from './DeleteAccount.svelte'
 
 	type Props = {
 		user: User
@@ -42,6 +43,8 @@
 		{@const latest = acts ? acts[0] : null}
 		<LatestActivity activity={latest} />
 	{/await}
+
+	<DeleteAccount />
 </div>
 
 <style>
@@ -49,7 +52,8 @@
 		grid-template-areas:
 			'account stats stats'
 			'strava stats stats'
-			'activities activities latest-activity';
+			'activities activities latest-activity'
+			'delete-account delete-account delete-account';
 	}
 
 	@media (max-width: 768px) {
@@ -59,7 +63,8 @@
 				'strava'
 				'stats'
 				'activities'
-				'latest-activity';
+				'latest-activity'
+				'delete-account';
 		}
 	}
 </style>

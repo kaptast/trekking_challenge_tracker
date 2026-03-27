@@ -141,5 +141,8 @@
 	"rulesExampleTitle": "Example",
 	"rulesExampleDescription": "2 people cycling 8 km each would earn: 8 km × 0.25 × 2 athletes = 4 points each (8 points total for their team).",
 	"openMenu": "Open menu",
-	"closeMenu": "Close menu"
+	"closeMenu": "Close menu",
+	"deleteAccount": "Delete account",
+	"deleteAccountWarning": "Deleting your account is irreversible. All your activities and data will be permanently removed.",
+	"deleteAccountConfirm": "Are you sure you want to delete your account? This action cannot be undone."
 }

@@ -1,7 +1,7 @@
 import { auth } from '$lib/server/auth'
 import { getPointsForActivity } from '$lib/server/calculatePoints'
 import { db } from '$lib/server/db'
-import { activity, team, teamMember } from '$lib/server/db/schema'
+import { activity, team, teamMember, user } from '$lib/server/db/schema'
 import type { Activity, Stats } from '$lib/types'
 import { fail, redirect, type Actions, type ServerLoad } from '@sveltejs/kit'
 import { APIError, type User } from 'better-auth'
@@ -200,6 +200,22 @@ export const actions: Actions = {
 			body: { providerId: 'strava' },
 			headers: event.request.headers
 		})
+
+		redirect(302, '/')
+	},
+
+	deleteAccount: async (event) => {
+		if (!event.locals.user) {
+			return fail(401, { message: 'You must be signed in' })
+		}
+
+		const userId = event.locals.user.id
+
+		await db.delete(activity).where(eq(activity.userId, userId)).execute()
+
+		await auth.api.signOut({ headers: event.request.headers })
+
+		await db.delete(user).where(eq(user.id, userId)).execute()
 
 		redirect(302, '/')
 	}
