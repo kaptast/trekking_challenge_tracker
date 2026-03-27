@@ -25,7 +25,14 @@
 				<p class="text-lg font-medium text-brown-800">
 					{m.connectedWith({ id: stravaAccount.accountId })}
 				</p>
-				<form method="POST" action="?/unlinkStrava" use:enhance>
+				<form
+					method="POST"
+					action="?/unlinkStrava"
+					use:enhance
+					onsubmit={(e) => {
+						if (!confirm(m.confirmUnlinkStrava())) e.preventDefault()
+					}}
+				>
 					<Button label={m.disconnect()} type="submit" variant="strava" class="w-full" />
 				</form>
 			{/if}
