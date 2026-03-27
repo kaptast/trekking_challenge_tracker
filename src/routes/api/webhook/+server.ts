@@ -1,7 +1,6 @@
 import { json, error } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
 import { env } from '$env/dynamic/private'
-import { auth } from '$lib/server/auth'
 import { db } from '$lib/server/db'
 import { activity, account } from '$lib/server/db/schema'
 import { and, eq } from 'drizzle-orm'
@@ -149,10 +148,8 @@ async function unlinkStravaAccount(stravaAthleteId: number) {
 		return
 	}
 
-	await auth.api.unlinkAccount({
-		body: {
-			providerId: 'strava',
-			accountId: stravaAccountId
-		}
-	})
+	await db
+		.delete(account)
+		.where(and(eq(account.providerId, 'strava'), eq(account.accountId, stravaAccountId)))
+		.execute()
 }
