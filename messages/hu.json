@@ -77,6 +77,7 @@
 	"createAccount": "Fiók létrehozása",
 	"connectedWith": "Csatlakoztatva a {id} fiókkal",
 	"disconnect": "Kapcsolat bontása",
+	"confirmUnlinkStrava": "Biztosan le akarod választani a Strava fiókodat? Ez törölni fogja az összes szinkronizált tevékenységet.",
 	"notConnected": "Nincs fiók csatlakoztatva",
 	"streak": "{value} nap",
 	"onlyGpxFilesAllowed": "Csak .gpx fájlok engedélyezettek.",
