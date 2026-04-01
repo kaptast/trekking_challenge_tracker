@@ -50,8 +50,8 @@
 							></div>
 						</div>
 					</div>
-				</div></Card
-			>
+				</div>
+			</Card>
 		{:else if challengeInfo && !challengeInfo.isActive}
 			<Card class="w-full">
 				<div class="p-4 text-center">
@@ -118,7 +118,7 @@
 	</Card>
 
 	<Card class="max-md:order-1 md:col-span-6">
-		<div class="flex size-full flex-col items-center gap-y-2 p-2">
+		<div class="flex size-full flex-col items-center justify-between gap-y-2 p-2">
 			<h3 class="text-brown-800 font-sans text-2xl font-bold uppercase">
 				{m.topTeams()}
 			</h3>
