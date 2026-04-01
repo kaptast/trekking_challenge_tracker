@@ -166,10 +166,14 @@
 		</div>
 
 		{#await data.teams}
-			<div class="row"><div class="col-full text-center italic">{m.loading()}</div></div>
+			<div class="row">
+				<div class="col-span-full w-full p-2 text-center italic">{m.loading()}</div>
+			</div>
 		{:then teams}
 			{#if teams.length === 0}
-				<div class="row"><div class="col-full text-center italic">{m.noTeams()}</div></div>
+				<div class="row">
+					<div class="col-span-full w-full p-2 text-center italic">{m.noTeams()}</div>
+				</div>
 			{:else}
 				{@const memberOfAnyTeam = teams.some((team) =>
 					team.members.some((member) => member.id === data.user?.id)
@@ -185,7 +189,7 @@
 			{/if}
 		{:catch error}
 			<div class="row">
-				<div class="col-full text-center">Error loading teams: {error.message}</div>
+				<div class="col-span-full p-2 text-center">Error loading teams: {error.message}</div>
 			</div>
 		{/await}
 	</div>
@@ -235,11 +239,11 @@
 		background-color: oklch(from var(--color-sand) calc(l - 0.05) c h);
 	}
 
-	.row > *:first-child {
+	.row > *:first-child:not(.col-span-full) {
 		justify-self: start;
 	}
 
-	.row > *:last-child {
+	.row > *:last-child:not(.col-span-full) {
 		justify-self: end;
 	}
 </style>

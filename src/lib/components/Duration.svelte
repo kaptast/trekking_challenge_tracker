@@ -7,11 +7,13 @@
 
 	const formattedDuration = $derived.by(() => {
 		try {
+			const intValue = Math.round(value) // Ensure the value is an integer
+
 			// @ts-expect-error - Intl.DurationFormat is not yet supported in TypeScript's lib.dom.d.ts, but it is available in modern browsers
 			return new Intl.DurationFormat('hu', { style: 'narrow' }).format({
-				hours: Math.floor(value / 3600),
-				minutes: Math.floor((value % 3600) / 60),
-				seconds: value % 60
+				hours: Math.floor(intValue / 3600),
+				minutes: Math.floor((intValue % 3600) / 60),
+				seconds: intValue % 60
 			})
 		} catch (e) {
 			// Fallback formatting if Intl.DurationFormat is not supported

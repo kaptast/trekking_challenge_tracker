@@ -3,12 +3,13 @@ import type { PageServerLoad } from './$types'
 import { db } from '$lib/server/db/index.js'
 import { activity } from '$lib/server/db/schema.js'
 import { inArray } from 'drizzle-orm'
+import { localizeUrl } from '$lib/paraglide/runtime'
 
 const PER_PAGE = 30
 
 export const load: PageServerLoad = async ({ request, fetch, locals, url }) => {
 	if (!locals.user) {
-		redirect(302, '/auth')
+		redirect(302, localizeUrl('/auth'))
 	}
 
 	const page = Math.max(1, parseInt(url.searchParams.get('page') ?? '1', 10))
