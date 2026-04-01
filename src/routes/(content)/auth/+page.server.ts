@@ -1,3 +1,4 @@
+import { localizeUrl } from '$lib/paraglide/runtime'
 import { auth } from '$lib/server/auth'
 import { getPointsForActivity } from '$lib/server/calculatePoints'
 import { db } from '$lib/server/db'
@@ -112,7 +113,7 @@ export const actions: Actions = {
 		await auth.api.signOut({
 			headers: event.request.headers
 		})
-		return redirect(302, '/')
+		return redirect(302, localizeUrl('/'))
 	},
 
 	signIn: async (event) => {
@@ -135,7 +136,7 @@ export const actions: Actions = {
 			return fail(500, { message: 'Unexpected error' })
 		}
 
-		return redirect(302, '/')
+		return redirect(302, localizeUrl('/'))
 	},
 
 	signUp: async (event) => {
@@ -164,7 +165,7 @@ export const actions: Actions = {
 			return fail(500, { message: 'Unexpected error' })
 		}
 
-		return redirect(302, '/')
+		return redirect(302, localizeUrl('/'))
 	},
 
 	linkStrava: async (event) => {
@@ -180,7 +181,7 @@ export const actions: Actions = {
 		})
 
 		if (result.url) {
-			redirect(302, result.url)
+			redirect(302, localizeUrl(result.url))
 		}
 
 		return fail(400, { message: 'Failed to initiate Strava linking' })
@@ -201,7 +202,7 @@ export const actions: Actions = {
 			headers: event.request.headers
 		})
 
-		redirect(302, '/')
+		redirect(302, localizeUrl('/'))
 	},
 
 	deleteAccount: async (event) => {
@@ -217,6 +218,6 @@ export const actions: Actions = {
 
 		await db.delete(user).where(eq(user.id, userId)).execute()
 
-		redirect(302, '/')
+		redirect(302, localizeUrl('/'))
 	}
 }

@@ -4,6 +4,7 @@ import { auth } from '$lib/server/auth'
 import { svelteKitHandler } from 'better-auth/svelte-kit'
 import { redirect, type Handle, type HandleFetch } from '@sveltejs/kit'
 import { paraglideMiddleware } from '$lib/paraglide/server'
+import { localizeUrl } from '$lib/paraglide/runtime'
 
 const handleParaglide: Handle = ({ event, resolve }) =>
 	paraglideMiddleware(event.request, ({ request, locale }) => {
@@ -46,7 +47,7 @@ export const handleFetch: HandleFetch = async ({ request, fetch }) => {
 			}
 		} catch (error) {
 			console.error('Error retrieving access token for Strava API request', error)
-			redirect(302, '/auth')
+			redirect(302, localizeUrl('/auth'))
 		}
 	}
 

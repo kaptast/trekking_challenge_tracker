@@ -1,4 +1,5 @@
 import { form, getRequestEvent } from '$app/server'
+import { localizeUrl } from '$lib/paraglide/runtime'
 import { db } from '$lib/server/db'
 import { team } from '$lib/server/db/schema'
 import { redirect } from '@sveltejs/kit'
@@ -11,11 +12,11 @@ export const createTeam = form(
 	async ({ name }) => {
 		const { locals } = getRequestEvent()
 		if (!locals.user) {
-			redirect(303, '/auth')
+			redirect(303, localizeUrl('/auth'))
 		}
 
 		await db.insert(team).values({ name }).execute()
 
-		redirect(303, '/teams')
+		redirect(303, localizeUrl('/teams'))
 	}
 )
