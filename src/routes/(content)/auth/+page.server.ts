@@ -1,4 +1,4 @@
-import { localizeUrl } from '$lib/paraglide/runtime'
+import { getLocale, localizeUrl } from '$lib/paraglide/runtime'
 import { auth } from '$lib/server/auth'
 import { getPointsForActivity } from '$lib/server/calculatePoints'
 import { db } from '$lib/server/db'
@@ -113,7 +113,9 @@ export const actions: Actions = {
 		await auth.api.signOut({
 			headers: event.request.headers
 		})
-		return redirect(302, localizeUrl('/'))
+
+		const url = getLocale() === 'hu' ? '/' : `/${getLocale()}`
+		redirect(302, url)
 	},
 
 	signIn: async (event) => {
@@ -136,7 +138,8 @@ export const actions: Actions = {
 			return fail(500, { message: 'Unexpected error' })
 		}
 
-		return redirect(302, localizeUrl('/'))
+		const url = getLocale() === 'hu' ? '/' : `/${getLocale()}`
+		redirect(302, url)
 	},
 
 	signUp: async (event) => {
@@ -165,7 +168,8 @@ export const actions: Actions = {
 			return fail(500, { message: 'Unexpected error' })
 		}
 
-		return redirect(302, localizeUrl('/'))
+		const url = getLocale() === 'hu' ? '/' : `/${getLocale()}`
+		redirect(302, url)
 	},
 
 	linkStrava: async (event) => {
@@ -202,7 +206,8 @@ export const actions: Actions = {
 			headers: event.request.headers
 		})
 
-		redirect(302, localizeUrl('/'))
+		const url = getLocale() === 'hu' ? '/' : `/${getLocale()}`
+		redirect(302, url)
 	},
 
 	deleteAccount: async (event) => {
@@ -218,6 +223,7 @@ export const actions: Actions = {
 
 		await db.delete(user).where(eq(user.id, userId)).execute()
 
-		redirect(302, localizeUrl('/'))
+		const url = getLocale() === 'hu' ? '/' : `/${getLocale()}`
+		redirect(302, url)
 	}
 }
