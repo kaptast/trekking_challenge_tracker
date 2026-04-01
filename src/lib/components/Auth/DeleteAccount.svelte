@@ -7,15 +7,14 @@
 
 <Card class="delete-account">
 	<div class="grid place-items-center space-y-2 p-4 text-center">
-		<h3 class="text-2xl font-semibold text-brown-800 uppercase">{m.deleteAccount()}</h3>
-		<p class="text-sm text-brown-800">{m.deleteAccountWarning()}</p>
+		<h3 class="text-brown-800 text-2xl font-semibold uppercase">{m.deleteAccount()}</h3>
+		<p class="text-brown-800 text-sm">{m.deleteAccountWarning()}</p>
 		<form
 			method="POST"
 			action="?/deleteAccount"
-			use:enhance
-			onsubmit={(e) => {
+			use:enhance={({ cancel }) => {
 				if (!confirm(m.deleteAccountConfirm())) {
-					e.preventDefault()
+					cancel()
 				}
 			}}
 		>
