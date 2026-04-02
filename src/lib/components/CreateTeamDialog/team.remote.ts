@@ -10,13 +10,13 @@ export const createTeam = form(
 		name: z.string().min(1, 'Team name is required')
 	}),
 	async ({ name }) => {
-		const { locals } = getRequestEvent()
+		const { locals, url } = getRequestEvent()
 		if (!locals.user) {
-			redirect(303, localizeUrl('/auth'))
+			redirect(303, localizeUrl(new URL('/auth', url.origin)).href)
 		}
 
 		await db.insert(team).values({ name }).execute()
 
-		redirect(303, localizeUrl('/teams'))
+		redirect(303, localizeUrl(new URL('/teams', url.origin)).href)
 	}
 )

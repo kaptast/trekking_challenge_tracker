@@ -28,7 +28,7 @@ const handleBetterAuth: Handle = async ({ event, resolve }) => {
 
 export const handle: Handle = sequence(handleParaglide, handleBetterAuth)
 
-export const handleFetch: HandleFetch = async ({ request, fetch }) => {
+export const handleFetch: HandleFetch = async ({ event: { url }, request, fetch }) => {
 	if (request.url.startsWith('https://www.strava.com/api/v3')) {
 		try {
 			const info = await auth.api.getAccessToken({
@@ -47,7 +47,7 @@ export const handleFetch: HandleFetch = async ({ request, fetch }) => {
 			}
 		} catch (error) {
 			console.error('Error retrieving access token for Strava API request', error)
-			redirect(302, localizeUrl('/auth'))
+			redirect(302, localizeUrl(new URL('/auth', url.origin)).href)
 		}
 	}
 
