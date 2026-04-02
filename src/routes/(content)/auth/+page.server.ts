@@ -185,7 +185,7 @@ export const actions: Actions = {
 		})
 
 		if (result.url) {
-			redirect(302, localizeUrl(result.url))
+			redirect(302, localizeUrl(new URL(result.url)).href)
 		}
 
 		return fail(400, { message: 'Failed to initiate Strava linking' })

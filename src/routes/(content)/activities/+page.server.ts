@@ -6,9 +6,9 @@ import { eq, and, desc } from 'drizzle-orm'
 import { getPointsForActivity } from '$lib/server/calculatePoints'
 import { localizeUrl } from '$lib/paraglide/runtime'
 
-export const load: PageServerLoad = async ({ locals, depends }) => {
+export const load: PageServerLoad = async ({ locals, depends, url }) => {
 	if (!locals.user) {
-		redirect(302, localizeUrl('/auth'))
+		redirect(302, localizeUrl(new URL('/auth', url.origin)).href)
 	}
 
 	depends('activities')

@@ -9,7 +9,7 @@ const PER_PAGE = 30
 
 export const load: PageServerLoad = async ({ request, fetch, locals, url }) => {
 	if (!locals.user) {
-		redirect(302, localizeUrl('/auth'))
+		redirect(302, localizeUrl(new URL('/auth', url.origin)).href)
 	}
 
 	const page = Math.max(1, parseInt(url.searchParams.get('page') ?? '1', 10))
