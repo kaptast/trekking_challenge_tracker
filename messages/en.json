@@ -144,7 +144,7 @@
 	"rulesPrivacyDataCollectedTitle": "What data we collect",
 	"rulesPrivacyDataCollectedDescription": "When you register, we store your name, email address, and profile picture. When you link your Strava account, we also store your Strava athlete profile picture. For each activity you add — whether via GPX upload or Strava import — we store its name, distance, duration, sport type, start date, location, and route map data.",
 	"rulesPrivacyVisibleTitle": "What other users can see",
-	"rulesPrivacyVisibleDescription": "Other participants can see your display name, profile picture, your activities (name, distance, points), and your team membership. Your email address is never visible to other users.",
+	"rulesPrivacyVisibleDescription": "Other participants can see your display name, profile picture, and which team you belong to. They can also see your team's combined total distance and points on the leaderboard. Individual activities are not visible to other users. Your email address is never visible to other users.",
 	"rulesPrivacyStravaDisconnectTitle": "Disconnecting your Strava account",
 	"rulesPrivacyStravaDisconnectDescription": "If you disconnect your Strava account, all activities imported from Strava are permanently deleted. Your account and any manually uploaded GPX activities remain intact.",
 	"rulesPrivacyDeleteAccountTitle": "Deleting your account",

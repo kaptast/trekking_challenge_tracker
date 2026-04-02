@@ -144,7 +144,7 @@
 	"rulesPrivacyDataCollectedTitle": "Milyen adatokat tárolunk",
 	"rulesPrivacyDataCollectedDescription": "Regisztrációkor eltároljuk a neved, az e-mail címed és a profilképedet. Ha összekapcsolod a Strava fiókodat, a Strava profilképedet is elmentjük. Minden egyes tevékenységedhez — akár GPX feltöltéssel, akár Strava importtal adtad hozzá — eltároljuk a nevét, távolságát, időtartamát, típusát, kezdési dátumát, helyszínét és az útvonaltérképet.",
 	"rulesPrivacyVisibleTitle": "Amit más felhasználók láthatnak",
-	"rulesPrivacyVisibleDescription": "A többi résztvevő láthatja a megjelenítési neved, profilképed, tevékenységeidet (név, távolság, pontok) és csapattagságod. Az e-mail címed soha nem látható más felhasználók számára.",
+	"rulesPrivacyVisibleDescription": "A többi résztvevő láthatja a megjelenítési neved, profilképed, és hogy melyik csapathoz tartozol. A ranglistán a csapatod összesített távolságát és pontszámát is láthatják. Az egyéni tevékenységeid nem láthatók más felhasználók számára. Az e-mail címed soha nem látható más felhasználók számára.",
 	"rulesPrivacyStravaDisconnectTitle": "A Strava fiók leválasztása",
 	"rulesPrivacyStravaDisconnectDescription": "Ha leválasztod a Strava fiókodat, az összes Stravából importált tevékenységed véglegesen törlődik. A fiókod és a GPX fájlokkal manuálisan feltöltött tevékenységeid megmaradnak.",
 	"rulesPrivacyDeleteAccountTitle": "A fiók törlése",
