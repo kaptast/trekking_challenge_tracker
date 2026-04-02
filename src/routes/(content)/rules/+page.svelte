@@ -52,4 +52,30 @@
 			</div>
 		</div>
 	</Card>
+
+	<Card>
+		<div class="flex w-full flex-col gap-3 p-4">
+			<h2 class="text-brown-800 text-xl font-bold uppercase">{m.rulesPrivacyTitle()}</h2>
+
+			<div class="flex flex-col gap-1">
+				<h3 class="text-brown-800 text-base font-bold">{m.rulesPrivacyDataCollectedTitle()}</h3>
+				<p class="text-base text-brown-600">{m.rulesPrivacyDataCollectedDescription()}</p>
+			</div>
+
+			<div class="flex flex-col gap-1">
+				<h3 class="text-brown-800 text-base font-bold">{m.rulesPrivacyVisibleTitle()}</h3>
+				<p class="text-base text-brown-600">{m.rulesPrivacyVisibleDescription()}</p>
+			</div>
+
+			<div class="flex flex-col gap-1">
+				<h3 class="text-brown-800 text-base font-bold">{m.rulesPrivacyStravaDisconnectTitle()}</h3>
+				<p class="text-base text-brown-600">{m.rulesPrivacyStravaDisconnectDescription()}</p>
+			</div>
+
+			<div class="flex flex-col gap-1">
+				<h3 class="text-brown-800 text-base font-bold">{m.rulesPrivacyDeleteAccountTitle()}</h3>
+				<p class="text-base text-brown-600">{m.rulesPrivacyDeleteAccountDescription()}</p>
+			</div>
+		</div>
+	</Card>
 </div>
