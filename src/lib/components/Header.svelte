@@ -89,6 +89,11 @@
 					label={m.teams()}
 					class={[page.route.id === '/(content)/teams' && 'active']}
 				/>
+				<Button
+					href={localizeHref('/leaderboards')}
+					label={m.leaderboards()}
+					class={[page.route.id === '/(content)/leaderboards' && 'active']}
+				/>
 			</nav>
 
 			<div class="chipped-corners flex items-center gap-x-1 bg-brown-300 p-1">
@@ -129,6 +134,13 @@
 				size="large"
 				wrapperClass="w-full"
 				class={[page.route.id === '/(content)/teams' && 'active']}
+			/>
+			<Button
+				href={localizeHref('/leaderboards')}
+				label={m.leaderboards()}
+				size="large"
+				wrapperClass="w-full"
+				class={[page.route.id === '/(content)/leaderboards' && 'active']}
 			/>
 		</nav>
 	</div>
