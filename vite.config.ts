@@ -61,6 +61,20 @@ export default defineConfig({
 						['en', '/leaderboards'],
 						['hu', '/ranglista']
 					]
+				},
+				{
+					pattern: '/challenges/:id',
+					localized: [
+						['en', '/challenges/:id'],
+						['hu', '/kihivasok/:id']
+					]
+				},
+				{
+					pattern: '/challenges',
+					localized: [
+						['en', '/challenges'],
+						['hu', '/kihivasok']
+					]
 				}
 			]
 		})
