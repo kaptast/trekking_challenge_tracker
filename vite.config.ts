@@ -54,6 +54,13 @@ export default defineConfig({
 						['en', '/rules'],
 						['hu', '/szabalyok']
 					]
+				},
+				{
+					pattern: '/leaderboards',
+					localized: [
+						['en', '/leaderboards'],
+						['hu', '/ranglista']
+					]
 				}
 			]
 		})
