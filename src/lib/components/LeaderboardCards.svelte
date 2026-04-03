@@ -56,7 +56,7 @@
 	</Card>
 {/snippet}
 
-<div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+<div class="grid grid-cols-1 gap-4 md:grid-cols-3">
 	{@render leaderCard(m.walkAndHike(), walkHikeAthletes)}
 	{@render leaderCard(m.categoryRun(), runAthletes)}
 	{@render leaderCard(m.categoryOther(), otherAthletes)}
