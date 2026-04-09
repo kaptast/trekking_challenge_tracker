@@ -45,7 +45,7 @@
 				title={menuOpen ? m.closeMenu() : m.openMenu()}
 				onclick={toggleMenu}
 				aria-pressed={menuOpen}
-				class="relative size-6 cursor-pointer sm:hidden"
+				class="relative size-6 cursor-pointer lg:hidden"
 			>
 				<span
 					class={[
@@ -73,7 +73,7 @@
 				></span>
 			</button>
 
-			<nav class="hidden items-center sm:flex">
+			<nav class="hidden items-center lg:flex">
 				<Button
 					href={localizeHref('/')}
 					label={m.home()}
@@ -88,6 +88,16 @@
 					href={localizeHref('/teams')}
 					label={m.teams()}
 					class={[page.route.id === '/(content)/teams' && 'active']}
+				/>
+				<Button
+					href={localizeHref('/leaderboards')}
+					label={m.leaderboards()}
+					class={[page.route.id === '/(content)/leaderboards' && 'active']}
+				/>
+				<Button
+					href={localizeHref('/challenges')}
+					label={m.challenges()}
+					class={[page.route.id?.startsWith('/(content)/challenges') && 'active']}
 				/>
 			</nav>
 
@@ -129,6 +139,20 @@
 				size="large"
 				wrapperClass="w-full"
 				class={[page.route.id === '/(content)/teams' && 'active']}
+			/>
+			<Button
+				href={localizeHref('/leaderboards')}
+				label={m.leaderboards()}
+				size="large"
+				wrapperClass="w-full"
+				class={[page.route.id === '/(content)/leaderboards' && 'active']}
+			/>
+			<Button
+				href={localizeHref('/challenges')}
+				label={m.challenges()}
+				size="large"
+				wrapperClass="w-full"
+				class={[page.route.id?.startsWith('/(content)/challenges') && 'active']}
 			/>
 		</nav>
 	</div>

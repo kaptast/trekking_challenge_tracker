@@ -1,4 +1,4 @@
-import { and, gte, lte, gt } from 'drizzle-orm'
+import { and, desc, eq, gte, gt, lte } from 'drizzle-orm'
 import { db } from './index'
 import { challenge } from './schema'
 
@@ -45,4 +45,13 @@ export async function getActiveOrNextChallenge(): Promise<ChallengeInfo | null> 
 	}
 
 	return null
+}
+
+export async function getAllChallenges(): Promise<Challenge[]> {
+	return db.select().from(challenge).orderBy(desc(challenge.endDate)).execute()
+}
+
+export async function getChallengeById(id: string): Promise<Challenge | null> {
+	const results = await db.select().from(challenge).where(eq(challenge.id, id)).limit(1).execute()
+	return results[0] ?? null
 }
